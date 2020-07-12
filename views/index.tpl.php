@@ -9,9 +9,12 @@
 
     <link rel="stylesheet" href="static/css/font-awesome.min.css">
     <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/codemirror.css">
     <link rel="stylesheet" href="static/css/jsonview.bundle.css">
     <link rel="stylesheet" href="static/css/mpg.css">
 
+    <script src="static/js/codemirror.js"></script>
+    <script src="static/js/codemirror-mode/javascript.js"></script>
     <script src="static/js/jsonview.bundle.js"></script>
     <script src="static/js/mpg.js"></script>
 

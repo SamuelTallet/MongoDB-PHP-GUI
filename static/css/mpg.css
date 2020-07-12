@@ -4,6 +4,16 @@ code {
 
 }
 
+.CodeMirror {
+
+    width: 100%;
+    height: auto;
+    min-height: 60px;
+
+    font-family: Consolas, monospace;
+
+}
+
 .json-container {
 
     font-family: Consolas, monospace;
@@ -20,12 +30,6 @@ code {
 #mpg-databases-list, #mpg-collections-list {
 
     list-style-type: none;
-
-}
-
-#mpg-filter-or-doc-textarea {
-
-    width: 100%;
 
 }
 

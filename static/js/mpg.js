@@ -7,6 +7,13 @@
 var MPG = {};
 
 /**
+ * Instance of CodeMirror.
+ * 
+ * @type {?CodeMirror}
+ */
+MPG.codeMirror = null;
+
+/**
  * Name of current database.
  * 
  * @type {string}
@@ -19,6 +26,19 @@ MPG.databaseName = '';
  * @type {string}
  */
 MPG.collectionName = '';
+
+/**
+ * Initializes CodeMirror instance.
+ * 
+ * @returns {void}
+ */
+MPG.initializeCodeMirror = function() {
+
+    MPG.codeMirror = CodeMirror.fromTextArea(
+        document.querySelector('#mpg-filter-or-doc-textarea')
+    );
+
+};
 
 /**
  * Does an ajax request.
@@ -174,6 +194,9 @@ MPG.eventListeners.addInsertOne = function() {
             return window.alert('Please select a database and a collection.');
         }
 
+        // Synchronizes CodeMirror with Filter or Document text area.
+        MPG.codeMirror.save();
+
         var requestBody = {};
         var filterOrDocTextAreaValue = document.querySelector('#mpg-filter-or-doc-textarea').value;
 
@@ -212,6 +235,9 @@ MPG.eventListeners.addCount = function() {
         if ( MPG.databaseName === '' || MPG.collectionName === '' ) {
             return window.alert('Please select a database and a collection.');
         }
+
+        // Synchronizes CodeMirror with Filter or Document text area.
+        MPG.codeMirror.save();
 
         var requestBody = {};
         var filterOrDocTextAreaValue = document.querySelector('#mpg-filter-or-doc-textarea').value;
@@ -252,6 +278,9 @@ MPG.eventListeners.addDeleteOne = function() {
             return window.alert('Please select a database and a collection.');
         }
 
+        // Synchronizes CodeMirror with Filter or Document text area.
+        MPG.codeMirror.save();
+
         var requestBody = {};
         var filterOrDocTextAreaValue = document.querySelector('#mpg-filter-or-doc-textarea').value;
 
@@ -291,6 +320,9 @@ MPG.eventListeners.addFind = function() {
             return window.alert('Please select a database and a collection.');
         }
 
+        // Synchronizes CodeMirror with Filter or Document text area.
+        MPG.codeMirror.save();
+
         var requestBody = {};
         var filterOrDocTextAreaValue = document.querySelector('#mpg-filter-or-doc-textarea').value;
 
@@ -326,6 +358,8 @@ MPG.eventListeners.addFind = function() {
 
 // When document is ready:
 window.addEventListener('DOMContentLoaded', function(_event) {
+
+    MPG.initializeCodeMirror();
 
     MPG.eventListeners.addDatabases();
     MPG.eventListeners.addCreate();
