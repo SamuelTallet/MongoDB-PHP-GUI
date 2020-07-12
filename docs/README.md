@@ -10,7 +10,8 @@ Screenshots
 Installation
 ------------
 
-1. `git clone` current repository somewhere in the cloud or on your local machine.
+1. `git clone` current repository somewhere in the cloud or on your local machine.<br>
+**Warning: If you choose cloud option. Be sure to secure folder with a *.htpasswd*.**
 2. Be sure to have PHP >= 7 with [MongoDB extension](https://www.php.net/manual/en/mongodb.installation.php) enabled in this environment.
 3. Run `composer install` at project's root directory to install all PHP dependencies.
 
