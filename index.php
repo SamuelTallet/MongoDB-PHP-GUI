@@ -13,7 +13,7 @@ require __DIR__ . '/routes.php';
  * 
  * @var string
  */
-define('MPG_APP_NAME', 'PHP MongoDB GUI');
+define('MPG_APP_NAME', 'MongoDB PHP GUI');
 
 /**
  * Application version.
