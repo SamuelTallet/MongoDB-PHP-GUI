@@ -25,7 +25,7 @@ Open *config.php* file located at project's root directory. Edit following const
 Thanks
 ------
 
-This application is based on [Limber](https://github.com/nimbly/Limber), [Capsule](https://github.com/nimbly/Capsule), [MongoDB PHP library](https://github.com/mongodb/mongo-php-library) and [JsonView](https://github.com/pgrabovets/json-view). ❤️
+This application is based on [Limber](https://github.com/nimbly/Limber), [Capsule](https://github.com/nimbly/Capsule), [MongoDB](https://github.com/mongodb/mongo-php-library), [CodeMirror](https://github.com/codemirror/codemirror) and [JsonView](https://github.com/pgrabovets/json-view). ❤️
 
 Copyright
 ---------
