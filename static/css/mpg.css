@@ -1,0 +1,42 @@
+code {
+
+    font-size: 100%;
+
+}
+
+.json-container {
+
+    font-family: Consolas, monospace;
+
+}
+
+.json-container .fas {
+
+    font: normal normal normal 14px/1 FontAwesome;
+    border-style: none;
+
+}
+
+#mpg-databases-list, #mpg-collections-list {
+
+    list-style-type: none;
+
+}
+
+#mpg-filter-or-doc-textarea {
+
+    width: 100%;
+
+}
+
+#mpg-find-button, #mpg-delete-one-button {
+
+    margin-left: 10px;
+
+}
+
+.output-column {
+
+    margin-top: 15px;
+
+}
