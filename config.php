@@ -27,10 +27,3 @@ define('MPG_MONGODB_HOST', '127.0.0.1');
  * @var string
  */
 define('MPG_MONGODB_PORT', '27017');
-
-/**
- * MongoDB server database.
- * 
- * @var string
- */
-define('MPG_MONGODB_DATABASE', '');
