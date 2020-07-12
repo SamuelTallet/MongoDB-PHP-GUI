@@ -17,7 +17,7 @@ Installation
 Configuration
 -------------
 
-Open *config.php* file located at projet's root directory. Edit following constants values:
+Open *config.php* file located at project's root directory. Edit following constants values:
 
 `MPG_MONGODB_USER`, `MPG_MONGODB_PASSWORD`, `MPG_MONGODB_HOST` and `MPG_MONGODB_PORT`.
 
