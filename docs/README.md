@@ -20,3 +20,13 @@ Configuration
 Open *config.php* file located at projet's root directory. Edit following constants values:
 
 `MPG_MONGODB_USER`, `MPG_MONGODB_PASSWORD`, `MPG_MONGODB_HOST` and `MPG_MONGODB_PORT`.
+
+Thanks
+------
+
+This application is based on [Limber](https://github.com/nimbly/Limber), [Capsule](https://github.com/nimbly/Capsule), [MongoDB PHP library](https://github.com/mongodb/mongo-php-library) and [JsonView](https://github.com/pgrabovets/json-view). ❤️
+
+Copyright
+---------
+
+© 2020 Samuel Tallet
