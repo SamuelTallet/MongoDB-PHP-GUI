@@ -1,7 +1,7 @@
 # Free MongoDB GUI powered by PHP
 
 Visually administrate your MongoDB database. Create, read and delete operations are supported.<br>
-Autocompletion is available for collection fields and MongoDB keywords via `Ctrl` + `Space`.
+Autocompletion is available for collection fields and MongoDB keywords via `Ctrl` + `Space` keys.
 
 Screenshots
 -----------
