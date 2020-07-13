@@ -23,6 +23,13 @@ button, input {
 
 }
 
+.CodeMirror-hints {
+
+    font-family: Consolas, monospace;
+    font-size: 100%;
+
+}
+
 .json-container {
 
     font-family: Consolas, monospace;

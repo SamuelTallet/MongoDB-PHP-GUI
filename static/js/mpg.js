@@ -28,6 +28,27 @@ MPG.databaseName = '';
 MPG.collectionName = '';
 
 /**
+ * List of MongoDB keywords.
+ * XXX Used for autocompletion.
+ * 
+ * @type {Array}
+ */
+MPG.mongoDBKeywords = [
+
+    '$eq', '$gt', '$gte', '$in', '$lt', '$lte', '$ne', '$nin',
+    '$and', '$not', '$nor', '$or', '$exists', '$type'
+
+];
+
+/**
+ * Field names of current collection.
+ * XXX Used for autocompletion.
+ * 
+ * @type {Array}
+ */
+MPG.collectionFields = [];
+
+/**
  * Initializes CodeMirror instance.
  * 
  * @returns {void}
@@ -142,6 +163,17 @@ MPG.eventListeners.addCollections = function() {
         collectionLink.addEventListener('click', function(_event) {
             
             MPG.collectionName = collectionLink.dataset.collectionName;
+            MPG.collectionFields = [];
+
+            MPG.doAjaxRequest(
+                'GET',
+                '/ajax/database/' + MPG.databaseName + '/collection/'
+                    + MPG.collectionName + '/enumFields',
+                function(response) {
+                    MPG.collectionFields = JSON.parse(response);
+                },
+                null
+            );
 
         });
 
@@ -356,6 +388,21 @@ MPG.eventListeners.addFind = function() {
 
 };
 
+/**
+ * Adds an event listener for autocompletion.
+ * 
+ * @returns {void}
+ */
+MPG.eventListeners.addCtrlSpace = function() {
+
+    document.addEventListener('keydown', function(event) {
+        if ( event.ctrlKey && event.code == 'Space' ) {
+            MPG.codeMirror.showHint();
+        }
+    });
+
+};
+
 // When document is ready:
 window.addEventListener('DOMContentLoaded', function(_event) {
 
@@ -367,6 +414,7 @@ window.addEventListener('DOMContentLoaded', function(_event) {
     MPG.eventListeners.addCount();
     MPG.eventListeners.addDeleteOne();
     MPG.eventListeners.addFind();
+    MPG.eventListeners.addCtrlSpace();
 
     window.location.hash = '';
 

@@ -33,4 +33,28 @@ class MongoDBHelper {
 
     }
 
+    /**
+     * Gets all keys from a multidimensional array.
+     * @see https://gist.github.com/JohnQUnknown/8761761
+     * 
+     * @param array $array
+     * 
+     * @return array
+     */
+    public static function arrayKeysMulti(array $array) : array {
+
+        $keys = [];
+
+        foreach ($array as $key => $_value) {
+            $keys[] = $key;
+
+            if ( is_array($array[$key]) ) {
+                $keys = array_merge($keys, self::arrayKeysMulti($array[$key]));
+            }
+        }
+
+        return $keys;
+
+    }
+
 }

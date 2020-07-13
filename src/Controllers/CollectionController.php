@@ -3,6 +3,7 @@
 namespace Controllers;
 
 use Capsule\Response;
+use Helpers\MongoDBHelper;
 
 class CollectionController extends Controller {
 
@@ -120,16 +121,32 @@ class CollectionController extends Controller {
 
         $documents = $collection->find(
             $decodedRequestBody['filter'], $decodedRequestBody['options']
+        )->toArray();
+
+        return new Response(
+            200, json_encode($documents), ['Content-Type' => 'application/json']
         );
 
-        $responseBody = [];
+    }
 
-        foreach ($documents as $document) {
-            $responseBody[] = $document;
+    public function enumFieldsAction($databaseName, $collectionName) : Response {
+
+        global $mongoDBClient;
+
+        $collection = $mongoDBClient->$databaseName->$collectionName;
+
+        $documents = $collection->find([], ['limit' => 1])->toArray();
+
+        if ( empty($documents) ) {
+            return new Response(404, 'Collection is empty');
         }
-        
+
+        $documentFields = MongoDBHelper::arrayKeysMulti(
+            json_decode(json_encode($documents[0]), JSON_OBJECT_AS_ARRAY)
+        );
+
         return new Response(
-            200, json_encode($responseBody), ['Content-Type' => 'application/json']
+            200, json_encode($documentFields), ['Content-Type' => 'application/json']
         );
 
     }
