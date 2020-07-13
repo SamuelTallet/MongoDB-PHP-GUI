@@ -59,6 +59,12 @@ class CollectionController extends Controller {
             return new Response(400, 'Request body is invalid.');
         }
 
+        if ( isset($decodedRequestBody['filter']['_id'])
+            && is_string($decodedRequestBody['filter']['_id']) ) {
+                $decodedRequestBody['filter']['_id'] =
+                    new \MongoDB\BSON\ObjectId($decodedRequestBody['filter']['_id']);
+        }
+
         $count = $collection->countDocuments($decodedRequestBody['filter']);
         
         return new Response(
@@ -86,6 +92,12 @@ class CollectionController extends Controller {
 
         if ( is_null($decodedRequestBody) ) {
             return new Response(400, 'Request body is invalid.');
+        }
+
+        if ( isset($decodedRequestBody['filter']['_id'])
+            && is_string($decodedRequestBody['filter']['_id']) ) {
+                $decodedRequestBody['filter']['_id'] =
+                    new \MongoDB\BSON\ObjectId($decodedRequestBody['filter']['_id']);
         }
 
         $deleteOneResult = $collection->deleteOne($decodedRequestBody['filter']);
@@ -117,6 +129,12 @@ class CollectionController extends Controller {
 
         if ( is_null($decodedRequestBody) ) {
             return new Response(400, 'Request body is invalid.');
+        }
+
+        if ( isset($decodedRequestBody['filter']['_id'])
+            && is_string($decodedRequestBody['filter']['_id']) ) {
+                $decodedRequestBody['filter']['_id'] =
+                    new \MongoDB\BSON\ObjectId($decodedRequestBody['filter']['_id']);
         }
 
         $documents = $collection->find(
