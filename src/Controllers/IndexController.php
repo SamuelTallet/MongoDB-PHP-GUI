@@ -12,8 +12,12 @@ class IndexController extends Controller {
 
         $databasesNames = [];
 
-        foreach ($mongoDBClient->listDatabases() as $databaseInfo) {
-            $databasesNames[] = $databaseInfo['name'];
+        if ( !empty(MPG_MONGODB_DATABASE) ) {
+            $databasesNames[] = MPG_MONGODB_DATABASE;
+        } else {
+            foreach ($mongoDBClient->listDatabases() as $databaseInfo) {
+                $databasesNames[] = $databaseInfo['name'];
+            }
         }
         
         return new Response(200, $this->renderView('index', [

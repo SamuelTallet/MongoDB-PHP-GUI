@@ -25,6 +25,10 @@ class MongoDBHelper {
             $clientUri .= ':' . MPG_MONGODB_PORT;
         }
 
+        if ( !empty(MPG_MONGODB_DATABASE) ) {
+            $clientUri .= '/' . MPG_MONGODB_DATABASE;
+        }
+
         return new MongoDBClient($clientUri);
 
     }
