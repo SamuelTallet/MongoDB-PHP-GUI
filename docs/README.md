@@ -5,7 +5,7 @@ Visually administrate your MongoDB database. Create, read and delete operations 
 Screenshots
 -----------
 
-![MongoDB PHP GUI](https://raw.githubusercontent.com/SamuelTS/MongoDB-PHP-GUI/master/docs/screenshots/mpg-find.png)
+![MongoDB PHP GUI](https://raw.githubusercontent.com/SamuelTS/MongoDB-PHP-GUI/master/docs/screenshots/mpg-find-with-autocompletion.png)
 
 Installation
 ------------
