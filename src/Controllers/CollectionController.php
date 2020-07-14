@@ -195,7 +195,7 @@ class CollectionController extends Controller {
         $documents = $collection->find([], ['limit' => 1])->toArray();
 
         if ( empty($documents) ) {
-            return new Response(404, 'Collection is empty');
+            return new Response(200, json_encode([]), ['Content-Type' => 'application/json']);
         }
 
         $documentFields = MongoDBHelper::arrayKeysMulti(
