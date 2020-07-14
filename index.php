@@ -20,7 +20,7 @@ define('MPG_APP_NAME', 'MongoDB PHP GUI');
  * 
  * @var string
  */
-define('MPG_APP_VERSION', '0.9.4');
+define('MPG_APP_VERSION', '0.9.5');
 
 /**
  * Development mode?

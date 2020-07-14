@@ -257,7 +257,13 @@ MPG.eventListeners.addCollections = function() {
                 '/ajax/database/' + MPG.databaseName + '/collection/'
                     + MPG.collectionName + '/enumFields',
                 function(response) {
-                    MPG.collectionFields = JSON.parse(response);
+
+                    JSON.parse(response).forEach(function(collectionField) {
+                        if ( typeof collectionField === 'string' ) {
+                            MPG.collectionFields.push(collectionField);
+                        }
+                    });
+
                 },
                 null
             );
