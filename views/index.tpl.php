@@ -18,7 +18,7 @@
     <script src="static/js/codemirror-mode/javascript.js"></script>
     <script src="static/js/codemirror-addon/show-hint.js"></script>
     <script src="static/js/codemirror-addon/mpg-hint.js"></script>
-    <script src="static/js/jsonview.bundle.js"></script>
+    <script src="static/js/jsonview.bundle.mod.js"></script>
     <script src="static/js/mpg.js"></script>
 
 </head>

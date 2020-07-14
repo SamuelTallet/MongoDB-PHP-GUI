@@ -46,6 +46,11 @@ $router->post(
 	CollectionController::class . '@findAction'
 );
 
+$router->post(
+	'/ajax/database/{databaseName}/collection/{collectionName}/updateOne',
+	CollectionController::class . '@updateOneAction'
+);
+
 $router->get(
 	'/ajax/database/{databaseName}/collection/{collectionName}/enumFields',
 	CollectionController::class . '@enumFieldsAction'

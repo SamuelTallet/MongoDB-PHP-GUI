@@ -147,6 +147,45 @@ class CollectionController extends Controller {
 
     }
 
+    /**
+     * @see https://docs.mongodb.com/php-library/v1.6/reference/method/MongoDBCollection-updateOne/index.html
+     */
+    public function updateOneAction($databaseName, $collectionName) : Response {
+
+        global $mongoDBClient;
+
+        $collection = $mongoDBClient->$databaseName->$collectionName;
+
+        $requestBody = $this->getRequestBody();
+
+        if ( is_null($requestBody) ) {
+            return new Response(400, 'Request body is missing.');
+        }
+
+        $decodedRequestBody = json_decode($requestBody, JSON_OBJECT_AS_ARRAY);
+
+        if ( is_null($decodedRequestBody) ) {
+            return new Response(400, 'Request body is invalid.');
+        }
+
+        if ( isset($decodedRequestBody['filter']['_id'])
+            && is_string($decodedRequestBody['filter']['_id']) ) {
+                $decodedRequestBody['filter']['_id'] =
+                    new \MongoDB\BSON\ObjectId($decodedRequestBody['filter']['_id']);
+        }
+
+        $updateResult = $collection->updateOne(
+            $decodedRequestBody['filter'], $decodedRequestBody['update']
+        );
+
+        return new Response(
+            200,
+            json_encode($updateResult->getModifiedCount()),
+            ['Content-Type' => 'application/json']
+        );
+
+    }
+
     public function enumFieldsAction($databaseName, $collectionName) : Response {
 
         global $mongoDBClient;

@@ -28,8 +28,15 @@ var JsonView = (function (exports) {
     var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
     var key = params.key,
         value = params.value,
-        type = params.type;
-    return "\n    <div class=\"line\">\n      <div class=\"empty-icon\"></div>\n      <div class=\"json-key\">".concat(key, "</div>\n      <div class=\"json-separator\">:</div>\n      <div class=\"json-value json-").concat(type, "\">").concat(value, "</div>\n    </div>\n  ");
+        type = params.type,
+
+        // XXX Modification made for MongoDB PHP GUI.
+        documentFieldIsUpdatable = params.documentFieldIsUpdatable,
+        documentId = params.documentId,
+        documentFieldName = params.documentFieldName;
+
+    // XXX Modification made for MongoDB PHP GUI.
+    return "\n    <div class=\"line\">\n      <div class=\"empty-icon\"></div>\n      <div class=\"json-key\">".concat(key, "</div>\n      <div class=\"json-separator\">:</div>\n      <div data-document-id=\"" + documentId + "\" data-document-field-is-updatable=\"" + documentFieldIsUpdatable + "\" data-document-field-name=\"" + documentFieldName + "\" data-document-field-type=\"" + type + "\" class=\"json-value json-").concat(type, "\">").concat(value, "</div>\n    </div>\n  ");
   }
 
   function hideNodeChildren(node) {
@@ -90,6 +97,77 @@ var JsonView = (function (exports) {
     return el;
   }
 
+  // XXX Modification made for MongoDB PHP GUI.
+  function getDocFieldFromNode(node) {
+
+    var docFieldArray = [];
+
+    docFieldArray.push(node.key);
+
+    switch (node.depth) {
+
+      case 2:
+        if ( node.parent.depth >= 2 ) {
+          docFieldArray.push(node.parent.key);
+        }
+        if ( node.parent.parent.depth >= 2 ) {
+          docFieldArray.push(node.parent.parent.key);
+        }
+        break;
+
+      case 3:
+        if ( node.parent.depth >= 2 ) {
+          docFieldArray.push(node.parent.key);
+        }
+        if ( node.parent.parent.depth >= 2 ) {
+          docFieldArray.push(node.parent.parent.key);
+        }
+        if ( node.parent.parent.parent.depth >= 2 ) {
+          docFieldArray.push(node.parent.parent.parent.key);
+        }
+        break;
+
+      case 4:
+        if ( node.parent.depth >= 2 ) {
+          docFieldArray.push(node.parent.key);
+        }
+        if ( node.parent.parent.depth >= 2 ) {
+          docFieldArray.push(node.parent.parent.key);
+        }
+        if ( node.parent.parent.parent.depth >= 2 ) {
+          docFieldArray.push(node.parent.parent.parent.key);
+        }
+        if ( node.parent.parent.parent.parent.depth >= 2 ) {
+          docFieldArray.push(node.parent.parent.parent.parent.key);
+        }
+        break;
+
+      case 5:
+        if ( node.parent.depth >= 2 ) {
+          docFieldArray.push(node.parent.key);
+        }
+        if ( node.parent.parent.depth >= 2 ) {
+          docFieldArray.push(node.parent.parent.key);
+        }
+        if ( node.parent.parent.parent.depth >= 2 ) {
+          docFieldArray.push(node.parent.parent.parent.key);
+        }
+        if ( node.parent.parent.parent.parent.depth >= 2 ) {
+          docFieldArray.push(node.parent.parent.parent.parent.key);
+        }
+        if ( node.parent.parent.parent.parent.parent.depth >= 2 ) {
+          docFieldArray.push(node.parent.parent.parent.parent.parent.key);
+        }
+        break;
+        
+    }
+
+    docFieldArray.reverse();
+
+    return docFieldArray.join('.');
+
+  }
+
   function createNodeElement(node) {
     var el = document.createElement('div');
 
@@ -110,10 +188,27 @@ var JsonView = (function (exports) {
         toggleNode(node);
       });
     } else {
+
+      // XXX Modification made for MongoDB PHP GUI.
+      if ( node.key === '$oid' ) {
+        MPG.documentId = node.value;
+      }
+      if ( node.depth >= 2 && node.depth <= 5 && node.key !== '$oid' ) {
+        var documentFieldIsUpdatable = true;
+      } else {
+        var documentFieldIsUpdatable = false;
+      }
+
       el.innerHTML = notExpandedTemplate({
         key: node.key,
         value: node.value,
-        type: _typeof(node.value)
+        type: _typeof(node.value),
+
+        // XXX Modification made for MongoDB PHP GUI.
+        documentFieldIsUpdatable: ( documentFieldIsUpdatable ) ? 'true' : 'false',
+        documentId: MPG.documentId,
+        documentFieldName: getDocFieldFromNode(node)
+
       });
     }
 

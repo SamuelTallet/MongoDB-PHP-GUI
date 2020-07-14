@@ -43,6 +43,13 @@ button, input {
 
 }
 
+.json-container .json-value[data-document-field-is-updatable="true"]:hover {
+
+    cursor: url("/static/images/edit-icon-32x32.png") 16 16, text;
+    outline: 1.5px solid #ddd;
+
+}
+
 #mpg-databases-list, #mpg-collections-list {
 
     list-style-type: none;

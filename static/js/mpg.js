@@ -49,6 +49,14 @@ MPG.mongoDBKeywords = [
 MPG.collectionFields = [];
 
 /**
+ * Document ID.
+ * XXX Used by JsonView parser.
+ * 
+ * @type {string}
+ */
+MPG.documentId = '';
+
+/**
  * Initializes CodeMirror instance.
  * 
  * @returns {void}
@@ -62,6 +70,13 @@ MPG.initializeCodeMirror = function() {
 };
 
 /**
+ * Helpers sub-namespace.
+ * 
+ * @type {object}
+ */
+MPG.helpers = {};
+
+/**
  * Does an ajax request.
  * 
  * @param {string} method 
@@ -71,7 +86,7 @@ MPG.initializeCodeMirror = function() {
  * 
  * @returns {void}
  */
-MPG.doAjaxRequest = function(method, url, callback, body) {
+MPG.helpers.doAjaxRequest = function(method, url, callback, body) {
 
     var xhr = new XMLHttpRequest();
 
@@ -87,6 +102,78 @@ MPG.doAjaxRequest = function(method, url, callback, body) {
 };
 
 /**
+ * Converts a string to any type.
+ * 
+ * @param {string} string 
+ * @param {string} targetType
+ * 
+ * @returns {*}
+ * 
+ * @throws {Error}
+ */
+MPG.helpers.convertStringToAny = function(string, targetType) {
+
+    var castedString = string;
+
+    switch (targetType) {
+
+        case 'number':
+            castedString = ( string.indexOf('.') !== -1 ) ? parseFloat(string) : parseInt(string);
+            if ( isNaN(castedString) ) {
+                throw Error('[MongoDB PHP GUI] "' + string + '" is not a number');
+            }
+            break;
+
+        case 'boolean':
+            if ( string === 'true' ) {
+                castedString = true;
+            } else if ( string === 'false' ) {
+                castedString = false;
+            } else {
+                throw Error('[MongoDB PHP GUI] "' + string + '" is not a boolean');
+            }
+            break;
+
+        case 'object':
+            castedString = ( string === 'null' ) ? null : JSON.parse(string);
+            break;
+
+    }
+
+    return castedString;
+
+};
+
+/**
+ * Converts any type to a string.
+ * 
+ * @param {*} any
+ * 
+ * @returns {*}
+ */
+MPG.helpers.convertAnyToString = function(any) {
+
+    var string;
+
+    switch (typeof any) {
+
+        case 'object':
+            string = ( any === null ) ? 'null' : JSON.stringify(any);
+            break;
+
+        case 'number':
+        case 'boolean':
+        default:
+            string = any.toString();
+            break;
+
+    }
+
+    return string;
+
+};
+
+/**
  * Reloads collections of a specific database.
  * 
  * @param {string} databaseName
@@ -95,7 +182,7 @@ MPG.doAjaxRequest = function(method, url, callback, body) {
  */
 MPG.reloadCollections = function(databaseName) {
 
-    MPG.doAjaxRequest(
+    MPG.helpers.doAjaxRequest(
         'GET', '/ajax/database/' + databaseName + '/listCollections', function(response) {
 
             var collectionsList = document.querySelector('#mpg-collections-list');
@@ -165,7 +252,7 @@ MPG.eventListeners.addCollections = function() {
             MPG.collectionName = collectionLink.dataset.collectionName;
             MPG.collectionFields = [];
 
-            MPG.doAjaxRequest(
+            MPG.helpers.doAjaxRequest(
                 'GET',
                 '/ajax/database/' + MPG.databaseName + '/collection/'
                     + MPG.collectionName + '/enumFields',
@@ -200,10 +287,10 @@ MPG.eventListeners.addCreate = function() {
             return;
         }
 
-        MPG.doAjaxRequest(
+        MPG.helpers.doAjaxRequest(
             'GET',
             '/ajax/database/' + databaseName + '/createCollection/' + collectionName,
-            function(response) {
+            function(_response) {
                 window.location.reload();
             },
             null
@@ -238,14 +325,14 @@ MPG.eventListeners.addInsertOne = function() {
         
         requestBody.document = JSON.parse(filterOrDocTextAreaValue);
         
-        MPG.doAjaxRequest(
+        MPG.helpers.doAjaxRequest(
             'POST',
             '/ajax/database/' + MPG.databaseName + '/collection/'
                 + MPG.collectionName + '/insertOne',
             function(response) {
 
                 var outputCode = document.querySelector('#mpg-output-code');
-                outputCode.innerHTML = 'Inserted: ' + response;
+                outputCode.innerHTML = 'Inserted: ' + JSON.parse(response);
 
             },
             JSON.stringify(requestBody)
@@ -280,14 +367,14 @@ MPG.eventListeners.addCount = function() {
             requestBody.filter = JSON.parse(filterOrDocTextAreaValue);
         }
 
-        MPG.doAjaxRequest(
+        MPG.helpers.doAjaxRequest(
             'POST',
             '/ajax/database/' + MPG.databaseName + '/collection/'
                 + MPG.collectionName + '/count',
             function(response) {
 
                 var outputCode = document.querySelector('#mpg-output-code');
-                outputCode.innerHTML = 'Count: ' + response;
+                outputCode.innerHTML = 'Count: ' + JSON.parse(response);
 
             },
             JSON.stringify(requestBody)
@@ -322,20 +409,80 @@ MPG.eventListeners.addDeleteOne = function() {
         
         requestBody.filter = JSON.parse(filterOrDocTextAreaValue);
         
-        MPG.doAjaxRequest(
+        MPG.helpers.doAjaxRequest(
             'POST',
             '/ajax/database/' + MPG.databaseName + '/collection/'
                 + MPG.collectionName + '/deleteOne',
             function(response) {
 
                 var outputCode = document.querySelector('#mpg-output-code');
-                outputCode.innerHTML = 'Deleted: ' + response;
+                outputCode.innerHTML = 'Deleted: ' + JSON.parse(response);
 
             },
             JSON.stringify(requestBody)
         );
 
     });
+
+};
+
+/**
+ * Adds an event listener for updates.
+ * 
+ * @returns {void}
+ */
+MPG.eventListeners.addUpdate = function() {
+
+    var updatableJsonValues = document.querySelectorAll(
+        '.json-value[data-document-field-is-updatable="true"]'
+    );
+
+    updatableJsonValues.forEach(function(updatableJsonValue) {
+
+        updatableJsonValue.addEventListener('click', function(event) {
+
+            var documentFieldNewValue = window.prompt('New value');
+
+            if ( documentFieldNewValue === null ) {
+                return;
+            }
+
+            var documentField = event.currentTarget;
+
+            documentFieldNewValue = MPG.helpers.convertStringToAny(
+                documentFieldNewValue, documentField.dataset.documentFieldType
+            );
+
+            var requestBody = { 
+                "filter": {
+                    "_id": documentField.dataset.documentId
+                },
+                "update": {
+                    "$set": {}
+                }
+            };
+
+            requestBody.update.$set[documentField.dataset.documentFieldName] = documentFieldNewValue;
+
+            MPG.helpers.doAjaxRequest(
+                'POST',
+                '/ajax/database/' + MPG.databaseName + '/collection/'
+                    + MPG.collectionName + '/updateOne',
+                function(response) {
+
+                    if ( JSON.parse(response) === 1 ) {
+                        documentField.innerText = MPG.helpers.convertAnyToString(
+                            documentFieldNewValue
+                        );
+                    }
+    
+                },
+                JSON.stringify(requestBody)
+            );
+
+        });
+
+    })
 
 };
 
@@ -367,7 +514,7 @@ MPG.eventListeners.addFind = function() {
         requestBody.options = {};
         requestBody.options.limit = parseInt(document.querySelector('#mpg-limit-input').value);
 
-        MPG.doAjaxRequest(
+        MPG.helpers.doAjaxRequest(
             'POST',
             '/ajax/database/' + MPG.databaseName + '/collection/'
                 + MPG.collectionName + '/find',
@@ -376,9 +523,12 @@ MPG.eventListeners.addFind = function() {
                 var outputCode = document.querySelector('#mpg-output-code');
                 outputCode.innerHTML = '';
 
-                var tree = JsonView.createTree(response);
-                JsonView.render(tree, outputCode);
-                JsonView.expandChildren(tree);
+                var jsonViewTree = JsonView.createTree(response);
+                JsonView.render(jsonViewTree, outputCode);
+                JsonView.expandChildren(jsonViewTree);
+                MPG.documentId = '';
+
+                MPG.eventListeners.addUpdate();
 
             },
             JSON.stringify(requestBody)
