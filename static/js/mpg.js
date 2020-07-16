@@ -57,6 +57,14 @@ MPG.collectionFields = [];
 MPG.documentId = '';
 
 /**
+ * Type of document ID.
+ * XXX Used by JsonView parser.
+ * 
+ * @type {string}
+ */
+MPG.documentIdType = '';
+
+/**
  * Initializes CodeMirror instance.
  * 
  * @returns {void}
@@ -412,7 +420,15 @@ MPG.eventListeners.addDeleteOne = function() {
         if ( filterOrDocTextAreaValue === '' ) {
             return window.alert('Please fill the filter text area.');
         }
-        
+
+        var deleteConfirmation = window.confirm(
+            'Do you really want to delete document matching this criteria:\n' + filterOrDocTextAreaValue
+        )
+
+        if ( deleteConfirmation === false ) {
+            return;
+        }
+
         requestBody.filter = JSON.parse(filterOrDocTextAreaValue);
         
         MPG.helpers.doAjaxRequest(
@@ -459,9 +475,15 @@ MPG.eventListeners.addUpdate = function() {
                 documentFieldNewValue, documentField.dataset.documentFieldType
             );
 
+            if ( MPG.documentIdType === 'int' ) {
+                var documentId = parseInt(documentField.dataset.documentId);
+            } else {
+                var documentId = documentField.dataset.documentId;
+            }
+
             var requestBody = { 
                 "filter": {
-                    "_id": documentField.dataset.documentId
+                    "_id": documentId
                 },
                 "update": {
                     "$set": {}
@@ -481,7 +503,7 @@ MPG.eventListeners.addUpdate = function() {
                             documentFieldNewValue
                         );
                     }
-    
+
                 },
                 JSON.stringify(requestBody)
             );

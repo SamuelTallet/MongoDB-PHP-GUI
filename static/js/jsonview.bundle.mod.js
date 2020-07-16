@@ -190,10 +190,15 @@ var JsonView = (function (exports) {
     } else {
 
       // XXX Modification made for MongoDB PHP GUI.
+      if ( node.key === '_id' ) {
+        MPG.documentId = node.value;
+        MPG.documentIdType = 'int';
+      }
       if ( node.key === '$oid' ) {
         MPG.documentId = node.value;
+        MPG.documentIdType = 'string';
       }
-      if ( node.depth >= 2 && node.depth <= 5 && node.key !== '$oid' ) {
+      if ( node.depth >= 2 && node.depth <= 5 && !(/(_id|\$oid)/).test(node.key) ) {
         var documentFieldIsUpdatable = true;
       } else {
         var documentFieldIsUpdatable = false;
@@ -201,7 +206,10 @@ var JsonView = (function (exports) {
 
       el.innerHTML = notExpandedTemplate({
         key: node.key,
-        value: node.value,
+
+        // XXX Modification made for MongoDB PHP GUI.
+        value: ( node.value === '' ) ? '<i>empty</i>' : node.value,
+        
         type: _typeof(node.value),
 
         // XXX Modification made for MongoDB PHP GUI.
