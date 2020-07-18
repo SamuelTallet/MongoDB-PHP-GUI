@@ -234,8 +234,10 @@ MPG.helpers.downloadFile = function(filename, data, type) {
  */
 MPG.reloadCollections = function(databaseName) {
 
+    var requestBody = { 'databaseName': databaseName };
+
     MPG.helpers.doAjaxRequest(
-        'GET', '/ajax/database/' + databaseName + '/listCollections', function(response) {
+        'POST', '/ajax/database/listCollections', function(response) {
 
             var collectionsList = document.querySelector('#mpg-collections-list');
 
@@ -258,7 +260,8 @@ MPG.reloadCollections = function(databaseName) {
 
             MPG.eventListeners.addCollections();
 
-        }, null
+        },
+        JSON.stringify(requestBody)
     );
 
 };
@@ -318,10 +321,14 @@ MPG.eventListeners.addCollections = function() {
 
             MPG.collectionFields = [];
 
+            var requestBody = {
+                'databaseName': MPG.databaseName,
+                'collectionName': MPG.collectionName
+            };
+
             MPG.helpers.doAjaxRequest(
-                'GET',
-                '/ajax/database/' + MPG.databaseName + '/collection/'
-                    + MPG.collectionName + '/enumFields',
+                'POST',
+                '/ajax/collection/enumFields',
                 function(response) {
 
                     JSON.parse(response).forEach(function(collectionField) {
@@ -343,7 +350,7 @@ MPG.eventListeners.addCollections = function() {
                     document.querySelector('#mpg-output-code').innerHTML = '';
 
                 },
-                null
+                JSON.stringify(requestBody)
             );
 
         });
@@ -368,7 +375,11 @@ MPG.eventListeners.addInsertOne = function() {
         // Synchronizes CodeMirror with Filter or Document text area.
         MPG.codeMirror.save();
 
-        var requestBody = {};
+        var requestBody = {
+            'databaseName': MPG.databaseName,
+            'collectionName': MPG.collectionName
+        };
+        
         var filterOrDocTextAreaValue = document.querySelector('#mpg-filter-or-doc-textarea').value;
 
         if ( filterOrDocTextAreaValue === '' ) {
@@ -379,8 +390,7 @@ MPG.eventListeners.addInsertOne = function() {
         
         MPG.helpers.doAjaxRequest(
             'POST',
-            '/ajax/database/' + MPG.databaseName + '/collection/'
-                + MPG.collectionName + '/insertOne',
+            '/ajax/collection/insertOne',
             function(response) {
 
                 var outputCode = document.querySelector('#mpg-output-code');
@@ -410,7 +420,11 @@ MPG.eventListeners.addCount = function() {
         // Synchronizes CodeMirror with Filter or Document text area.
         MPG.codeMirror.save();
 
-        var requestBody = {};
+        var requestBody = {
+            'databaseName': MPG.databaseName,
+            'collectionName': MPG.collectionName
+        };
+
         var filterOrDocTextAreaValue = document.querySelector('#mpg-filter-or-doc-textarea').value;
 
         if ( filterOrDocTextAreaValue === '' ) {
@@ -421,8 +435,7 @@ MPG.eventListeners.addCount = function() {
 
         MPG.helpers.doAjaxRequest(
             'POST',
-            '/ajax/database/' + MPG.databaseName + '/collection/'
-                + MPG.collectionName + '/count',
+            '/ajax/collection/count',
             function(response) {
 
                 var outputCode = document.querySelector('#mpg-output-code');
@@ -452,7 +465,11 @@ MPG.eventListeners.addDeleteOne = function() {
         // Synchronizes CodeMirror with Filter or Document text area.
         MPG.codeMirror.save();
 
-        var requestBody = {};
+        var requestBody = {
+            'databaseName': MPG.databaseName,
+            'collectionName': MPG.collectionName
+        };
+
         var filterOrDocTextAreaValue = document.querySelector('#mpg-filter-or-doc-textarea').value;
 
         if ( filterOrDocTextAreaValue === '' ) {
@@ -471,8 +488,7 @@ MPG.eventListeners.addDeleteOne = function() {
         
         MPG.helpers.doAjaxRequest(
             'POST',
-            '/ajax/database/' + MPG.databaseName + '/collection/'
-                + MPG.collectionName + '/deleteOne',
+            '/ajax/collection/deleteOne',
             function(response) {
 
                 var outputCode = document.querySelector('#mpg-output-code');
@@ -519,7 +535,9 @@ MPG.eventListeners.addUpdate = function() {
                 var documentId = documentField.dataset.documentId;
             }
 
-            var requestBody = { 
+            var requestBody = {
+                'databaseName': MPG.databaseName,
+                'collectionName': MPG.collectionName,
                 "filter": {
                     "_id": documentId
                 },
@@ -532,8 +550,7 @@ MPG.eventListeners.addUpdate = function() {
 
             MPG.helpers.doAjaxRequest(
                 'POST',
-                '/ajax/database/' + MPG.databaseName + '/collection/'
-                    + MPG.collectionName + '/updateOne',
+                '/ajax/collection/updateOne',
                 function(response) {
 
                     if ( JSON.parse(response) === 1 ) {
@@ -568,7 +585,11 @@ MPG.eventListeners.addFind = function() {
         // Synchronizes CodeMirror with Filter or Document text area.
         MPG.codeMirror.save();
 
-        var requestBody = {};
+        var requestBody = {
+            'databaseName': MPG.databaseName,
+            'collectionName': MPG.collectionName
+        };
+
         var filterOrDocTextAreaValue = document.querySelector('#mpg-filter-or-doc-textarea').value;
 
         if ( filterOrDocTextAreaValue === '' ) {
@@ -593,8 +614,7 @@ MPG.eventListeners.addFind = function() {
 
         MPG.helpers.doAjaxRequest(
             'POST',
-            '/ajax/database/' + MPG.databaseName + '/collection/'
-                + MPG.collectionName + '/find',
+            '/ajax/collection/find',
             function(response) {
 
                 MPG.cachedOutput = response;

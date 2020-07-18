@@ -61,13 +61,18 @@ MPG.createDatabase = function() {
         return window.location = '/';
     }
 
+    var requestBody = {
+        'databaseName': databaseName,
+        'collectionName': collectionName
+    };
+
     MPG.helpers.doAjaxRequest(
-        'GET',
-        '/ajax/database/' + databaseName + '/createCollection/' + collectionName,
+        'POST',
+        '/ajax/database/createCollection/',
         function(_response) {
             window.location = '/';
         },
-        null
+        JSON.stringify(requestBody)
     );
 
 };

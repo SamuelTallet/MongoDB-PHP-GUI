@@ -19,10 +19,9 @@ class CollectionController extends Controller {
     /**
      * @see https://docs.mongodb.com/php-library/v1.6/reference/method/MongoDBCollection-insertOne/index.html
      */
-    public function insertOneAction($databaseName, $collectionName) : Response {
+    public function insertOneAction() : Response {
 
         $mongoDBClient = MongoDBHelper::getClient();
-        $collection = $mongoDBClient->selectCollection($databaseName, $collectionName);
 
         $requestBody = $this->getRequestBody();
 
@@ -35,6 +34,10 @@ class CollectionController extends Controller {
         if ( is_null($decodedRequestBody) ) {
             return new Response(400, 'Request body is invalid.');
         }
+
+        $collection = $mongoDBClient->selectCollection(
+            $decodedRequestBody['databaseName'], $decodedRequestBody['collectionName']
+        );
 
         try {
             $insertOneResult = $collection->insertOne($decodedRequestBody['document']);
@@ -57,10 +60,9 @@ class CollectionController extends Controller {
     /**
      * @see https://docs.mongodb.com/php-library/v1.6/reference/method/MongoDBCollection-countDocuments/
      */
-    public function countAction($databaseName, $collectionName) : Response {
+    public function countAction() : Response {
 
         $mongoDBClient = MongoDBHelper::getClient();
-        $collection = $mongoDBClient->selectCollection($databaseName, $collectionName);
 
         $requestBody = $this->getRequestBody();
 
@@ -73,6 +75,10 @@ class CollectionController extends Controller {
         if ( is_null($decodedRequestBody) ) {
             return new Response(400, 'Request body is invalid.');
         }
+
+        $collection = $mongoDBClient->selectCollection(
+            $decodedRequestBody['databaseName'], $decodedRequestBody['collectionName']
+        );
 
         if ( isset($decodedRequestBody['filter']['_id'])
             && is_string($decodedRequestBody['filter']['_id']) ) {
@@ -99,10 +105,9 @@ class CollectionController extends Controller {
     /**
      * @see https://docs.mongodb.com/php-library/v1.6/reference/method/MongoDBCollection-deleteOne/index.html
      */
-    public function deleteOneAction($databaseName, $collectionName) : Response {
+    public function deleteOneAction() : Response {
 
         $mongoDBClient = MongoDBHelper::getClient();
-        $collection = $mongoDBClient->selectCollection($databaseName, $collectionName);
 
         $requestBody = $this->getRequestBody();
 
@@ -115,6 +120,10 @@ class CollectionController extends Controller {
         if ( is_null($decodedRequestBody) ) {
             return new Response(400, 'Request body is invalid.');
         }
+
+        $collection = $mongoDBClient->selectCollection(
+            $decodedRequestBody['databaseName'], $decodedRequestBody['collectionName']
+        );
 
         if ( isset($decodedRequestBody['filter']['_id'])
             && is_string($decodedRequestBody['filter']['_id']) ) {
@@ -143,10 +152,9 @@ class CollectionController extends Controller {
     /**
      * @see https://docs.mongodb.com/php-library/v1.6/reference/method/MongoDBCollection-find/index.html
      */
-    public function findAction($databaseName, $collectionName) : Response {
+    public function findAction() : Response {
 
         $mongoDBClient = MongoDBHelper::getClient();
-        $collection = $mongoDBClient->selectCollection($databaseName, $collectionName);
 
         $requestBody = $this->getRequestBody();
 
@@ -159,6 +167,10 @@ class CollectionController extends Controller {
         if ( is_null($decodedRequestBody) ) {
             return new Response(400, 'Request body is invalid.');
         }
+
+        $collection = $mongoDBClient->selectCollection(
+            $decodedRequestBody['databaseName'], $decodedRequestBody['collectionName']
+        );
 
         if ( isset($decodedRequestBody['filter']['_id'])
             && is_string($decodedRequestBody['filter']['_id']) ) {
@@ -187,10 +199,9 @@ class CollectionController extends Controller {
     /**
      * @see https://docs.mongodb.com/php-library/v1.6/reference/method/MongoDBCollection-updateOne/index.html
      */
-    public function updateOneAction($databaseName, $collectionName) : Response {
+    public function updateOneAction() : Response {
 
         $mongoDBClient = MongoDBHelper::getClient();
-        $collection = $mongoDBClient->selectCollection($databaseName, $collectionName);
 
         $requestBody = $this->getRequestBody();
 
@@ -203,6 +214,10 @@ class CollectionController extends Controller {
         if ( is_null($decodedRequestBody) ) {
             return new Response(400, 'Request body is invalid.');
         }
+
+        $collection = $mongoDBClient->selectCollection(
+            $decodedRequestBody['databaseName'], $decodedRequestBody['collectionName']
+        );
 
         if ( isset($decodedRequestBody['filter']['_id'])
             && is_string($decodedRequestBody['filter']['_id']) ) {
@@ -230,10 +245,25 @@ class CollectionController extends Controller {
 
     }
 
-    public function enumFieldsAction($databaseName, $collectionName) : Response {
+    public function enumFieldsAction() : Response {
 
         $mongoDBClient = MongoDBHelper::getClient();
-        $collection = $mongoDBClient->selectCollection($databaseName, $collectionName);
+
+        $requestBody = $this->getRequestBody();
+
+        if ( is_null($requestBody) ) {
+            return new Response(400, 'Request body is missing.');
+        }
+
+        $decodedRequestBody = json_decode($requestBody, JSON_OBJECT_AS_ARRAY);
+
+        if ( is_null($decodedRequestBody) ) {
+            return new Response(400, 'Request body is invalid.');
+        }
+
+        $collection = $mongoDBClient->selectCollection(
+            $decodedRequestBody['databaseName'], $decodedRequestBody['collectionName']
+        );
 
         try {
             $documents = $collection->find([], ['limit' => 1])->toArray();
@@ -280,10 +310,9 @@ class CollectionController extends Controller {
     /**
      * @see https://docs.mongodb.com/php-library/v1.6/reference/method/MongoDBCollection-createIndex/index.html
      */
-    public function createIndexAction($databaseName, $collectionName) : Response {
+    public function createIndexAction() : Response {
 
         $mongoDBClient = MongoDBHelper::getClient();
-        $collection = $mongoDBClient->selectCollection($databaseName, $collectionName);
 
         $requestBody = $this->getRequestBody();
 
@@ -296,6 +325,10 @@ class CollectionController extends Controller {
         if ( is_null($decodedRequestBody) ) {
             return new Response(400, 'Request body is invalid.');
         }
+
+        $collection = $mongoDBClient->selectCollection(
+            $decodedRequestBody['databaseName'], $decodedRequestBody['collectionName']
+        );
 
         try {
             $createdIndexName = $collection->createIndex(
@@ -318,10 +351,25 @@ class CollectionController extends Controller {
     /**
      * @see https://docs.mongodb.com/php-library/v1.6/reference/method/MongoDBCollection-listIndexes/index.html
      */
-    public function listIndexesAction($databaseName, $collectionName) : Response {
+    public function listIndexesAction() : Response {
 
         $mongoDBClient = MongoDBHelper::getClient();
-        $collection = $mongoDBClient->selectCollection($databaseName, $collectionName);
+
+        $requestBody = $this->getRequestBody();
+
+        if ( is_null($requestBody) ) {
+            return new Response(400, 'Request body is missing.');
+        }
+
+        $decodedRequestBody = json_decode($requestBody, JSON_OBJECT_AS_ARRAY);
+
+        if ( is_null($decodedRequestBody) ) {
+            return new Response(400, 'Request body is invalid.');
+        }
+
+        $collection = $mongoDBClient->selectCollection(
+            $decodedRequestBody['databaseName'], $decodedRequestBody['collectionName']
+        );
 
         $indexes = [];
 
@@ -349,10 +397,9 @@ class CollectionController extends Controller {
     /**
      * @see https://docs.mongodb.com/php-library/v1.6/reference/method/MongoDBCollection-dropIndex/index.html
      */
-    public function dropIndexAction($databaseName, $collectionName) : Response {
+    public function dropIndexAction() : Response {
 
         $mongoDBClient = MongoDBHelper::getClient();
-        $collection = $mongoDBClient->selectCollection($databaseName, $collectionName);
 
         $requestBody = $this->getRequestBody();
 
@@ -365,6 +412,10 @@ class CollectionController extends Controller {
         if ( is_null($decodedRequestBody) ) {
             return new Response(400, 'Request body is invalid.');
         }
+
+        $collection = $mongoDBClient->selectCollection(
+            $decodedRequestBody['databaseName'], $decodedRequestBody['collectionName']
+        );
 
         try {
             $collection->dropIndex($decodedRequestBody['indexName']);

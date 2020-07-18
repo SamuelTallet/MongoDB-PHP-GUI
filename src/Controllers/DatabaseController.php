@@ -50,16 +50,29 @@ class DatabaseController extends Controller {
     /**
      * @see https://docs.mongodb.com/php-library/v1.6/reference/method/MongoDBDatabase-listCollections/index.html
      */
-    public function listCollectionsAction($databaseName) : Response {
+    public function listCollectionsAction() : Response {
 
         $mongoDBClient = MongoDBHelper::getClient();
-        $database = $mongoDBClient->selectDatabase($databaseName);
 
-        $collectionsNames = [];
+        $requestBody = $this->getRequestBody();
+
+        if ( is_null($requestBody) ) {
+            return new Response(400, 'Request body is missing.');
+        }
+
+        $decodedRequestBody = json_decode($requestBody, JSON_OBJECT_AS_ARRAY);
+
+        if ( is_null($decodedRequestBody) ) {
+            return new Response(400, 'Request body is invalid.');
+        }
+
+        $database = $mongoDBClient->selectDatabase($decodedRequestBody['databaseName']);
+
+        $collectionNames = [];
 
         try {
             foreach ($database->listCollections() as $collectionInfo) {
-                $collectionsNames[] = $collectionInfo['name'];
+                $collectionNames[] = $collectionInfo['name'];
             }
         } catch (\Throwable $th) {
             return new Response(
@@ -70,7 +83,7 @@ class DatabaseController extends Controller {
         }
         
         return new Response(
-            200, json_encode($collectionsNames), ['Content-Type' => 'application/json']
+            200, json_encode($collectionNames), ['Content-Type' => 'application/json']
         );
 
     }
@@ -78,12 +91,33 @@ class DatabaseController extends Controller {
     /**
      * @see https://docs.mongodb.com/php-library/v1.6/reference/method/MongoDBDatabase-createCollection/index.html
      */
-    public function createCollectionAction($databaseName, $collectionName) : Response {
+    public function createCollectionAction() : Response {
 
         $mongoDBClient = MongoDBHelper::getClient();
-        $database = $mongoDBClient->selectDatabase($databaseName);
 
-        $database->createCollection($collectionName);
+        $requestBody = $this->getRequestBody();
+
+        if ( is_null($requestBody) ) {
+            return new Response(400, 'Request body is missing.');
+        }
+
+        $decodedRequestBody = json_decode($requestBody, JSON_OBJECT_AS_ARRAY);
+
+        if ( is_null($decodedRequestBody) ) {
+            return new Response(400, 'Request body is invalid.');
+        }
+
+        $database = $mongoDBClient->selectDatabase($decodedRequestBody['databaseName']);
+
+        try {
+            $database->createCollection($decodedRequestBody['collectionName']);
+        } catch (\Throwable $th) {
+            return new Response(
+                500,
+                json_encode(ErrorNormalizer::normalize($th, __METHOD__)),
+                ['Content-Type' => 'application/json']
+            );
+        }
         
         return new Response(
             200, json_encode(true), ['Content-Type' => 'application/json']

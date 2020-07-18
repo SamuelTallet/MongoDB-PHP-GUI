@@ -21,43 +21,43 @@ $router->get(
 	DatabaseController::class . '@renderQueryViewAction'
 );
 
-$router->get(
-	'/ajax/database/{databaseName}/listCollections',
+$router->post(
+	'/ajax/database/listCollections',
 	DatabaseController::class . '@listCollectionsAction'
 );
 
-$router->get(
-	'/ajax/database/{databaseName}/createCollection/{collectionName}',
+$router->post(
+	'/ajax/database/createCollection',
 	DatabaseController::class . '@createCollectionAction'
 );
 
 $router->post(
-	'/ajax/database/{databaseName}/collection/{collectionName}/insertOne',
+	'/ajax/collection/insertOne',
 	CollectionController::class . '@insertOneAction'
 );
 
 $router->post(
-	'/ajax/database/{databaseName}/collection/{collectionName}/count',
+	'/ajax/collection/count',
 	CollectionController::class . '@countAction'
 );
 
 $router->post(
-	'/ajax/database/{databaseName}/collection/{collectionName}/deleteOne',
+	'/ajax/collection/deleteOne',
 	CollectionController::class . '@deleteOneAction'
 );
 
 $router->post(
-	'/ajax/database/{databaseName}/collection/{collectionName}/find',
+	'/ajax/collection/find',
 	CollectionController::class . '@findAction'
 );
 
 $router->post(
-	'/ajax/database/{databaseName}/collection/{collectionName}/updateOne',
+	'/ajax/collection/updateOne',
 	CollectionController::class . '@updateOneAction'
 );
 
-$router->get(
-	'/ajax/database/{databaseName}/collection/{collectionName}/enumFields',
+$router->post(
+	'/ajax/collection/enumFields',
 	CollectionController::class . '@enumFieldsAction'
 );
 
@@ -67,16 +67,16 @@ $router->get(
 );
 
 $router->post(
-	'/ajax/database/{databaseName}/collection/{collectionName}/createIndex',
+	'/ajax/collection/createIndex',
 	CollectionController::class . '@createIndexAction'
 );
 
-$router->get(
-	'/ajax/database/{databaseName}/collection/{collectionName}/listIndexes',
+$router->post(
+	'/ajax/collection/listIndexes',
 	CollectionController::class . '@listIndexesAction'
 );
 
 $router->post(
-	'/ajax/database/{databaseName}/collection/{collectionName}/dropIndex',
+	'/ajax/collection/dropIndex',
 	CollectionController::class . '@dropIndexAction'
 );

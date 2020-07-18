@@ -81,8 +81,10 @@ MPG.helpers.doAjaxRequest = function(method, url, successCallback, body) {
  */
 MPG.reloadCollections = function(databaseName) {
 
+    var requestBody = { 'databaseName': databaseName };
+
     MPG.helpers.doAjaxRequest(
-        'GET', '/ajax/database/' + databaseName + '/listCollections', function(response) {
+        'POST', '/ajax/database/listCollections', function(response) {
 
             var collectionsList = document.querySelector('#mpg-collections-list');
 
@@ -105,7 +107,8 @@ MPG.reloadCollections = function(databaseName) {
 
             MPG.eventListeners.addCollections();
 
-        }, null
+        },
+        JSON.stringify(requestBody)
     );
 
 };
@@ -117,10 +120,14 @@ MPG.reloadCollections = function(databaseName) {
  */
 MPG.reloadCollectionFields = function() {
 
+    var requestBody = {
+        'databaseName': MPG.databaseName,
+        'collectionName': MPG.collectionName
+    };
+
     MPG.helpers.doAjaxRequest(
-        'GET',
-        '/ajax/database/' + MPG.databaseName + '/collection/'
-            + MPG.collectionName + '/enumFields',
+        'POST',
+        '/ajax/collection/enumFields',
         function(response) {
 
             JSON.parse(response).forEach(function(collectionField) {
@@ -142,7 +149,7 @@ MPG.reloadCollectionFields = function() {
             });
 
         },
-        null
+        JSON.stringify(requestBody)
     );
 
 };
@@ -154,10 +161,14 @@ MPG.reloadCollectionFields = function() {
  */
 MPG.reloadCollectionIndexes = function() {
 
+    var requestBody = {
+        'databaseName': MPG.databaseName,
+        'collectionName': MPG.collectionName
+    };
+
     MPG.helpers.doAjaxRequest(
-        'GET',
-        '/ajax/database/' + MPG.databaseName + '/collection/'
-            + MPG.collectionName + '/listIndexes',
+        'POST',
+        '/ajax/collection/listIndexes',
         function(response) {
 
             MPG.collectionIndexes = JSON.parse(response);
@@ -201,7 +212,7 @@ MPG.reloadCollectionIndexes = function() {
             });
 
         },
-        null
+        JSON.stringify(requestBody)
     );
 
 };
@@ -300,7 +311,11 @@ MPG.eventListeners.addCreateIndex = function() {
         var uniqueIndex = document.querySelector('#mpg-unique-index-select').value;
         var indexIsUnique = ( uniqueIndex === 'true' ) ? true : false;
         
-        var requestBody = {};
+        var requestBody = {
+            'databaseName': MPG.databaseName,
+            'collectionName': MPG.collectionName
+        };
+
         requestBody.key = {};
         requestBody.options = { "unique" : indexIsUnique };
 
@@ -310,8 +325,7 @@ MPG.eventListeners.addCreateIndex = function() {
 
         MPG.helpers.doAjaxRequest(
             'POST',
-            '/ajax/database/' + MPG.databaseName + '/collection/'
-                + MPG.collectionName + '/createIndex',
+            '/ajax/collection/createIndex',
             function(response) {
 
                 var createdIndexName = JSON.parse(response);
@@ -340,12 +354,15 @@ MPG.eventListeners.addDropIndex = function() {
 
         indexDropButton.addEventListener('click', function(_event) {
 
-            var requestBody = { "indexName": indexDropButton.dataset.indexName };
+            var requestBody = {
+                'databaseName': MPG.databaseName,
+                'collectionName': MPG.collectionName,
+                'indexName': indexDropButton.dataset.indexName
+            };
 
             MPG.helpers.doAjaxRequest(
                 'POST',
-                '/ajax/database/' + MPG.databaseName + '/collection/'
-                    + MPG.collectionName + '/dropIndex',
+                '/ajax/collection/dropIndex',
                 function(response) {
     
                     if ( JSON.parse(response) === true ) {
