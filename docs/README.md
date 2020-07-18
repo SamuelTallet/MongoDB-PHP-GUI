@@ -6,7 +6,7 @@ Autocompletion is available for collection fields and MongoDB keywords via `Ctrl
 Screenshots
 -----------
 
-![MongoDB PHP GUI](https://raw.githubusercontent.com/SamuelTS/MongoDB-PHP-GUI/master/docs/screenshots/mpg-find-with-autocompletion.png)
+![MongoDB PHP GUI](https://raw.githubusercontent.com/SamuelTS/MongoDB-PHP-GUI/master/docs/screenshots/mpg-database-query.png)
 
 Installation
 ------------
