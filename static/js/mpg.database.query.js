@@ -277,6 +277,18 @@ MPG.eventListeners.addCollections = function() {
                         }
                     });
 
+                    var sortSelect = document.querySelector('#mpg-sort-select');
+                    sortSelect.innerHTML = '';
+
+                    MPG.collectionFields.forEach(function(collectionField) {
+
+                        sortSelect.innerHTML += '<option value="' + collectionField + '">'
+                            + collectionField + '</option>';
+
+                    });
+
+                    document.querySelector('#mpg-output-code').innerHTML = '';
+
                 },
                 null
             );
@@ -514,6 +526,17 @@ MPG.eventListeners.addFind = function() {
 
         requestBody.options = {};
         requestBody.options.limit = parseInt(document.querySelector('#mpg-limit-input').value);
+
+        var sortSelect = document.querySelector('#mpg-sort-select');
+
+        if ( sortSelect.value !== '' ) {
+
+            var order = parseInt(document.querySelector('#mpg-order-select').value);
+
+            requestBody.options.sort = {};
+            requestBody.options.sort[sortSelect.value] = order;
+
+        }
 
         MPG.helpers.doAjaxRequest(
             'POST',

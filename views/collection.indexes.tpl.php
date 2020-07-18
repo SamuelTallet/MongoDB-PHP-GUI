@@ -106,14 +106,14 @@
 
                                 <span class="align-middle">Order</span>
 
-                                <select id="mpg-index-order-select" class="align-middle">
+                                <select id="mpg-index-order-select" class="form-control d-inline-block align-middle">
                                     <option value="1" selected>ASC</option>
                                     <option value="-1">DESC</option>
                                 </select>
 
                                 <span class="align-middle">Unique?</span>
                                 
-                                <select id="mpg-unique-index-select" class="align-middle">
+                                <select id="mpg-unique-index-select" class="form-control d-inline-block align-middle">
                                     <option value="true">Yes</option>
                                     <option value="false" selected>No</option>
                                 </select>

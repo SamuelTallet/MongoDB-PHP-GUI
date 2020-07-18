@@ -98,6 +98,12 @@ button, input {
 
 }
 
+#mpg-index-order-select, #mpg-unique-index-select {
+
+    width: auto;
+
+}
+
 #mpg-create-index-button {
 
     margin-left: 10px;

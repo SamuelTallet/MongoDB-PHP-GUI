@@ -84,7 +84,7 @@
 
                 <div class="row">
 
-                    <div class="col-md-8">
+                    <div class="col-md-6">
 
                         <h2 class="float-left">Document</h2>
 
@@ -110,10 +110,32 @@
 
                     </div>
                     
-                    <div class="col-md-4">
+                    <div class="col-md-6">
 
                         <h2>Options</h2>
-                        Limit <input id="mpg-limit-input" type="number" value="5" min="1">
+                        
+                        <div class="form-group">
+
+                            <div>
+                                Limit <input id="mpg-limit-input" type="number" class="form-control" value="5" min="1">
+                            </div>
+                            
+                            <div>
+                                Sort
+                                <select id="mpg-sort-select" class="form-control">
+                                    <option value="">Please select a database and a collection.</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                Order
+                                <select id="mpg-order-select" class="form-control">
+                                    <option value="1">ASC</option>
+                                    <option value="-1">DESC</option>
+                                </select>
+                            </div>
+
+                        </div>
 
                     </div>
                     
