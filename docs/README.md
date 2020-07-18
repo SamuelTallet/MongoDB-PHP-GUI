@@ -8,6 +8,8 @@ Screenshots
 
 ![MongoDB PHP GUI](https://raw.githubusercontent.com/SamuelTS/MongoDB-PHP-GUI/master/docs/screenshots/mpg-database-query.png)
 
+![MongoDB PHP GUI](https://raw.githubusercontent.com/SamuelTS/MongoDB-PHP-GUI/master/docs/screenshots/mpg-collection-indexes.png)
+
 Installation
 ------------
 
