@@ -225,6 +225,13 @@ MPG.eventListeners.addDatabases = function() {
         databaseLink.addEventListener('click', function(_event) {
             
             MPG.databaseName = databaseLink.dataset.databaseName;
+
+            document.querySelectorAll('.mpg-database-link').forEach(function(databaseLink) {
+                databaseLink.classList.remove('font-weight-bold');
+            });
+
+            databaseLink.classList.add('font-weight-bold');
+
             MPG.reloadCollections(databaseLink.dataset.databaseName);
 
             document.querySelector('#mpg-indexable-fields-list').innerHTML =
@@ -250,6 +257,13 @@ MPG.eventListeners.addCollections = function() {
         collectionLink.addEventListener('click', function(_event) {
             
             MPG.collectionName = collectionLink.dataset.collectionName;
+
+            document.querySelectorAll('.mpg-collection-link').forEach(function(collectionLink) {
+                collectionLink.classList.remove('font-weight-bold');
+            });
+
+            collectionLink.classList.add('font-weight-bold');
+
             MPG.collectionFields = [];
 
             MPG.reloadCollectionFields();
