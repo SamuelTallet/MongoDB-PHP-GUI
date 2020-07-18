@@ -145,8 +145,13 @@
 
                     <div id="mpg-output-column" class="col-md-12">
 
-                        <h2>Output</h2>
-                        <code id="mpg-output-code"></code>
+                        <h2 class="d-inline-block">Output</h2>
+
+                        <button id="mpg-export-button" class="btn btn-secondary">Export</button>
+                        
+                        <div>
+                            <code id="mpg-output-code"></code>
+                        </div>
 
                     </div>
                     

@@ -14,7 +14,9 @@
 .navbar-brand, .navbar-nav .nav-link {
 
     position: relative;
+    left: 0;
     top: 15px;
+
     padding-bottom: 15px;
 
 }
@@ -95,6 +97,16 @@ button, input {
 #mpg-output-column, #mpg-indexes-column {
 
     margin-top: 15px;
+
+}
+
+#mpg-export-button {
+
+    position: relative;
+    top: -5px;
+    left: 0;
+
+    margin-left: 10px;
 
 }
 

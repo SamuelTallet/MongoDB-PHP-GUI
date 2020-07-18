@@ -64,6 +64,13 @@ MPG.documentId = '';
 MPG.documentIdType = '';
 
 /**
+ * Cached output.
+ * 
+ * @type {string}
+ */
+MPG.cachedOutput = '';
+
+/**
  * Initializes CodeMirror instance.
  * 
  * @returns {void}
@@ -183,6 +190,38 @@ MPG.helpers.convertAnyToString = function(any) {
     }
 
     return string;
+
+};
+
+/**
+ * Downloads a file.
+ * 
+ * @see https://stackoverflow.com/questions/3665115/how-to-create-a-file-in-memory-for-user-to-download-but-not-through-server
+ * 
+ * @param {string} filename
+ * @param {string} data
+ * @param {string} type
+ * 
+ * @returns {void}
+ */
+MPG.helpers.downloadFile = function(filename, data, type) {
+
+    var blob = new Blob([data], {type: type});
+
+    if ( window.navigator.msSaveOrOpenBlob ) {
+
+        window.navigator.msSaveBlob(blob, filename);
+
+    } else {
+
+        var elem = window.document.createElement('a');
+        elem.href = window.URL.createObjectURL(blob);
+        elem.download = filename;
+        document.body.appendChild(elem);
+        elem.click();
+        document.body.removeChild(elem);
+
+    }
 
 };
 
@@ -544,6 +583,8 @@ MPG.eventListeners.addFind = function() {
                 + MPG.collectionName + '/find',
             function(response) {
 
+                MPG.cachedOutput = response;
+
                 var outputCode = document.querySelector('#mpg-output-code');
                 outputCode.innerHTML = '';
 
@@ -577,6 +618,29 @@ MPG.eventListeners.addCtrlSpace = function() {
 
 };
 
+/**
+ * Adds an event listener on "Export" button.
+ * 
+ * @returns {void}
+ */
+MPG.eventListeners.addExport = function() {
+
+    document.querySelector('#mpg-export-button').addEventListener('click', function(_event) {
+
+        if ( MPG.cachedOutput === '' ) {
+            return window.alert('There is nothing to export for now...');
+        }
+
+        MPG.helpers.downloadFile(
+            'mongodb-php-gui-export-' + (new Date()).getTime() + '.json',
+            JSON.stringify(JSON.parse(MPG.cachedOutput), null, 4),
+            'application/json'
+        );
+
+    });
+
+};
+
 // When document is ready:
 window.addEventListener('DOMContentLoaded', function(_event) {
 
@@ -588,6 +652,7 @@ window.addEventListener('DOMContentLoaded', function(_event) {
     MPG.eventListeners.addDeleteOne();
     MPG.eventListeners.addFind();
     MPG.eventListeners.addCtrlSpace();
+    MPG.eventListeners.addExport();
 
     window.location.hash = '';
 
