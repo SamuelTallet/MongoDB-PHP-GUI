@@ -121,3 +121,13 @@ button, input {
     margin-left: 10px;
 
 }
+
+@media screen and (max-width: 576px) {
+
+    #mpg-create-index-button {
+
+        margin-top: 10px;
+    
+    }
+
+}

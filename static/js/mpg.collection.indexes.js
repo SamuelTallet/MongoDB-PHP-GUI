@@ -42,6 +42,17 @@ MPG.collectionIndexes = [];
 MPG.helpers = {};
 
 /**
+ * Indicates if device is extra small.
+ * 
+ * @returns {boolean}
+ */
+MPG.helpers.isXsDevice = function() {
+
+    return window.matchMedia('(max-width: 576px)').matches;
+
+};
+
+/**
  * Does an ajax request.
  * 
  * @param {string} method 
@@ -69,6 +80,21 @@ MPG.helpers.doAjaxRequest = function(method, url, successCallback, body) {
 
     xhr.open(method, url);
     xhr.send(body);
+
+};
+
+/**
+ * Fixes responsive design.
+ * 
+ * @returns {void}
+ */
+MPG.fixResponsiveDesign = function() {
+
+    if ( MPG.helpers.isXsDevice() ) {
+
+        document.querySelector('#mpg-app-name').innerHTML = 'M';
+
+    }
 
 };
 
@@ -381,6 +407,8 @@ MPG.eventListeners.addDropIndex = function() {
 
 // When document is ready:
 window.addEventListener('DOMContentLoaded', function(_event) {
+
+    MPG.fixResponsiveDesign();
 
     MPG.eventListeners.addDatabases();
     MPG.eventListeners.addCreateIndex();

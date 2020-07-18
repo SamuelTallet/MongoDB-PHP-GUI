@@ -27,7 +27,7 @@
 
     <nav class="navbar navbar-expand sticky-top navbar-dark bg-mongodb">
 
-        <a class="navbar-brand" href="/"><?php echo MPG_APP_NAME; ?></a>
+        <a id="mpg-app-name" class="navbar-brand" href="/"><?php echo MPG_APP_NAME; ?></a>
 
         <div class="navbar-nav">
             <a class="nav-item nav-link" href="/createDatabase">Create database</a>

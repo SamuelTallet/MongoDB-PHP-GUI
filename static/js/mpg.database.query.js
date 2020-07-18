@@ -91,6 +91,17 @@ MPG.initializeCodeMirror = function() {
 MPG.helpers = {};
 
 /**
+ * Indicates if device is extra small.
+ * 
+ * @returns {boolean}
+ */
+MPG.helpers.isXsDevice = function() {
+
+    return window.matchMedia('(max-width: 576px)').matches;
+
+};
+
+/**
  * Does an ajax request.
  * 
  * @param {string} method 
@@ -220,6 +231,23 @@ MPG.helpers.downloadFile = function(filename, data, type) {
         document.body.appendChild(elem);
         elem.click();
         document.body.removeChild(elem);
+
+    }
+
+};
+
+/**
+ * Fixes responsive design.
+ * 
+ * @returns {void}
+ */
+MPG.fixResponsiveDesign = function() {
+
+    if ( MPG.helpers.isXsDevice() ) {
+
+        document.querySelector('#mpg-app-name').innerHTML = 'M';
+        document.querySelector('#mpg-insert-one-button').innerHTML = 'Insert';
+        document.querySelector('#mpg-delete-one-button').innerHTML = 'Delete';
 
     }
 
@@ -679,6 +707,7 @@ MPG.eventListeners.addExport = function() {
 window.addEventListener('DOMContentLoaded', function(_event) {
 
     MPG.initializeCodeMirror();
+    MPG.fixResponsiveDesign();
 
     MPG.eventListeners.addDatabases();
     MPG.eventListeners.addInsertOne();
