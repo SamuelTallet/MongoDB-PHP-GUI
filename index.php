@@ -1,6 +1,5 @@
 <?php
 
-use Helpers\MongoDBHelper;
 use Limber\Application;
 use Capsule\Factory\ServerRequestFactory;
 
@@ -36,20 +35,7 @@ define('MPG_DEV_MODE', false);
  */
 define('MPG_VIEWS_PATH', __DIR__ . '/views');
 
-try {
-
-    global $mongoDBClient;
-    $mongoDBClient = MongoDBHelper::createClient();
-
-    $application = new Application($router);
-    $serverRequest = ServerRequestFactory::createFromGlobals();
-    $response = $application->dispatch($serverRequest);
-    $application->send($response);
-
-} catch (\Throwable $th) {
-
-    if ( MPG_DEV_MODE === true ) {
-        print_r($th);
-    }
-
-}
+$application = new Application($router);
+$serverRequest = ServerRequestFactory::createFromGlobals();
+$response = $application->dispatch($serverRequest);
+$application->send($response);

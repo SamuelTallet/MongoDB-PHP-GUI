@@ -2,16 +2,23 @@
 
 namespace Helpers;
 
-use MongoDB\Client as MongoDBClient;
+use MongoDB\Client;
 
 class MongoDBHelper {
+ 
+    /**
+     * MongoDB client singleton instance.
+     * 
+     * @var MongoDB\Client|null
+     */
+    private static $client;
 
     /**
      * Creates a MongoDB client.
      * 
      * @return MongoDB\Client
      */
-    public static function createClient() : MongoDBClient {
+    private static function createClient() : Client {
 
         $clientUri = 'mongodb://';
 
@@ -29,31 +36,22 @@ class MongoDBHelper {
             $clientUri .= '/' . MPG_MONGODB_DATABASE;
         }
 
-        return new MongoDBClient($clientUri);
+        return new Client($clientUri);
 
     }
 
     /**
-     * Gets all keys from a multidimensional array.
-     * @see https://gist.github.com/JohnQUnknown/8761761
+     * Gets MongoBD client singleton instance.
      * 
-     * @param array $array
-     * 
-     * @return array
+     * @return MongoDB\Client
      */
-    public static function arrayKeysMulti(array $array) : array {
+    public static function getClient() : Client {
 
-        $keys = [];
-
-        foreach ($array as $key => $_value) {
-            $keys[] = $key;
-
-            if ( is_array($array[$key]) ) {
-                $keys = array_merge($keys, self::arrayKeysMulti($array[$key]));
-            }
+        if ( is_null(self::$client) ) {
+            self::$client = self::createClient();  
         }
 
-        return $keys;
+        return self::$client;
 
     }
 

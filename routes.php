@@ -1,20 +1,25 @@
 <?php
 
 use Limber\Router\Router;
-use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Message\ResponseInterface;
-use Capsule\Response;
-use Controllers\IndexController;
 use Controllers\DatabaseController;
 use Controllers\CollectionController;
 
 $router = new Router();
 
-$router->get('/ping', function(ServerRequestInterface $request) : ResponseInterface {
-	return new Response(200, 'pong');
+$router->get('/', function() {
+	header('Location: /queryDatabase');
+	exit;
 });
 
-$router->get('/', IndexController::class . '@indexAction');
+$router->get(
+	'/createDatabase',
+	DatabaseController::class . '@renderCreateViewAction'
+);
+
+$router->get(
+	'/queryDatabase',
+	DatabaseController::class . '@renderQueryViewAction'
+);
 
 $router->get(
 	'/ajax/database/{databaseName}/listCollections',
@@ -54,4 +59,24 @@ $router->post(
 $router->get(
 	'/ajax/database/{databaseName}/collection/{collectionName}/enumFields',
 	CollectionController::class . '@enumFieldsAction'
+);
+
+$router->get(
+	'/manageIndexes',
+	CollectionController::class . '@renderIndexesViewAction'
+);
+
+$router->post(
+	'/ajax/database/{databaseName}/collection/{collectionName}/createIndex',
+	CollectionController::class . '@createIndexAction'
+);
+
+$router->get(
+	'/ajax/database/{databaseName}/collection/{collectionName}/listIndexes',
+	CollectionController::class . '@listIndexesAction'
+);
+
+$router->post(
+	'/ajax/database/{databaseName}/collection/{collectionName}/dropIndex',
+	CollectionController::class . '@dropIndexAction'
 );

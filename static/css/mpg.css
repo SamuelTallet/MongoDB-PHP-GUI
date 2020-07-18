@@ -1,3 +1,33 @@
+.navbar {
+
+    margin-bottom: 10px;
+    padding-top: 0;
+
+}
+
+.bg-mongodb {
+
+    background-color: #13aa52;
+
+}
+
+.navbar-brand, .navbar-nav .nav-link {
+
+    position: relative;
+    top: 15px;
+    padding-bottom: 15px;
+
+}
+
+.navbar-nav .nav-link.active {
+
+    background-color: white;
+    color: black !important;
+
+    border-radius: 5px;
+
+}
+
 code {
 
     font-size: 100%;
@@ -50,7 +80,7 @@ button, input {
 
 }
 
-#mpg-databases-list, #mpg-collections-list {
+#mpg-databases-list, #mpg-collections-list, #mpg-indexable-fields-list {
 
     list-style-type: none;
 
@@ -62,8 +92,14 @@ button, input {
 
 }
 
-.output-column {
+#mpg-output-column, #mpg-indexes-column {
 
     margin-top: 15px;
+
+}
+
+#mpg-create-index-button {
+
+    margin-left: 10px;
 
 }

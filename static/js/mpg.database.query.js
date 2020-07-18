@@ -42,7 +42,6 @@ MPG.mongoDBKeywords = [
 
 /**
  * Field names of current collection.
- * XXX Used for autocompletion.
  * 
  * @type {Array}
  */
@@ -89,19 +88,25 @@ MPG.helpers = {};
  * 
  * @param {string} method 
  * @param {string} url 
- * @param {function} callback 
+ * @param {function} successCallback 
  * @param {?string} body
  * 
  * @returns {void}
  */
-MPG.helpers.doAjaxRequest = function(method, url, callback, body) {
+MPG.helpers.doAjaxRequest = function(method, url, successCallback, body) {
 
     var xhr = new XMLHttpRequest();
 
     xhr.addEventListener('readystatechange', function() {
+
         if ( this.readyState === 4 ) {
-            callback(this.responseText);
+            if ( this.status === 200 ) {
+                successCallback(this.responseText);
+            } else {
+                window.alert('Error: ' + JSON.parse(this.responseText).error.message);
+            }
         }
+
     });
 
     xhr.open(method, url);
@@ -277,38 +282,6 @@ MPG.eventListeners.addCollections = function() {
             );
 
         });
-
-    });
-
-};
-
-/**
- * Adds an event listener on "Create" button.
- * 
- * @returns {void}
- */
-MPG.eventListeners.addCreate = function() {
-
-    document.querySelector('#mpg-create-button').addEventListener('click', function(_event) {
-
-        var databaseName = window.prompt('Database name to create or use', MPG.databaseName);
-        if ( databaseName === null ) {
-            return;
-        }
-        
-        var collectionName = window.prompt('Collection name to create');
-        if ( collectionName === null ) {
-            return;
-        }
-
-        MPG.helpers.doAjaxRequest(
-            'GET',
-            '/ajax/database/' + databaseName + '/createCollection/' + collectionName,
-            function(_response) {
-                window.location.reload();
-            },
-            null
-        );
 
     });
 
@@ -587,7 +560,6 @@ window.addEventListener('DOMContentLoaded', function(_event) {
     MPG.initializeCodeMirror();
 
     MPG.eventListeners.addDatabases();
-    MPG.eventListeners.addCreate();
     MPG.eventListeners.addInsertOne();
     MPG.eventListeners.addCount();
     MPG.eventListeners.addDeleteOne();
