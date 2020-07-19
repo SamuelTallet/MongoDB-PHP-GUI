@@ -1,6 +1,6 @@
 <?php
 
-namespace Helpers;
+namespace Normalizers;
 
 class ErrorNormalizer {
 
@@ -12,21 +12,19 @@ class ErrorNormalizer {
      * 
      * @return array
      */
-    public static function normalize(\Throwable $error, $function = null) : array {
+    public static function normalize(\Throwable $error, string $function = null) : array {
 
         $normalizedError = ['error' => null];
 
         $normalizedError['error']['code'] = $error->getCode();
         $normalizedError['error']['message'] = $error->getMessage();
 
+        if ( !is_null($function) ) {
+            $normalizedError['error']['function'] = $function;
+        }
+
         if ( MPG_DEV_MODE === true ) {
-
-            if ( !is_null($function) ) {
-                $normalizedError['error']['function'] = $function;
-            }
-
             $normalizedError['error']['trace'] = $error->getTrace();
-
         }
 
         return $normalizedError;

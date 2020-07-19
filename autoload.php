@@ -5,5 +5,8 @@ if ( !file_exists($autoload_file = __DIR__ . '/vendor/autoload.php') ) {
 }
 
 $loader = require_once $autoload_file;
-$loader->add('Helpers', __DIR__ . '/src');
+
 $loader->add('Controllers', __DIR__ . '/src');
+$loader->add('Helpers', __DIR__ . '/src');
+$loader->add('Normalizers', __DIR__ . '/src');
+$loader->add('Responses', __DIR__ . '/src');

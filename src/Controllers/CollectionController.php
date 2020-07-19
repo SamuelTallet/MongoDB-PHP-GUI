@@ -3,8 +3,9 @@
 namespace Controllers;
 
 use Capsule\Response;
+use Responses\JsonResponse;
 use Helpers\MongoDBHelper;
-use Helpers\ErrorNormalizer;
+use Normalizers\ErrorNormalizer;
 
 class CollectionController extends Controller {
 
@@ -21,39 +22,25 @@ class CollectionController extends Controller {
      */
     public function insertOneAction() : Response {
 
-        $mongoDBClient = MongoDBHelper::getClient();
-
-        $requestBody = $this->getRequestBody();
-
-        if ( is_null($requestBody) ) {
-            return new Response(400, 'Request body is missing.');
+        try {
+            $decodedRequestBody = $this->getDecodedRequestBody();
+        } catch (\Throwable $th) {
+            return new JsonResponse(400, ErrorNormalizer::normalize($th, __METHOD__));
         }
-
-        $decodedRequestBody = json_decode($requestBody, JSON_OBJECT_AS_ARRAY);
-
-        if ( is_null($decodedRequestBody) ) {
-            return new Response(400, 'Request body is invalid.');
-        }
-
-        $collection = $mongoDBClient->selectCollection(
-            $decodedRequestBody['databaseName'], $decodedRequestBody['collectionName']
-        );
 
         try {
-            $insertOneResult = $collection->insertOne($decodedRequestBody['document']);
-        } catch (\Throwable $th) {
-            return new Response(
-                500,
-                json_encode(ErrorNormalizer::normalize($th)),
-                ['Content-Type' => 'application/json']
+
+            $collection = MongoDBHelper::getClient()->selectCollection(
+                $decodedRequestBody['databaseName'], $decodedRequestBody['collectionName']
             );
+
+            $insertOneResult = $collection->insertOne($decodedRequestBody['document']);
+
+        } catch (\Throwable $th) {
+            return new JsonResponse(500, ErrorNormalizer::normalize($th, __METHOD__));
         }
 
-        return new Response(
-            200,
-            json_encode($insertOneResult->getInsertedCount()),
-            ['Content-Type' => 'application/json']
-        );
+        return new JsonResponse(200, $insertOneResult->getInsertedCount());
 
     }
 
@@ -62,23 +49,11 @@ class CollectionController extends Controller {
      */
     public function countAction() : Response {
 
-        $mongoDBClient = MongoDBHelper::getClient();
-
-        $requestBody = $this->getRequestBody();
-
-        if ( is_null($requestBody) ) {
-            return new Response(400, 'Request body is missing.');
+        try {
+            $decodedRequestBody = $this->getDecodedRequestBody();
+        } catch (\Throwable $th) {
+            return new JsonResponse(400, ErrorNormalizer::normalize($th, __METHOD__));
         }
-
-        $decodedRequestBody = json_decode($requestBody, JSON_OBJECT_AS_ARRAY);
-
-        if ( is_null($decodedRequestBody) ) {
-            return new Response(400, 'Request body is invalid.');
-        }
-
-        $collection = $mongoDBClient->selectCollection(
-            $decodedRequestBody['databaseName'], $decodedRequestBody['collectionName']
-        );
 
         if ( isset($decodedRequestBody['filter']['_id'])
             && is_string($decodedRequestBody['filter']['_id']) ) {
@@ -87,18 +62,18 @@ class CollectionController extends Controller {
         }
 
         try {
-            $count = $collection->countDocuments($decodedRequestBody['filter']);
-        } catch (\Throwable $th) {
-            return new Response(
-                500,
-                json_encode(ErrorNormalizer::normalize($th)),
-                ['Content-Type' => 'application/json']
+
+            $collection = MongoDBHelper::getClient()->selectCollection(
+                $decodedRequestBody['databaseName'], $decodedRequestBody['collectionName']
             );
+
+            $count = $collection->countDocuments($decodedRequestBody['filter']);
+
+        } catch (\Throwable $th) {
+            return new JsonResponse(500, ErrorNormalizer::normalize($th, __METHOD__));
         }
 
-        return new Response(
-            200, json_encode($count), ['Content-Type' => 'application/json']
-        );
+        return new JsonResponse(200, $count);
 
     }
 
@@ -107,23 +82,11 @@ class CollectionController extends Controller {
      */
     public function deleteOneAction() : Response {
 
-        $mongoDBClient = MongoDBHelper::getClient();
-
-        $requestBody = $this->getRequestBody();
-
-        if ( is_null($requestBody) ) {
-            return new Response(400, 'Request body is missing.');
+        try {
+            $decodedRequestBody = $this->getDecodedRequestBody();
+        } catch (\Throwable $th) {
+            return new JsonResponse(400, ErrorNormalizer::normalize($th, __METHOD__));
         }
-
-        $decodedRequestBody = json_decode($requestBody, JSON_OBJECT_AS_ARRAY);
-
-        if ( is_null($decodedRequestBody) ) {
-            return new Response(400, 'Request body is invalid.');
-        }
-
-        $collection = $mongoDBClient->selectCollection(
-            $decodedRequestBody['databaseName'], $decodedRequestBody['collectionName']
-        );
 
         if ( isset($decodedRequestBody['filter']['_id'])
             && is_string($decodedRequestBody['filter']['_id']) ) {
@@ -132,20 +95,18 @@ class CollectionController extends Controller {
         }
 
         try {
-            $deleteOneResult = $collection->deleteOne($decodedRequestBody['filter']);
-        } catch (\Throwable $th) {
-            return new Response(
-                500,
-                json_encode(ErrorNormalizer::normalize($th)),
-                ['Content-Type' => 'application/json']
+
+            $collection = MongoDBHelper::getClient()->selectCollection(
+                $decodedRequestBody['databaseName'], $decodedRequestBody['collectionName']
             );
+
+            $deleteOneResult = $collection->deleteOne($decodedRequestBody['filter']);
+
+        } catch (\Throwable $th) {
+            return new JsonResponse(500, ErrorNormalizer::normalize($th, __METHOD__));
         }
-        
-        return new Response(
-            200,
-            json_encode($deleteOneResult->getDeletedCount()),
-            ['Content-Type' => 'application/json']
-        );
+
+        return new JsonResponse(200, $deleteOneResult->getDeletedCount());
 
     }
 
@@ -154,23 +115,11 @@ class CollectionController extends Controller {
      */
     public function findAction() : Response {
 
-        $mongoDBClient = MongoDBHelper::getClient();
-
-        $requestBody = $this->getRequestBody();
-
-        if ( is_null($requestBody) ) {
-            return new Response(400, 'Request body is missing.');
+        try {
+            $decodedRequestBody = $this->getDecodedRequestBody();
+        } catch (\Throwable $th) {
+            return new JsonResponse(400, ErrorNormalizer::normalize($th, __METHOD__));
         }
-
-        $decodedRequestBody = json_decode($requestBody, JSON_OBJECT_AS_ARRAY);
-
-        if ( is_null($decodedRequestBody) ) {
-            return new Response(400, 'Request body is invalid.');
-        }
-
-        $collection = $mongoDBClient->selectCollection(
-            $decodedRequestBody['databaseName'], $decodedRequestBody['collectionName']
-        );
 
         if ( isset($decodedRequestBody['filter']['_id'])
             && is_string($decodedRequestBody['filter']['_id']) ) {
@@ -179,20 +128,20 @@ class CollectionController extends Controller {
         }
 
         try {
+
+            $collection = MongoDBHelper::getClient()->selectCollection(
+                $decodedRequestBody['databaseName'], $decodedRequestBody['collectionName']
+            );
+
             $documents = $collection->find(
                 $decodedRequestBody['filter'], $decodedRequestBody['options']
             )->toArray();
+
         } catch (\Throwable $th) {
-            return new Response(
-                500,
-                json_encode(ErrorNormalizer::normalize($th)),
-                ['Content-Type' => 'application/json']
-            );
+            return new JsonResponse(500, ErrorNormalizer::normalize($th, __METHOD__));
         }
 
-        return new Response(
-            200, json_encode($documents), ['Content-Type' => 'application/json']
-        );
+        return new JsonResponse(200, $documents);
 
     }
 
@@ -201,23 +150,11 @@ class CollectionController extends Controller {
      */
     public function updateOneAction() : Response {
 
-        $mongoDBClient = MongoDBHelper::getClient();
-
-        $requestBody = $this->getRequestBody();
-
-        if ( is_null($requestBody) ) {
-            return new Response(400, 'Request body is missing.');
+        try {
+            $decodedRequestBody = $this->getDecodedRequestBody();
+        } catch (\Throwable $th) {
+            return new JsonResponse(400, ErrorNormalizer::normalize($th, __METHOD__));
         }
-
-        $decodedRequestBody = json_decode($requestBody, JSON_OBJECT_AS_ARRAY);
-
-        if ( is_null($decodedRequestBody) ) {
-            return new Response(400, 'Request body is invalid.');
-        }
-
-        $collection = $mongoDBClient->selectCollection(
-            $decodedRequestBody['databaseName'], $decodedRequestBody['collectionName']
-        );
 
         if ( isset($decodedRequestBody['filter']['_id'])
             && is_string($decodedRequestBody['filter']['_id']) ) {
@@ -226,57 +163,45 @@ class CollectionController extends Controller {
         }
 
         try {
+
+            $collection = MongoDBHelper::getClient()->selectCollection(
+                $decodedRequestBody['databaseName'], $decodedRequestBody['collectionName']
+            );
+
             $updateResult = $collection->updateOne(
                 $decodedRequestBody['filter'], $decodedRequestBody['update']
             );
+
         } catch (\Throwable $th) {
-            return new Response(
-                500,
-                json_encode(ErrorNormalizer::normalize($th)),
-                ['Content-Type' => 'application/json']
-            );
+            return new JsonResponse(500, ErrorNormalizer::normalize($th, __METHOD__));
         }
 
-        return new Response(
-            200,
-            json_encode($updateResult->getModifiedCount()),
-            ['Content-Type' => 'application/json']
-        );
+        return new JsonResponse(200, $updateResult->getModifiedCount());
 
     }
 
     public function enumFieldsAction() : Response {
 
-        $mongoDBClient = MongoDBHelper::getClient();
-
-        $requestBody = $this->getRequestBody();
-
-        if ( is_null($requestBody) ) {
-            return new Response(400, 'Request body is missing.');
+        try {
+            $decodedRequestBody = $this->getDecodedRequestBody();
+        } catch (\Throwable $th) {
+            return new JsonResponse(400, ErrorNormalizer::normalize($th, __METHOD__));
         }
-
-        $decodedRequestBody = json_decode($requestBody, JSON_OBJECT_AS_ARRAY);
-
-        if ( is_null($decodedRequestBody) ) {
-            return new Response(400, 'Request body is invalid.');
-        }
-
-        $collection = $mongoDBClient->selectCollection(
-            $decodedRequestBody['databaseName'], $decodedRequestBody['collectionName']
-        );
 
         try {
-            $documents = $collection->find([], ['limit' => 1])->toArray();
-        } catch (\Throwable $th) {
-            return new Response(
-                500,
-                json_encode(ErrorNormalizer::normalize($th)),
-                ['Content-Type' => 'application/json']
+
+            $collection = MongoDBHelper::getClient()->selectCollection(
+                $decodedRequestBody['databaseName'], $decodedRequestBody['collectionName']
             );
+
+            $documents = $collection->find([], ['limit' => 1])->toArray();
+
+        } catch (\Throwable $th) {
+            return new JsonResponse(500, ErrorNormalizer::normalize($th, __METHOD__));
         }
 
         if ( empty($documents) ) {
-            return new Response(200, json_encode([]), ['Content-Type' => 'application/json']);
+            return new JsonResponse(200, []);
         }
 
         $array = json_decode(json_encode($documents[0]), JSON_OBJECT_AS_ARRAY);
@@ -301,9 +226,7 @@ class CollectionController extends Controller {
         // We ignore $oid since it represents a \MongoDB\BSON\ObjectId object.
         $fixedDocumentFields = str_replace('_id.$oid', '_id', json_encode($documentFields));
 
-        return new Response(
-            200, $fixedDocumentFields, ['Content-Type' => 'application/json']
-        );
+        return new JsonResponse(200, json_decode($fixedDocumentFields));
 
     }
 
@@ -312,39 +235,27 @@ class CollectionController extends Controller {
      */
     public function createIndexAction() : Response {
 
-        $mongoDBClient = MongoDBHelper::getClient();
-
-        $requestBody = $this->getRequestBody();
-
-        if ( is_null($requestBody) ) {
-            return new Response(400, 'Request body is missing.');
+        try {
+            $decodedRequestBody = $this->getDecodedRequestBody();
+        } catch (\Throwable $th) {
+            return new JsonResponse(400, ErrorNormalizer::normalize($th, __METHOD__));
         }
-
-        $decodedRequestBody = json_decode($requestBody, JSON_OBJECT_AS_ARRAY);
-
-        if ( is_null($decodedRequestBody) ) {
-            return new Response(400, 'Request body is invalid.');
-        }
-
-        $collection = $mongoDBClient->selectCollection(
-            $decodedRequestBody['databaseName'], $decodedRequestBody['collectionName']
-        );
 
         try {
+
+            $collection = MongoDBHelper::getClient()->selectCollection(
+                $decodedRequestBody['databaseName'], $decodedRequestBody['collectionName']
+            );
+
             $createdIndexName = $collection->createIndex(
                 $decodedRequestBody['key'], $decodedRequestBody['options']
             );
+
         } catch (\Throwable $th) {
-            return new Response(
-                500,
-                json_encode(ErrorNormalizer::normalize($th)),
-                ['Content-Type' => 'application/json']
-            );
+            return new JsonResponse(500, ErrorNormalizer::normalize($th, __METHOD__));
         }
 
-        return new Response(
-            200, json_encode($createdIndexName), ['Content-Type' => 'application/json']
-        );
+        return new JsonResponse(200, $createdIndexName);
 
     }
 
@@ -353,44 +264,32 @@ class CollectionController extends Controller {
      */
     public function listIndexesAction() : Response {
 
-        $mongoDBClient = MongoDBHelper::getClient();
-
-        $requestBody = $this->getRequestBody();
-
-        if ( is_null($requestBody) ) {
-            return new Response(400, 'Request body is missing.');
+        try {
+            $decodedRequestBody = $this->getDecodedRequestBody();
+        } catch (\Throwable $th) {
+            return new JsonResponse(400, ErrorNormalizer::normalize($th, __METHOD__));
         }
-
-        $decodedRequestBody = json_decode($requestBody, JSON_OBJECT_AS_ARRAY);
-
-        if ( is_null($decodedRequestBody) ) {
-            return new Response(400, 'Request body is invalid.');
-        }
-
-        $collection = $mongoDBClient->selectCollection(
-            $decodedRequestBody['databaseName'], $decodedRequestBody['collectionName']
-        );
 
         $indexes = [];
 
         try {
+
+            $collection = MongoDBHelper::getClient()->selectCollection(
+                $decodedRequestBody['databaseName'], $decodedRequestBody['collectionName']
+            );
+
             foreach ($collection->listIndexes() as $indexInfo) {
                 $indexes[] = [
                     'keys' => $indexInfo->getKey(),
                     'name' => $indexInfo->getName()
                 ];
             }
+
         } catch (\Throwable $th) {
-            return new Response(
-                500,
-                json_encode(ErrorNormalizer::normalize($th)),
-                ['Content-Type' => 'application/json']
-            );
+            return new JsonResponse(500, ErrorNormalizer::normalize($th, __METHOD__));
         }
 
-        return new Response(
-            200, json_encode($indexes), ['Content-Type' => 'application/json']
-        );
+        return new JsonResponse(200, $indexes);
 
     }
 
@@ -399,37 +298,26 @@ class CollectionController extends Controller {
      */
     public function dropIndexAction() : Response {
 
-        $mongoDBClient = MongoDBHelper::getClient();
-
-        $requestBody = $this->getRequestBody();
-
-        if ( is_null($requestBody) ) {
-            return new Response(400, 'Request body is missing.');
+        try {
+            $decodedRequestBody = $this->getDecodedRequestBody();
+        } catch (\Throwable $th) {
+            return new JsonResponse(400, ErrorNormalizer::normalize($th, __METHOD__));
         }
-
-        $decodedRequestBody = json_decode($requestBody, JSON_OBJECT_AS_ARRAY);
-
-        if ( is_null($decodedRequestBody) ) {
-            return new Response(400, 'Request body is invalid.');
-        }
-
-        $collection = $mongoDBClient->selectCollection(
-            $decodedRequestBody['databaseName'], $decodedRequestBody['collectionName']
-        );
 
         try {
-            $collection->dropIndex($decodedRequestBody['indexName']);
-        } catch (\Throwable $th) {
-            return new Response(
-                500,
-                json_encode(ErrorNormalizer::normalize($th)),
-                ['Content-Type' => 'application/json']
+
+            $collection = MongoDBHelper::getClient()->selectCollection(
+                $decodedRequestBody['databaseName'], $decodedRequestBody['collectionName']
             );
+
+            // TODO: Check dropIndex result.
+            $collection->dropIndex($decodedRequestBody['indexName']);
+
+        } catch (\Throwable $th) {
+            return new JsonResponse(500, ErrorNormalizer::normalize($th, __METHOD__));
         }
 
-        return new Response(
-            200, json_encode(true), ['Content-Type' => 'application/json']
-        );
+        return new JsonResponse(200, true);
 
     }
 

@@ -163,6 +163,12 @@ MPG.reloadCollectionFields = function() {
             });
 
             var indexableFieldsList = document.querySelector('#mpg-indexable-fields-list');
+            
+            if ( MPG.collectionFields.length === 0 ) {
+                indexableFieldsList.innerHTML = '<li><i>Collection is empty.</i></li>';
+                return;
+            }
+
             indexableFieldsList.innerHTML = '';
         
             MPG.collectionFields.forEach(function(collectionField) {

@@ -2,16 +2,14 @@
 
 namespace Controllers;
 
-use Capsule\Response;
 use Helpers\MongoDBHelper;
-use Helpers\ErrorNormalizer;
-use Normalizer;
+use Normalizers\ErrorNormalizer;
+use Capsule\Response;
+use Responses\JsonResponse;
 
 class DatabaseController extends Controller {
 
     public static function getDatabaseNames() : array {
-
-        $mongoDBClient = MongoDBHelper::getClient();
 
         $databaseNames = [];
 
@@ -20,7 +18,7 @@ class DatabaseController extends Controller {
         } else {
 
             try {
-                foreach ($mongoDBClient->listDatabases() as $databaseInfo) {
+                foreach (MongoDBHelper::getClient()->listDatabases() as $databaseInfo) {
                     $databaseNames[] = $databaseInfo['name'];
                 }
             } catch (\Throwable $th) {
@@ -52,39 +50,29 @@ class DatabaseController extends Controller {
      */
     public function listCollectionsAction() : Response {
 
-        $mongoDBClient = MongoDBHelper::getClient();
-
-        $requestBody = $this->getRequestBody();
-
-        if ( is_null($requestBody) ) {
-            return new Response(400, 'Request body is missing.');
+        try {
+            $decodedRequestBody = $this->getDecodedRequestBody();
+        } catch (\Throwable $th) {
+            return new JsonResponse(400, ErrorNormalizer::normalize($th, __METHOD__));
         }
-
-        $decodedRequestBody = json_decode($requestBody, JSON_OBJECT_AS_ARRAY);
-
-        if ( is_null($decodedRequestBody) ) {
-            return new Response(400, 'Request body is invalid.');
-        }
-
-        $database = $mongoDBClient->selectDatabase($decodedRequestBody['databaseName']);
-
-        $collectionNames = [];
 
         try {
+
+            $database = MongoDBHelper::getClient()->selectDatabase(
+                $decodedRequestBody['databaseName']
+            );
+
+            $collectionNames = [];
+
             foreach ($database->listCollections() as $collectionInfo) {
                 $collectionNames[] = $collectionInfo['name'];
             }
+
         } catch (\Throwable $th) {
-            return new Response(
-                500,
-                json_encode(ErrorNormalizer::normalize($th, __METHOD__)),
-                ['Content-Type' => 'application/json']
-            );
+            return new JsonResponse(500, ErrorNormalizer::normalize($th, __METHOD__));
         }
-        
-        return new Response(
-            200, json_encode($collectionNames), ['Content-Type' => 'application/json']
-        );
+
+        return new JsonResponse(200, $collectionNames);
 
     }
 
@@ -93,35 +81,25 @@ class DatabaseController extends Controller {
      */
     public function createCollectionAction() : Response {
 
-        $mongoDBClient = MongoDBHelper::getClient();
-
-        $requestBody = $this->getRequestBody();
-
-        if ( is_null($requestBody) ) {
-            return new Response(400, 'Request body is missing.');
+        try {
+            $decodedRequestBody = $this->getDecodedRequestBody();
+        } catch (\Throwable $th) {
+            return new JsonResponse(400, ErrorNormalizer::normalize($th, __METHOD__));
         }
-
-        $decodedRequestBody = json_decode($requestBody, JSON_OBJECT_AS_ARRAY);
-
-        if ( is_null($decodedRequestBody) ) {
-            return new Response(400, 'Request body is invalid.');
-        }
-
-        $database = $mongoDBClient->selectDatabase($decodedRequestBody['databaseName']);
 
         try {
-            $database->createCollection($decodedRequestBody['collectionName']);
-        } catch (\Throwable $th) {
-            return new Response(
-                500,
-                json_encode(ErrorNormalizer::normalize($th, __METHOD__)),
-                ['Content-Type' => 'application/json']
+
+            $database = MongoDBHelper::getClient()->selectDatabase(
+                $decodedRequestBody['databaseName']
             );
+
+            $database->createCollection($decodedRequestBody['collectionName']);
+
+        } catch (\Throwable $th) {
+            return new JsonResponse(500, ErrorNormalizer::normalize($th, __METHOD__));
         }
         
-        return new Response(
-            200, json_encode(true), ['Content-Type' => 'application/json']
-        );
+        return new JsonResponse(200, true);
 
     }
 
