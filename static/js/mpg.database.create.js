@@ -53,12 +53,12 @@ MPG.createDatabase = function() {
 
     var databaseName = window.prompt('Database name to create or use');
     if ( databaseName === null ) {
-        return window.location = '/';
+        return window.location = MPG_BASE_URL + '/index';
     }
     
     var collectionName = window.prompt('Collection name to create');
     if ( collectionName === null ) {
-        return window.location = '/';
+        return window.location = MPG_BASE_URL + '/index';
     }
 
     var requestBody = {
@@ -68,9 +68,9 @@ MPG.createDatabase = function() {
 
     MPG.helpers.doAjaxRequest(
         'POST',
-        '/ajax/database/createCollection/',
+        'ajaxDatabaseCreateCollection/',
         function(_response) {
-            window.location = '/';
+            return window.location = MPG_BASE_URL + '/index';
         },
         JSON.stringify(requestBody)
     );

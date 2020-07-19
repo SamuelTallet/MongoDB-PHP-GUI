@@ -7,19 +7,24 @@
 
     <title><?php echo MPG_APP_NAME . ' v' . MPG_APP_VERSION; ?></title>
 
-    <link rel="stylesheet" href="static/css/font-awesome.min.css">
-    <link rel="stylesheet" href="static/css/bootstrap.min.css">
-    <link rel="stylesheet" href="static/css/codemirror.css">
-    <link rel="stylesheet" href="static/css/codemirror-addon/show-hint.css">
-    <link rel="stylesheet" href="static/css/jsonview.bundle.css">
-    <link rel="stylesheet" href="static/css/mpg.css">
+    <link rel="stylesheet" href="<?php echo MPG_BASE_URL; ?>/static/css/font-awesome.min.css">
+    <link rel="stylesheet" href="<?php echo MPG_BASE_URL; ?>/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo MPG_BASE_URL; ?>/static/css/codemirror.css">
+    <link rel="stylesheet" href="<?php echo MPG_BASE_URL; ?>/static/css/codemirror-addon/show-hint.css">
+    <link rel="stylesheet" href="<?php echo MPG_BASE_URL; ?>/static/css/jsonview.bundle.css">
+    <link rel="stylesheet" href="<?php echo MPG_BASE_URL; ?>/static/css/mpg.css">
 
-    <script src="static/js/codemirror.js"></script>
-    <script src="static/js/codemirror-mode/javascript.js"></script>
-    <script src="static/js/codemirror-addon/show-hint.js"></script>
-    <script src="static/js/codemirror-addon/mpg-hint.js"></script>
-    <script src="static/js/jsonview.bundle.mod.js"></script>
-    <script src="static/js/mpg.collection.indexes.js"></script>
+    <script src="<?php echo MPG_BASE_URL; ?>/static/js/codemirror.js"></script>
+    <script src="<?php echo MPG_BASE_URL; ?>/static/js/codemirror-mode/javascript.js"></script>
+    <script src="<?php echo MPG_BASE_URL; ?>/static/js/codemirror-addon/show-hint.js"></script>
+    <script src="<?php echo MPG_BASE_URL; ?>/static/js/codemirror-addon/mpg-hint.js"></script>
+    <script src="<?php echo MPG_BASE_URL; ?>/static/js/jsonview.bundle.mod.js"></script>
+
+    <script>
+        var MPG_BASE_URL = '<?php echo MPG_BASE_URL; ?>';
+    </script>
+
+    <script src="<?php echo MPG_BASE_URL; ?>/static/js/mpg.collection.indexes.js"></script>
 
 </head>
 
@@ -27,12 +32,13 @@
 
     <nav class="navbar navbar-expand sticky-top navbar-dark bg-mongodb">
 
-        <a id="mpg-app-name" class="navbar-brand" href="/"><?php echo MPG_APP_NAME; ?></a>
+        <a id="mpg-app-name" class="navbar-brand" href="<?php echo MPG_BASE_URL; ?>/index"><?php echo MPG_APP_NAME; ?></a>
 
         <div class="navbar-nav">
-            <a class="nav-item nav-link" href="/createDatabase">Create database</a>
-            <a class="nav-item nav-link" href="/queryDatabase">Query database</a>
-            <a class="nav-item nav-link active" href="/manageIndexes">Manage indexes</a>
+            <a class="nav-item nav-link" href="<?php echo MPG_BASE_URL; ?>/createDatabase">Create database</a>
+            <a class="nav-item nav-link" href="<?php echo MPG_BASE_URL; ?>/queryDatabase">Query database</a>
+            <a class="nav-item nav-link active" href="<?php echo MPG_BASE_URL; ?>/manageIndexes">Manage indexes</a>
+            <a class="nav-item nav-link" href="<?php echo MPG_BASE_URL; ?>/logout">Logout</a>
         </div>
 
     </nav>

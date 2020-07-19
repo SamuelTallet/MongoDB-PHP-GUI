@@ -22,18 +22,18 @@ class MongoDBHelper {
 
         $clientUri = 'mongodb://';
 
-        if ( !empty(MPG_MONGODB_USER) && !empty(MPG_MONGODB_PASSWORD) ) {
-            $clientUri .= MPG_MONGODB_USER . ':' . MPG_MONGODB_PASSWORD . '@';
+        if ( isset($_SESSION['mpg']['mongodb_user'])
+            && isset($_SESSION['mpg']['mongodb_password'])
+        ) {
+            $clientUri .= $_SESSION['mpg']['mongodb_user'] . ':';
+            $clientUri .= $_SESSION['mpg']['mongodb_password'] . '@';
         }
 
-        $clientUri .= MPG_MONGODB_HOST;
+        $clientUri .= $_SESSION['mpg']['mongodb_host'];
+        $clientUri .= ':' . $_SESSION['mpg']['mongodb_port'];
 
-        if ( !empty(MPG_MONGODB_PORT) ) {
-            $clientUri .= ':' . MPG_MONGODB_PORT;
-        }
-
-        if ( !empty(MPG_MONGODB_DATABASE) ) {
-            $clientUri .= '/' . MPG_MONGODB_DATABASE;
+        if ( isset($_SESSION['mpg']['mongodb_database']) ) {
+            $clientUri .= '/' . $_SESSION['mpg']['mongodb_database'];
         }
 
         return new Client($clientUri);

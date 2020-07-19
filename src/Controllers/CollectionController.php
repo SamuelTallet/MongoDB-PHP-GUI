@@ -11,6 +11,8 @@ class CollectionController extends Controller {
 
     public function renderIndexesViewAction() : Response {
 
+        LoginController::ensureUserIsLogged();
+
         return new Response(200, $this->renderView('collection.indexes', [
             'databaseNames' => DatabaseController::getDatabaseNames()
         ]));

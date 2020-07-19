@@ -13,8 +13,8 @@ class DatabaseController extends Controller {
 
         $databaseNames = [];
 
-        if ( !empty(MPG_MONGODB_DATABASE) ) {
-            $databaseNames[] = MPG_MONGODB_DATABASE;
+        if ( isset($_SESSION['mpg']['mongodb_database']) ) {
+            $databaseNames[] = $_SESSION['mpg']['mongodb_database'];
         } else {
 
             try {
@@ -33,11 +33,15 @@ class DatabaseController extends Controller {
 
     public function renderCreateViewAction() : Response {
 
+        LoginController::ensureUserIsLogged();
+
         return new Response(200, $this->renderView('database.create'));
 
     }
 
     public function renderQueryViewAction() : Response {
+
+        LoginController::ensureUserIsLogged();
         
         return new Response(200, $this->renderView('database.query', [
             'databaseNames' => self::getDatabaseNames()

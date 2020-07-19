@@ -110,7 +110,7 @@ MPG.reloadCollections = function(databaseName) {
     var requestBody = { 'databaseName': databaseName };
 
     MPG.helpers.doAjaxRequest(
-        'POST', '/ajax/database/listCollections', function(response) {
+        'POST', MPG_BASE_URL + '/ajaxDatabaseListCollections', function(response) {
 
             var collectionsList = document.querySelector('#mpg-collections-list');
 
@@ -153,7 +153,7 @@ MPG.reloadCollectionFields = function() {
 
     MPG.helpers.doAjaxRequest(
         'POST',
-        '/ajax/collection/enumFields',
+        MPG_BASE_URL + '/ajaxCollectionEnumFields',
         function(response) {
 
             JSON.parse(response).forEach(function(collectionField) {
@@ -200,7 +200,7 @@ MPG.reloadCollectionIndexes = function() {
 
     MPG.helpers.doAjaxRequest(
         'POST',
-        '/ajax/collection/listIndexes',
+        MPG_BASE_URL + '/ajaxCollectionListIndexes',
         function(response) {
 
             MPG.collectionIndexes = JSON.parse(response);
@@ -357,7 +357,7 @@ MPG.eventListeners.addCreateIndex = function() {
 
         MPG.helpers.doAjaxRequest(
             'POST',
-            '/ajax/collection/createIndex',
+            MPG_BASE_URL + '/ajaxCollectionCreateIndex',
             function(response) {
 
                 var createdIndexName = JSON.parse(response);
@@ -394,7 +394,7 @@ MPG.eventListeners.addDropIndex = function() {
 
             MPG.helpers.doAjaxRequest(
                 'POST',
-                '/ajax/collection/dropIndex',
+                MPG_BASE_URL + '/ajaxCollectionDropIndex',
                 function(response) {
     
                     if ( JSON.parse(response) === true ) {

@@ -1,7 +1,8 @@
 # Free MongoDB GUI powered by PHP
 
 Visually administrate your MongoDB database. Create, read, update and delete your documents.<br>
-Autocompletion is available for collection fields and MongoDB keywords via `Ctrl` + `Space` keys.
+Autocompletion is available for collection fields and MongoDB keywords via `Ctrl` + `Space` keys.<br>
+You can also create and drop indexes.
 
 Screenshots
 -----------
@@ -13,15 +14,9 @@ Screenshots
 Installation
 ------------
 
-1. `git clone` current repository somewhere in the cloud or on your local machine.<br>
-**Warning: If you choose cloud option. Be sure to secure folder with a *.htpasswd*.**
+1. `git clone` current repository somewhere in the cloud or on your local machine.
 2. Be sure to have PHP >= 7 with [MongoDB extension](https://www.php.net/manual/en/mongodb.installation.php) enabled in this environment.
 3. Run `composer install` at project's root directory to install all PHP dependencies.
-
-Configuration
--------------
-
-Open *config.php* file located at project's root directory. Edit `MPG_MONGODB*` constants.
 
 Thanks
 ------

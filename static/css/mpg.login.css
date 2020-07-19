@@ -1,0 +1,51 @@
+
+/**
+ * Based on a snippet made by Mutiullah Samim.
+ *
+ * @see https://bootsnipp.com/snippets/vl4R7
+ */
+
+html, body {
+
+    background-image: url('../images/login-background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    height: 100%;
+
+}
+
+.alert {
+
+    max-width: 290px;
+    margin: 15px auto;
+
+}
+
+.card {
+
+    margin-top: auto;
+    margin-bottom: auto;
+
+    background-color: rgba(255, 255, 255, 0.7);
+
+}
+
+
+.input-group-prepend span {
+
+    width: 40px;
+
+    background-color: #13aa52;
+    color: white;
+
+    border: 0 !important;
+
+}
+
+input:focus {
+
+    outline: 0 0 0 0 !important;
+    box-shadow: 0 0 0 0 !important;
+    
+}

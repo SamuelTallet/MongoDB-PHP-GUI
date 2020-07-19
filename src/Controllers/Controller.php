@@ -8,6 +8,17 @@ use Capsule\Stream\BufferStream;
 class Controller {
 
     /**
+     * Redirects to a route.
+     * 
+     * @param string $route
+     */
+    public static function redirectTo(string $route) {
+
+        header('Location: ' . MPG_BASE_URL . $route); exit;
+
+    }
+
+    /**
      * If it exists: returns request body.
      * 
      * @return string|null
