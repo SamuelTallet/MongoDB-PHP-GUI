@@ -1,8 +1,8 @@
 # Free MongoDB GUI powered by PHP
 
-Visually administrate your MongoDB database. Create, read, update and delete your documents...<br>
-Query your MongoDB database with SELECT SQL statements. You can also create and drop indexes.<br>
-Autocompletion is available for fields, MongoDB and SQL keywords via `Ctrl` `Space` combination.
+Visually administrate your MongoDB database. Create, read, update & delete your documents...<br>
+Query your MongoDB database with SELECT SQL statements. You can also create & drop indexes.<br>
+Autocompletion is available for fields, MongoDB & SQL keywords via `Ctrl` `Space` combination.
 
 Screenshots
 -----------
