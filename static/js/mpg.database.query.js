@@ -133,6 +133,27 @@ MPG.helpers.doAjaxRequest = function(method, url, successCallback, body) {
 };
 
 /**
+ * Converts a SQL query to a MongoDB query.
+ * 
+ * @param {string} sql
+ * @param {function} successCallback
+ * 
+ * @returns {void}
+ */
+MPG.helpers.convertSQLToMongoDBQuery = function(sql, successCallback) {
+
+    MPG.helpers.doAjaxRequest(
+        'POST',
+        MPG_BASE_URL + '/ajaxSQLConvertToMongoDBQuery',
+        successCallback,
+        JSON.stringify({ "sql": sql })
+    );
+
+    return;
+
+};
+
+/**
  * Converts a string to any type.
  * 
  * @param {string} string 
@@ -598,6 +619,26 @@ MPG.eventListeners.addUpdate = function() {
 };
 
 /**
+ * Adds an event listener on "CodeMirror" change.
+ * 
+ * @returns {void}
+ */
+MPG.eventListeners.addCodeMirror = function() {
+
+    MPG.codeMirror.on('change', function() {
+
+        // If Filter or Document text area contains SQL:
+        if ( /^SELECT/i.test(MPG.codeMirror.getValue()) ) {
+            MPG.codeMirror.setOption('mode', 'sql');
+        } else {
+            MPG.codeMirror.setOption('mode', 'javascript');
+        }
+
+    });
+    
+};
+
+/**
  * Adds an event listener on "Find" button.
  * 
  * @returns {void}
@@ -613,12 +654,31 @@ MPG.eventListeners.addFind = function() {
         // Synchronizes CodeMirror with Filter or Document text area.
         MPG.codeMirror.save();
 
+        var filterOrDocTextAreaValue = document.querySelector('#mpg-filter-or-doc-textarea').value;
+
+        // If Filter or Document text area contains SQL:
+        if ( /^SELECT/i.test(filterOrDocTextAreaValue) ) {
+
+            MPG.codeMirror.setValue('');
+            MPG.codeMirror.save();
+            
+            return MPG.helpers.convertSQLToMongoDBQuery(filterOrDocTextAreaValue,
+                function(response) {
+
+                    MPG.codeMirror.setValue(JSON.parse(response));
+                    MPG.codeMirror.save();
+
+                    document.querySelector('#mpg-find-button').click();
+
+                }
+            );
+
+        }
+
         var requestBody = {
             'databaseName': MPG.databaseName,
             'collectionName': MPG.collectionName
         };
-
-        var filterOrDocTextAreaValue = document.querySelector('#mpg-filter-or-doc-textarea').value;
 
         if ( filterOrDocTextAreaValue === '' ) {
             requestBody.filter = {};
@@ -713,6 +773,7 @@ window.addEventListener('DOMContentLoaded', function(_event) {
     MPG.eventListeners.addInsertOne();
     MPG.eventListeners.addCount();
     MPG.eventListeners.addDeleteOne();
+    MPG.eventListeners.addCodeMirror();
     MPG.eventListeners.addFind();
     MPG.eventListeners.addCtrlSpace();
     MPG.eventListeners.addExport();

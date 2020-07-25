@@ -9,16 +9,7 @@
 
     <link rel="stylesheet" href="<?php echo MPG_BASE_URL; ?>/static/css/font-awesome.min.css">
     <link rel="stylesheet" href="<?php echo MPG_BASE_URL; ?>/static/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<?php echo MPG_BASE_URL; ?>/static/css/codemirror.css">
-    <link rel="stylesheet" href="<?php echo MPG_BASE_URL; ?>/static/css/codemirror-addon/show-hint.css">
-    <link rel="stylesheet" href="<?php echo MPG_BASE_URL; ?>/static/css/jsonview.bundle.css">
     <link rel="stylesheet" href="<?php echo MPG_BASE_URL; ?>/static/css/mpg.css">
-
-    <script src="<?php echo MPG_BASE_URL; ?>/static/js/codemirror.js"></script>
-    <script src="<?php echo MPG_BASE_URL; ?>/static/js/codemirror-mode/javascript.js"></script>
-    <script src="<?php echo MPG_BASE_URL; ?>/static/js/codemirror-addon/show-hint.js"></script>
-    <script src="<?php echo MPG_BASE_URL; ?>/static/js/codemirror-addon/mpg-hint.js"></script>
-    <script src="<?php echo MPG_BASE_URL; ?>/static/js/jsonview.bundle.mod.js"></script>
 
     <script>
         var MPG_BASE_URL = '<?php echo MPG_BASE_URL; ?>';

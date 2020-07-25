@@ -18,7 +18,7 @@ define('MPG_APP_NAME', 'MongoDB PHP GUI');
  * 
  * @var string
  */
-define('MPG_APP_VERSION', '1.0.0');
+define('MPG_APP_VERSION', '1.0.1');
 
 /**
  * Development mode?
@@ -28,11 +28,11 @@ define('MPG_APP_VERSION', '1.0.0');
 define('MPG_DEV_MODE', false);
 
 /**
- * Absolute path to views folder. XXX Without trailing slash.
+ * Absolute path. XXX Without trailing slash.
  * 
  * @var string
  */
-define('MPG_VIEWS_PATH', __DIR__ . '/views');
+define('MPG_ABS_PATH', __DIR__);
 
 $baseUrl = ( isset($_SERVER['HTTPS']) && !empty($_SERVER['HTTPS']) ) ? 'https' : 'http';
 $baseUrl .= '://' . $_SERVER['HTTP_HOST'];

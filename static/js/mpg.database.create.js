@@ -68,7 +68,7 @@ MPG.createDatabase = function() {
 
     MPG.helpers.doAjaxRequest(
         'POST',
-        'ajaxDatabaseCreateCollection/',
+        MPG_BASE_URL + '/ajaxDatabaseCreateCollection',
         function(_response) {
             return window.location = MPG_BASE_URL + '/index';
         },

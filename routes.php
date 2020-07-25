@@ -2,9 +2,10 @@
 
 use Limber\Router\Router;
 use Controllers\LoginController;
+use Controllers\Controller;
 use Controllers\DatabaseController;
 use Controllers\CollectionController;
-use Controllers\Controller;
+use Controllers\SQLController;
 
 $router = new Router();
 
@@ -68,6 +69,11 @@ $router->post(
 $router->post(
 	MPG_SERVER_PATH . '/ajaxCollectionDeleteOne',
 	CollectionController::class . '@deleteOneAction'
+);
+
+$router->post(
+	MPG_SERVER_PATH . '/ajaxSQLConvertToMongoDBQuery',
+	SQLController::class . '@convertToMongoDBQueryAction'
 );
 
 $router->post(
