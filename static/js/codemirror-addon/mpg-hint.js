@@ -22,7 +22,7 @@
     while (start && word.test(curLine.charAt(start - 1))) --start;
     var curWord = start != end && curLine.slice(start, end);
 
-    options.list = MPG.mongoDBKeywords.concat(MPG.collectionFields);
+    options.list = MPG.mongoDBAndSQLKeywords.concat(MPG.collectionFields);
 
     /**
      * Code block taken from Mongolo project.

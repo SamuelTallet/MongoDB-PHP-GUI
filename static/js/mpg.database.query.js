@@ -28,15 +28,17 @@ MPG.databaseName = '';
 MPG.collectionName = '';
 
 /**
- * List of MongoDB keywords.
+ * List of MongoDB and SQL keywords.
  * XXX Used for autocompletion.
  * 
  * @type {Array}
  */
-MPG.mongoDBKeywords = [
+MPG.mongoDBAndSQLKeywords = [
 
     '$eq', '$gt', '$gte', '$in', '$lt', '$lte', '$ne', '$nin',
-    '$and', '$not', '$nor', '$or', '$exists', '$type'
+    '$and', '$not', '$nor', '$or', '$exists', '$type',
+
+    'SELECT', 'FROM', 'WHERE', 'IN', 'LIKE', 'AND', 'NOT', 'OR'
 
 ];
 
