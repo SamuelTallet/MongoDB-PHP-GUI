@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="<?php echo MPG_BASE_URL; ?>/static/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo MPG_BASE_URL; ?>/static/css/mpg.login.css">
 
+    <script src="<?php echo MPG_BASE_URL; ?>/static/js/mpg.login.js"></script>
+
 </head>
 
 <body>
@@ -77,7 +79,7 @@
                         </div>
 
                         <div class="form-group">
-                            <input type="submit" name="login" value="Login" class="btn btn-primary float-right">
+                            <input id="mpg-login-button" type="submit" name="login" value="Login" class="btn btn-primary float-right">
                         </div>
 
                     </form>
