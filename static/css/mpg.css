@@ -55,6 +55,24 @@ button, input {
 
 }
 
+.CodeMirror .mpg-history-pop-button {
+
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 100;
+
+    border: none;
+    background: none;
+
+}
+
+.CodeMirror .mpg-history-pop-button:focus {
+
+    outline: none;
+
+}
+
 .CodeMirror-hints {
 
     font-family: Consolas, monospace;

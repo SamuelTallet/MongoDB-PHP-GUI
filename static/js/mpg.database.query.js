@@ -28,6 +28,13 @@ MPG.databaseName = '';
 MPG.collectionName = '';
 
 /**
+ * History of queries.
+ * 
+ * @type {Array}
+ */
+MPG.queryHistory = [];
+
+/**
  * List of MongoDB and SQL keywords.
  * XXX Used for autocompletion.
  * 
@@ -82,6 +89,13 @@ MPG.initializeCodeMirror = function() {
     MPG.codeMirror = CodeMirror.fromTextArea(
         document.querySelector('#mpg-filter-or-doc-textarea')
     );
+
+    var historyPopButton = document.createElement('button');
+    
+    historyPopButton.className = 'mpg-history-pop-button';
+    historyPopButton.innerHTML = '<i class="fa fa-history" aria-hidden="true"></i>';
+
+    document.querySelector('.CodeMirror').appendChild(historyPopButton);
 
 };
 
@@ -654,6 +668,34 @@ MPG.eventListeners.addCodeMirror = function() {
 };
 
 /**
+ * Adds an event listener on "History pop" button.
+ * 
+ * @returns {void}
+ */
+MPG.eventListeners.addHistoryPop = function() {
+
+    document.querySelector('.CodeMirror .mpg-history-pop-button')
+        .addEventListener('click', function(_event) {
+
+        var lastQuery = MPG.queryHistory.pop();
+
+        if ( lastQuery === MPG.codeMirror.getValue() ) {
+            lastQuery = MPG.queryHistory.pop();
+        }
+
+        if ( typeof lastQuery === 'string' ) {
+            MPG.codeMirror.setValue(lastQuery);
+            MPG.codeMirror.save();
+        } else {
+            MPG.codeMirror.setValue('');
+            MPG.codeMirror.save();
+        }
+
+    });
+
+};
+
+/**
  * Adds an event listener on "Find" button.
  * 
  * @returns {void}
@@ -698,6 +740,7 @@ MPG.eventListeners.addFind = function() {
         if ( filterOrDocTextAreaValue === '' ) {
             requestBody.filter = {};
         } else {
+            MPG.queryHistory.push(filterOrDocTextAreaValue);
             requestBody.filter = JSON.parse(filterOrDocTextAreaValue);
         }
 
@@ -789,6 +832,7 @@ window.addEventListener('DOMContentLoaded', function(_event) {
     MPG.eventListeners.addCount();
     MPG.eventListeners.addDeleteOne();
     MPG.eventListeners.addCodeMirror();
+    MPG.eventListeners.addHistoryPop();
     MPG.eventListeners.addFind();
     MPG.eventListeners.addCtrlSpace();
     MPG.eventListeners.addExport();
