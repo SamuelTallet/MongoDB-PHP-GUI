@@ -144,14 +144,27 @@ MPG.helpers.doAjaxRequest = function(method, url, successCallback, body) {
  */
 MPG.helpers.convertSQLToMongoDBQuery = function(sql, successCallback) {
 
+    if ( /GROUP BY/i.test(sql) ) {
+        MPG.codeMirror.setValue(sql);
+        return window.alert('SQL GROUP BY clause is not supported.');
+    }
+
+    if ( /ORDER BY/i.test(sql) ) {
+        MPG.codeMirror.setValue(sql);
+        return window.alert('SQL ORDER BY clause is not supported.');
+    }
+
+    if ( /LIMIT/i.test(sql) ) {
+        MPG.codeMirror.setValue(sql);
+        return window.alert('SQL LIMIT clause is not supported.');
+    }
+
     MPG.helpers.doAjaxRequest(
         'POST',
         MPG_BASE_URL + '/ajaxSQLConvertToMongoDBQuery',
         successCallback,
         JSON.stringify({ "sql": sql })
     );
-
-    return;
 
 };
 
