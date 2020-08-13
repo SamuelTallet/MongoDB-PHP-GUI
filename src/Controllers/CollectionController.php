@@ -30,6 +30,12 @@ class CollectionController extends Controller {
             return new JsonResponse(400, ErrorNormalizer::normalize($th, __METHOD__));
         }
 
+        if ( isset($decodedRequestBody['document']['_id'])
+            && preg_match(MongoDBHelper::MDB_OBJECT_ID_REGEX, $decodedRequestBody['document']['_id']) ) {
+                $decodedRequestBody['document']['_id'] =
+                    new \MongoDB\BSON\ObjectId($decodedRequestBody['document']['_id']);
+        }
+
         foreach ($decodedRequestBody['document'] as &$insertValue) {
             if ( preg_match(MongoDBHelper::ISO_DATE_TIME_REGEX, $insertValue) ) {
                 $insertValue = new \MongoDB\BSON\UTCDateTime(new \DateTime($insertValue));
