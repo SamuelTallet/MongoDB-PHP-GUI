@@ -595,19 +595,19 @@ MPG.eventListeners.addUpdate = function() {
 
         updatableJsonValue.addEventListener('click', function(event) {
 
-            var documentFieldNewValue = window.prompt('New value');
+            var documentField = event.currentTarget;
+
+            var documentFieldNewValue = window.prompt('New value', documentField.innerHTML);
 
             if ( documentFieldNewValue === null ) {
                 return;
             }
 
-            var documentField = event.currentTarget;
-
             documentFieldNewValue = MPG.helpers.convertStringToAny(
                 documentFieldNewValue, documentField.dataset.documentFieldType
             );
 
-            if ( MPG.documentIdType === 'int' ) {
+            if ( MPG.documentIdType === 'number' ) {
                 var documentId = parseInt(documentField.dataset.documentId);
             } else {
                 var documentId = documentField.dataset.documentId;
@@ -632,7 +632,7 @@ MPG.eventListeners.addUpdate = function() {
                 function(response) {
 
                     if ( JSON.parse(response) === 1 ) {
-                        documentField.innerText = MPG.helpers.convertAnyToString(
+                        documentField.innerHTML = MPG.helpers.convertAnyToString(
                             documentFieldNewValue
                         );
                     }

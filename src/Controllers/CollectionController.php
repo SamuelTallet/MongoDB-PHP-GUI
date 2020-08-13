@@ -30,6 +30,12 @@ class CollectionController extends Controller {
             return new JsonResponse(400, ErrorNormalizer::normalize($th, __METHOD__));
         }
 
+        foreach ($decodedRequestBody['document'] as &$insertValue) {
+            if ( preg_match(MongoDBHelper::ISO_DATE_TIME_REGEX, $insertValue) ) {
+                $insertValue = new \MongoDB\BSON\UTCDateTime(new \DateTime($insertValue));
+            }
+        }
+
         try {
 
             $collection = MongoDBHelper::getClient()->selectCollection(
@@ -58,7 +64,7 @@ class CollectionController extends Controller {
         }
 
         if ( isset($decodedRequestBody['filter']['_id'])
-            && is_string($decodedRequestBody['filter']['_id']) ) {
+            && preg_match(MongoDBHelper::MDB_OBJECT_ID_REGEX, $decodedRequestBody['filter']['_id']) ) {
                 $decodedRequestBody['filter']['_id'] =
                     new \MongoDB\BSON\ObjectId($decodedRequestBody['filter']['_id']);
         }
@@ -91,7 +97,7 @@ class CollectionController extends Controller {
         }
 
         if ( isset($decodedRequestBody['filter']['_id'])
-            && is_string($decodedRequestBody['filter']['_id']) ) {
+            && preg_match(MongoDBHelper::MDB_OBJECT_ID_REGEX, $decodedRequestBody['filter']['_id']) ) {
                 $decodedRequestBody['filter']['_id'] =
                     new \MongoDB\BSON\ObjectId($decodedRequestBody['filter']['_id']);
         }
@@ -124,7 +130,7 @@ class CollectionController extends Controller {
         }
 
         if ( isset($decodedRequestBody['filter']['_id'])
-            && is_string($decodedRequestBody['filter']['_id']) ) {
+            && preg_match(MongoDBHelper::MDB_OBJECT_ID_REGEX, $decodedRequestBody['filter']['_id']) ) {
                 $decodedRequestBody['filter']['_id'] =
                     new \MongoDB\BSON\ObjectId($decodedRequestBody['filter']['_id']);
         }
@@ -143,6 +149,16 @@ class CollectionController extends Controller {
             return new JsonResponse(500, ErrorNormalizer::normalize($th, __METHOD__));
         }
 
+        foreach ($documents as $document) {
+            foreach ($document as &$documentValue) {
+                if ( is_a($documentValue, '\MongoDB\BSON\ObjectId') ) {
+                    $documentValue = (string) $documentValue;
+                } elseif ( is_a($documentValue, '\MongoDB\BSON\UTCDatetime') ) {
+                    $documentValue = $documentValue->toDateTime()->format('Y-m-d\TH:i:s.v\Z');
+                }
+            }
+        }
+
         return new JsonResponse(200, $documents);
 
     }
@@ -159,9 +175,15 @@ class CollectionController extends Controller {
         }
 
         if ( isset($decodedRequestBody['filter']['_id'])
-            && is_string($decodedRequestBody['filter']['_id']) ) {
+            && preg_match(MongoDBHelper::MDB_OBJECT_ID_REGEX, $decodedRequestBody['filter']['_id']) ) {
                 $decodedRequestBody['filter']['_id'] =
                     new \MongoDB\BSON\ObjectId($decodedRequestBody['filter']['_id']);
+        }
+
+        foreach ($decodedRequestBody['update']['$set'] as &$updateValue) {
+            if ( preg_match(MongoDBHelper::ISO_DATE_TIME_REGEX, $updateValue) ) {
+                $updateValue = new \MongoDB\BSON\UTCDateTime(new \DateTime($updateValue));
+            }
         }
 
         try {
