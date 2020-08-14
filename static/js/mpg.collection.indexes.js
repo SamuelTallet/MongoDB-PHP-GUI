@@ -358,10 +358,7 @@ MPG.eventListeners.addCreateIndex = function() {
         MPG.helpers.doAjaxRequest(
             'POST',
             MPG_BASE_URL + '/ajaxCollectionCreateIndex',
-            function(response) {
-
-                var createdIndexName = JSON.parse(response);
-                window.alert('Index created with name: ' + createdIndexName);
+            function(_response) {
 
                 MPG.reloadCollectionIndexes();
 

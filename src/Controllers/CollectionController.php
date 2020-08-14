@@ -36,11 +36,13 @@ class CollectionController extends Controller {
                     new \MongoDB\BSON\ObjectId($decodedRequestBody['document']['_id']);
         }
 
-        foreach ($decodedRequestBody['document'] as &$insertValue) {
+        array_walk_recursive($decodedRequestBody['document'], function(&$insertValue) {
+
             if ( preg_match(MongoDBHelper::ISO_DATE_TIME_REGEX, $insertValue) ) {
                 $insertValue = new \MongoDB\BSON\UTCDateTime(new \DateTime($insertValue));
             }
-        }
+
+        });
 
         try {
 
@@ -155,14 +157,20 @@ class CollectionController extends Controller {
             return new JsonResponse(500, ErrorNormalizer::normalize($th, __METHOD__));
         }
 
-        foreach ($documents as $document) {
-            foreach ($document as &$documentValue) {
+        foreach ($documents as &$document) {
+
+            $document = $document->jsonSerialize();
+
+            array_walk_recursive($document, function(&$documentValue) {
+
                 if ( is_a($documentValue, '\MongoDB\BSON\ObjectId') ) {
                     $documentValue = (string) $documentValue;
                 } elseif ( is_a($documentValue, '\MongoDB\BSON\UTCDatetime') ) {
                     $documentValue = $documentValue->toDateTime()->format('Y-m-d\TH:i:s.v\Z');
                 }
-            }
+
+            });
+
         }
 
         return new JsonResponse(200, $documents);
@@ -234,7 +242,19 @@ class CollectionController extends Controller {
             return new JsonResponse(200, []);
         }
 
-        $array = json_decode(json_encode($documents[0]), JSON_OBJECT_AS_ARRAY);
+        $document = $documents[0]->jsonSerialize();
+
+        array_walk_recursive($document, function(&$documentValue) {
+
+            if ( is_a($documentValue, '\MongoDB\BSON\ObjectId') ) {
+                $documentValue = (string) $documentValue;
+            } elseif ( is_a($documentValue, '\MongoDB\BSON\UTCDatetime') ) {
+                $documentValue = $documentValue->toDateTime()->format('Y-m-d\TH:i:s.v\Z');
+            }
+
+        });
+
+        $array = json_decode(json_encode($document), JSON_OBJECT_AS_ARRAY);
 
         /**
          * Converts multidimensional array to 2D array with dot notation keys.
@@ -253,10 +273,7 @@ class CollectionController extends Controller {
 
         $documentFields = array_unique($result);
 
-        // We ignore $oid since it represents a \MongoDB\BSON\ObjectId object.
-        $fixedDocumentFields = str_replace('_id.$oid', '_id', json_encode($documentFields));
-
-        return new JsonResponse(200, json_decode($fixedDocumentFields));
+        return new JsonResponse(200, $documentFields);
 
     }
 
