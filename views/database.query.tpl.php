@@ -31,9 +31,9 @@
 
 <body>
 
-    <nav class="navbar navbar-expand sticky-top navbar-dark bg-mongodb">
+    <nav class="navbar sticky-top navbar-dark bg-mongodb">
 
-        <a id="mpg-app-name" class="navbar-brand" href="<?php echo MPG_BASE_URL; ?>/index"><?php echo MPG_APP_NAME; ?></a>
+        <a class="navbar-brand" href="<?php echo MPG_BASE_URL; ?>/index"><?php echo MPG_APP_NAME; ?></a>
 
         <div class="navbar-nav">
             <a class="nav-item nav-link" href="<?php echo MPG_BASE_URL; ?>/createDatabase">Create database</a>
@@ -41,6 +41,8 @@
             <a class="nav-item nav-link" href="<?php echo MPG_BASE_URL; ?>/manageIndexes">Manage indexes</a>
             <a class="nav-item nav-link" href="<?php echo MPG_BASE_URL; ?>/logout">Logout</a>
         </div>
+
+        <button id="menu-toggle-button"><i class="fa fa-bars" aria-hidden="true"></i></button>
 
     </nav>
 

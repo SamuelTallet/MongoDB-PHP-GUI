@@ -5,6 +5,19 @@
 
 }
 
+@media screen and (min-width: 768px) {
+
+    .navbar {
+
+        flex-flow: row nowrap;
+        -ms-flex-pack: start;
+        justify-content: flex-start;
+    
+    
+    }
+
+}
+
 .bg-mongodb {
 
     background-color: #13aa52;
@@ -15,9 +28,78 @@
 
     position: relative;
     left: 0;
-    top: 15px;
+    top: 4px;
 
-    padding-bottom: 15px;
+    padding: 5px;
+
+}
+
+.navbar.menu-expanded .navbar-brand {
+
+    display: none;
+
+}
+
+.navbar-nav {
+
+    display: none;
+
+}
+
+.navbar.menu-expanded .navbar-nav {
+
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+
+    width: 100%;
+    margin-top: 35px;
+
+}
+
+@media screen and (min-width: 768px) {
+
+    .navbar-brand, .navbar-nav .nav-link {
+
+        top: 15px;
+        padding-top: 10px;
+        padding-bottom: 15px;
+    
+    }
+
+    .navbar-nav {
+
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: row;
+        flex-direction: row;
+    
+    }
+    
+}
+
+#menu-toggle-button {
+
+    border: none;
+    background: none;
+
+    display: block;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+
+    color: white;
+
+}
+
+@media screen and (min-width: 768px) {
+
+    #menu-toggle-button {
+
+        display: none;
+    
+    }
 
 }
 

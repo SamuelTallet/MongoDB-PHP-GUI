@@ -295,7 +295,6 @@ MPG.fixResponsiveDesign = function() {
 
     if ( MPG.helpers.isXsDevice() ) {
 
-        document.querySelector('#mpg-app-name').innerHTML = 'M';
         document.querySelector('#mpg-insert-one-button').innerHTML = 'Insert';
         document.querySelector('#mpg-delete-one-button').innerHTML = 'Delete';
 
@@ -350,6 +349,19 @@ MPG.reloadCollections = function(databaseName) {
  * @type {object}
  */
 MPG.eventListeners = {};
+
+/**
+ * Adds an event listener on "Menu toggle" button.
+ * 
+ * @returns {void}
+ */
+MPG.eventListeners.addMenuToggle = function() {
+
+    document.querySelector('#menu-toggle-button').addEventListener('click', function() {
+        document.querySelector('.navbar').classList.toggle('menu-expanded');
+    });
+
+};
 
 /**
  * Adds an event listener on each database.
@@ -827,6 +839,7 @@ window.addEventListener('DOMContentLoaded', function(_event) {
     MPG.initializeCodeMirror();
     MPG.fixResponsiveDesign();
 
+    MPG.eventListeners.addMenuToggle();
     MPG.eventListeners.addDatabases();
     MPG.eventListeners.addInsertOne();
     MPG.eventListeners.addCount();
