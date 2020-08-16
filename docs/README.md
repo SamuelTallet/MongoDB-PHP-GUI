@@ -2,7 +2,8 @@
 
 Visually administrate your MongoDB database. Create, read, update & delete your documents...<br>
 Query your MongoDB database with SELECT SQL statements. You can also create & drop indexes.<br>
-Autocompletion is available for fields, MongoDB & SQL keywords via `Ctrl` `Space` combination.
+Autocompletion is available for fields, MongoDB & SQL keywords via `Ctrl` `Space` combination.<br>
+Additional features: Export documents to JSON. Import documents from JSON. ISODate support.
 
 Screenshots
 -----------
