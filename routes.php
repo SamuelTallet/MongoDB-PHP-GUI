@@ -42,6 +42,16 @@ $router->get(
 );
 
 $router->get(
+	MPG_SERVER_PATH . '/importDocuments',
+	CollectionController::class . '@renderImportViewAction'
+);
+
+$router->post(
+	MPG_SERVER_PATH . '/importDocuments',
+	CollectionController::class . '@renderImportViewAction'
+);
+
+$router->get(
 	MPG_SERVER_PATH . '/queryDatabase',
 	DatabaseController::class . '@renderQueryViewAction'
 );

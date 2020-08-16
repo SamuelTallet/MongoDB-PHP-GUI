@@ -37,6 +37,7 @@
 
         <div class="navbar-nav">
             <a class="nav-item nav-link" href="<?php echo MPG_BASE_URL; ?>/createDatabase">Create database</a>
+            <a class="nav-item nav-link" href="<?php echo MPG_BASE_URL; ?>/importDocuments">Import documents</a>
             <a class="nav-item nav-link active" href="<?php echo MPG_BASE_URL; ?>/queryDatabase">Query database</a>
             <a class="nav-item nav-link" href="<?php echo MPG_BASE_URL; ?>/manageIndexes">Manage indexes</a>
             <a class="nav-item nav-link" href="<?php echo MPG_BASE_URL; ?>/logout">Logout</a>
@@ -101,7 +102,7 @@
 
                         <textarea id="mpg-filter-or-doc-textarea"></textarea>
 
-                        <button id="mpg-insert-one-button" class="btn btn-primary float-left">
+                        <button id="mpg-insert-one-button" class="btn btn-warning float-left">
                             Insert one
                         </button>
 
@@ -156,7 +157,7 @@
 
                         <h2 class="d-inline-block">Output</h2>
 
-                        <button id="mpg-export-button" class="btn btn-secondary">Export</button>
+                        <button id="mpg-export-button" class="btn btn-primary">Export</button>
                         
                         <div>
                             <code id="mpg-output-code"></code>

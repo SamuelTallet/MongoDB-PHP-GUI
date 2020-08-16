@@ -237,7 +237,7 @@ MPG.eventListeners = {};
  */
 MPG.eventListeners.addMenuToggle = function() {
 
-    document.querySelector('#menu-toggle-button').addEventListener('click', function() {
+    document.querySelector('#menu-toggle-button').addEventListener('click', function(_event) {
         document.querySelector('.navbar').classList.toggle('menu-expanded');
     });
 

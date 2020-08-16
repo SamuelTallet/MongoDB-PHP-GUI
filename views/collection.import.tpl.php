@@ -15,7 +15,7 @@
         var MPG_BASE_URL = '<?php echo MPG_BASE_URL; ?>';
     </script>
 
-    <script src="<?php echo MPG_BASE_URL; ?>/static/js/mpg.collection.indexes.js"></script>
+    <script src="<?php echo MPG_BASE_URL; ?>/static/js/mpg.collection.import.js"></script>
 
 </head>
 
@@ -27,9 +27,9 @@
 
         <div class="navbar-nav">
             <a class="nav-item nav-link" href="<?php echo MPG_BASE_URL; ?>/createDatabase">Create database</a>
-            <a class="nav-item nav-link" href="<?php echo MPG_BASE_URL; ?>/importDocuments">Import documents</a>
+            <a class="nav-item nav-link active" href="<?php echo MPG_BASE_URL; ?>/importDocuments">Import documents</a>
             <a class="nav-item nav-link" href="<?php echo MPG_BASE_URL; ?>/queryDatabase">Query database</a>
-            <a class="nav-item nav-link active" href="<?php echo MPG_BASE_URL; ?>/manageIndexes">Manage indexes</a>
+            <a class="nav-item nav-link" href="<?php echo MPG_BASE_URL; ?>/manageIndexes">Manage indexes</a>
             <a class="nav-item nav-link" href="<?php echo MPG_BASE_URL; ?>/logout">Logout</a>
         </div>
 
@@ -85,74 +85,42 @@
                 <div class="row">
 
                     <div class="col-md-12">
+                        
+                        <div id="mpg-import-notice" class="alert alert-info">Use form below to import documents. Max file size: <?php echo $maxFileSize; ?></div>
+                        
+                        <?php
+                        if ( !empty($successMessage) ) :
+                        ?>
+                            <h2>Result</h2>
+                            <div class="alert alert-success">Success: <?php echo $successMessage; ?></div>
+                        <?php
+                        endif;
+                        ?>
 
-                        <div class="row">
+                        <?php
+                        if ( !empty($errorMessage) ) :
+                        ?>
+                            <h2>Result</h2>
+                            <div class="alert alert-danger">Error: <?php echo $errorMessage; ?></div>
+                        <?php
+                        endif;
+                        ?>
 
-                            <div class="col-md-12">
+                        <form id="mpg-import-form" method="POST" enctype="multipart/form-data">
 
-                                <h2>Fields</h2>
+                            <input id="mpg-import-file" type="file" accept=".json" name="import" class="form-control-file d-inline align-middle">
 
-                                <ul id="mpg-indexable-fields-list">
-                                    <li><i>Please select a database and a collection.</i></li>
-                                </ul>
+                            <input type="hidden" name="database_name" value="">
+                            <input type="hidden" name="collection_name" value="">
 
-                            </div>
+                            <button id="mpg-import-button" type="submit" class="btn btn-warning d-inline">
+                                Import
+                            </button>
 
-                        </div>
-
-                        <div class="row">
-
-                            <div class="col-md-12">
-
-                                <span class="align-middle">Order</span>
-
-                                <select id="mpg-index-order-select" class="form-control d-inline-block align-middle">
-                                    <option value="1" selected>ASC</option>
-                                    <option value="-1">DESC</option>
-                                </select>
-
-                                <span class="align-middle">Unique?</span>
-                                
-                                <select id="mpg-unique-index-select" class="form-control d-inline-block align-middle">
-                                    <option value="true">Yes</option>
-                                    <option value="false" selected>No</option>
-                                </select>
-
-                                <button id="mpg-create-index-button" class="btn btn-primary">
-                                    Create index
-                                </button>
-
-                            </div>
-
-                        </div>
+                        </form>
 
                     </div>
 
-                </div>
-                
-                <div class="row">
-
-                    <div id="mpg-indexes-column" class="col-md-12 d-none">
-
-                        <h2>Indexes</h2>
-
-                        <table id="mpg-indexes-table" class="table table-bordered table-hover">
-
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Keys (Order)</th>
-                                    <th>Operation</th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                            </tbody>
-
-                        </table>
-
-                    </div>
-                    
                 </div>
                 
             </div>

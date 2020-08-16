@@ -112,6 +112,29 @@
 
 }
 
+#mpg-import-notice {
+
+    margin-top: 10px;
+
+}
+
+#mpg-import-file {
+
+    border: none;
+    width: auto;
+    
+}
+
+@media screen and (max-width: 576px) {
+
+    #mpg-import-button {
+
+        margin-top: 10px;
+        
+    }
+
+}
+
 code {
 
     font-size: 100%;

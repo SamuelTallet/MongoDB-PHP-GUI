@@ -9,6 +9,85 @@ use Normalizers\ErrorNormalizer;
 
 class CollectionController extends Controller {
 
+    /**
+     * @see https://docs.mongodb.com/php-library/v1.6/reference/method/MongoDBCollection-insertMany/
+     */
+    public function importFile($documentsFilename, $databaseName, $collectionName) : int {
+
+        $documentsFileContents = @file_get_contents($documentsFilename);
+
+        if ( $documentsFileContents === false ) {
+            throw new \Exception('Impossible to read the import file.');
+        }
+
+        $documents = json_decode($documentsFileContents, JSON_OBJECT_AS_ARRAY);
+
+        if ( is_null($documents) ) {
+            throw new \Exception('Import file is invalid... Malformed JSON?');
+        }
+
+        foreach ($documents as &$document) {
+
+            if ( isset($document['_id'])
+                && preg_match(MongoDBHelper::MDB_OBJECT_ID_REGEX, $document['_id']) ) {
+                    $document['_id'] = new \MongoDB\BSON\ObjectId($document['_id']);
+            }
+
+            array_walk_recursive($document, function(&$documentValue) {
+
+                if ( preg_match(MongoDBHelper::ISO_DATE_TIME_REGEX, $documentValue) ) {
+                    $documentValue = new \MongoDB\BSON\UTCDateTime(new \DateTime($documentValue));
+                }
+    
+            });
+
+        }
+
+        $collection = MongoDBHelper::getClient()->selectCollection(
+            $databaseName, $collectionName
+        );
+
+        $insertManyResult = $collection->insertMany($documents);
+
+        return $insertManyResult->getInsertedCount();
+
+    }
+
+    public function renderImportViewAction() : Response {
+
+        LoginController::ensureUserIsLogged();
+
+        $successMessage = '';
+        $errorMessage = '';
+
+        if ( isset($_FILES['import']) && isset($_FILES['import']['tmp_name'])
+            && isset($_POST['database_name']) && isset($_POST['collection_name']) ) {
+
+                try {
+
+                    $importedDocumentsCount = $this->importFile(
+                        $_FILES['import']['tmp_name'],
+                        $_POST['database_name'],
+                        $_POST['collection_name']
+                    );
+
+                    $successMessage = $importedDocumentsCount . ' document(s) imported.';
+
+                } catch (\Throwable $th) {
+                    $errorMessage = $th->getMessage();
+                }
+
+        }
+
+        return new Response(200, $this->renderView('collection.import', [
+            'databaseNames' => DatabaseController::getDatabaseNames(),
+            'maxFileSize' => ini_get('upload_max_filesize'),
+            'successMessage' => $successMessage,
+            'errorMessage' => $errorMessage
+        ]));
+
+    }
+
     public function renderIndexesViewAction() : Response {
 
         LoginController::ensureUserIsLogged();
@@ -36,10 +115,10 @@ class CollectionController extends Controller {
                     new \MongoDB\BSON\ObjectId($decodedRequestBody['document']['_id']);
         }
 
-        array_walk_recursive($decodedRequestBody['document'], function(&$insertValue) {
+        array_walk_recursive($decodedRequestBody['document'], function(&$documentValue) {
 
-            if ( preg_match(MongoDBHelper::ISO_DATE_TIME_REGEX, $insertValue) ) {
-                $insertValue = new \MongoDB\BSON\UTCDateTime(new \DateTime($insertValue));
+            if ( preg_match(MongoDBHelper::ISO_DATE_TIME_REGEX, $documentValue) ) {
+                $documentValue = new \MongoDB\BSON\UTCDateTime(new \DateTime($documentValue));
             }
 
         });
@@ -161,15 +240,32 @@ class CollectionController extends Controller {
 
             $document = $document->jsonSerialize();
 
-            array_walk_recursive($document, function(&$documentValue) {
+            if ( property_exists($document, '_id')
+                && is_a($document->_id, '\MongoDB\BSON\ObjectId') ) {
+                    $document->_id = (string) $document->_id;
+            }
 
-                if ( is_a($documentValue, '\MongoDB\BSON\ObjectId') ) {
-                    $documentValue = (string) $documentValue;
-                } elseif ( is_a($documentValue, '\MongoDB\BSON\UTCDatetime') ) {
+            foreach ($document as &$documentValue) {
+
+                if ( is_a($documentValue, '\MongoDB\Model\BSONDocument') ) {
+    
+                    $documentValue = $documentValue->jsonSerialize();
+    
+                    foreach ($documentValue as &$documentSubValue) {
+    
+                        if ( is_a($documentSubValue, '\MongoDB\BSON\UTCDateTime') ) {
+                            $documentSubValue = $documentSubValue->toDateTime()->format('Y-m-d\TH:i:s.v\Z');
+                        }
+    
+                        // TODO: Support more nested documents.
+    
+                    }
+    
+                } elseif ( is_a($documentValue, '\MongoDB\BSON\UTCDateTime') ) {
                     $documentValue = $documentValue->toDateTime()->format('Y-m-d\TH:i:s.v\Z');
                 }
-
-            });
+    
+            }
 
         }
 
@@ -244,15 +340,32 @@ class CollectionController extends Controller {
 
         $document = $documents[0]->jsonSerialize();
 
-        array_walk_recursive($document, function(&$documentValue) {
+        if ( property_exists($document, '_id')
+            && is_a($document->_id, '\MongoDB\BSON\ObjectId') ) {
+                $document->_id = (string) $document->_id;
+        }
 
-            if ( is_a($documentValue, '\MongoDB\BSON\ObjectId') ) {
-                $documentValue = (string) $documentValue;
-            } elseif ( is_a($documentValue, '\MongoDB\BSON\UTCDatetime') ) {
+        foreach ($document as &$documentValue) {
+
+            if ( is_a($documentValue, '\MongoDB\Model\BSONDocument') ) {
+
+                $documentValue = $documentValue->jsonSerialize();
+
+                foreach ($documentValue as &$documentSubValue) {
+
+                    if ( is_a($documentSubValue, '\MongoDB\BSON\UTCDateTime') ) {
+                        $documentSubValue = $documentSubValue->toDateTime()->format('Y-m-d\TH:i:s.v\Z');
+                    }
+
+                    // TODO: Support more nested documents.
+
+                }
+
+            } elseif ( is_a($documentValue, '\MongoDB\BSON\UTCDateTime') ) {
                 $documentValue = $documentValue->toDateTime()->format('Y-m-d\TH:i:s.v\Z');
             }
 
-        });
+        }
 
         $array = json_decode(json_encode($document), JSON_OBJECT_AS_ARRAY);
 
