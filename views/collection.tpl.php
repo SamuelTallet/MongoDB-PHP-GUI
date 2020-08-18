@@ -88,7 +88,7 @@
                     
                         <h2>Operations</h2>
 
-                        <div class="alert alert-danger">Be aware that drop a collection is irreversible.</div>
+                        <div class="alert alert-danger" role="alert">Be aware that drop a collection is irreversible.</div>
 
                         <button id="mpg-create-coll-button" class="btn btn-primary">Create coll.</button>
 

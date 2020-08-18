@@ -23,9 +23,9 @@
         if ( isset($errors) ) :
         ?>
 
-        <div class="alert alert-danger text-center" role="alert">
-            Please fill these fields: <?php echo join(', ', $errors); ?>
-        </div>
+            <div class="alert alert-danger text-center" role="alert">
+                Please fill these fields: <?php echo join(', ', $errors); ?>
+            </div>
 
         <?php
         endif;

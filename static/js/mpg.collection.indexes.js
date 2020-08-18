@@ -211,7 +211,8 @@ MPG.reloadCollectionIndexes = function() {
                 
                 indexesTableBody.innerHTML += '<tr><td>' + collectionIndex.name + '</td>'
                     + '<td>' + collectionIndexKeysHtml + '</td>'
-                        + '<td>' + collectionIndexDropButton + '</td></tr>';
+                        + '<td>' + (collectionIndex.isUnique ? 'Yes' : 'No') + '</td>'
+                            + '<td>' + collectionIndexDropButton + '</td></tr>';
                 
                 MPG.eventListeners.addDropIndex();
         
@@ -345,7 +346,14 @@ MPG.eventListeners.addCreateIndex = function() {
         MPG.helpers.doAjaxRequest(
             'POST',
             MPG_BASE_URL + '/ajaxCollectionCreateIndex',
-            function(_response) {
+            function(response) {
+
+                var indexCreated = document.querySelector('#mpg-index-created');
+                var indexCreatedText = document.querySelector('#mpg-index-created .text');
+
+                indexCreated.classList.remove('d-none');
+                indexCreatedText.innerHTML
+                    = 'Success: Index created with name ' + response + '.';
 
                 MPG.reloadCollectionIndexes();
 
@@ -395,11 +403,32 @@ MPG.eventListeners.addDropIndex = function() {
 
 };
 
+/**
+ * Adds an event listener on dismissible alerts.
+ * 
+ * @returns {void}
+ */
+MPG.eventListeners.addDismissible = function() {
+
+    document.querySelectorAll('[data-dismiss="alert"]').forEach(function(alertCloseButton) {
+
+        alertCloseButton.addEventListener('click', function(event) {
+
+            var alert = document.getElementById(event.currentTarget.dataset.alertId);
+            alert.classList.add('d-none');
+
+        });
+        
+    });
+
+};
+
 // When document is ready:
 window.addEventListener('DOMContentLoaded', function(_event) {
 
     MPG.eventListeners.addMenuToggle();
     MPG.eventListeners.addDatabases();
     MPG.eventListeners.addCreateIndex();
+    MPG.eventListeners.addDismissible();
 
 });

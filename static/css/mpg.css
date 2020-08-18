@@ -255,6 +255,18 @@ button, input {
 
 }
 
+.alert-dismissible {
+
+    width: fit-content;
+
+}
+
+#mpg-index-created {
+
+    margin-top: 15px;
+    
+}
+
 @media screen and (max-width: 576px) {
 
     #mpg-create-index-button {

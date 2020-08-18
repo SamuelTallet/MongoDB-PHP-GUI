@@ -509,8 +509,9 @@ class CollectionController extends Controller {
 
             foreach ($collection->listIndexes() as $indexInfo) {
                 $indexes[] = [
+                    'name' => $indexInfo->getName(),
                     'keys' => $indexInfo->getKey(),
-                    'name' => $indexInfo->getName()
+                    'isUnique' => $indexInfo->isUnique()
                 ];
             }
 

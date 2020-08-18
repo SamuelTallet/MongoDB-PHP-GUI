@@ -86,13 +86,13 @@
 
                     <div class="col-md-12">
                         
-                        <div id="mpg-import-notice" class="alert alert-info">Use form below to import documents. Max file size: <?php echo $maxFileSize; ?></div>
+                        <div id="mpg-import-notice" class="alert alert-info" role="alert">Use form below to import documents. Max file size: <?php echo $maxFileSize; ?></div>
                         
                         <?php
                         if ( !empty($successMessage) ) :
                         ?>
                             <h2>Result</h2>
-                            <div class="alert alert-success">Success: <?php echo $successMessage; ?></div>
+                            <div class="alert alert-success" role="alert">Success: <?php echo $successMessage; ?></div>
                         <?php
                         endif;
                         ?>
@@ -101,7 +101,7 @@
                         if ( !empty($errorMessage) ) :
                         ?>
                             <h2>Result</h2>
-                            <div class="alert alert-danger">Error: <?php echo $errorMessage; ?></div>
+                            <div class="alert alert-danger" role="alert">Error: <?php echo $errorMessage; ?></div>
                         <?php
                         endif;
                         ?>

@@ -126,6 +126,21 @@
 
                         </div>
 
+                        <div class="row">
+
+                            <div class="col-md-12">
+
+                                <div id="mpg-index-created" class="alert alert-success alert-dismissible d-none" role="alert">
+                                    <span class="text">...</span>
+                                    <button type="button" class="close" data-dismiss="alert" data-alert-id="mpg-index-created" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                
+                            </div>
+
+                        </div>
+
                     </div>
 
                 </div>
@@ -142,6 +157,7 @@
                                 <tr>
                                     <th>Name</th>
                                     <th>Keys (Order)</th>
+                                    <th>Unique?</th>
                                     <th>Operation</th>
                                 </tr>
                             </thead>
