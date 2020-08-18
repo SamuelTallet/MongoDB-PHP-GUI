@@ -9,6 +9,75 @@ use Normalizers\ErrorNormalizer;
 
 class CollectionController extends Controller {
 
+    public function renderViewAction() : Response {
+
+        LoginController::ensureUserIsLogged();
+        
+        return new Response(200, $this->renderView('collection', [
+            'databaseNames' => DatabaseController::getDatabaseNames()
+        ]));
+
+    }
+
+    /**
+     * @see https://docs.mongodb.com/manual/reference/command/renameCollection/
+     */
+    public function renameAction() : Response {
+
+        try {
+            $decodedRequestBody = $this->getDecodedRequestBody();
+        } catch (\Throwable $th) {
+            return new JsonResponse(400, ErrorNormalizer::normalize($th, __METHOD__));
+        }
+
+        try {
+
+            $database = MongoDBHelper::getClient()->selectDatabase('admin');
+
+            // TODO: Check command result?
+            $database->command([
+                'renameCollection' => $decodedRequestBody['databaseName'] . '.'
+                    . $decodedRequestBody['oldCollectionName'],
+                'to' => $decodedRequestBody['databaseName'] . '.'
+                    . $decodedRequestBody['newCollectionName']
+            ]);
+
+        } catch (\Throwable $th) {
+            return new JsonResponse(500, ErrorNormalizer::normalize($th, __METHOD__));
+        }
+
+        return new JsonResponse(200, true);
+
+    }
+
+    /**
+     * @see https://docs.mongodb.com/php-library/v1.6/reference/method/MongoDBCollection-drop/index.html
+     */
+    public function dropAction() : Response {
+
+        try {
+            $decodedRequestBody = $this->getDecodedRequestBody();
+        } catch (\Throwable $th) {
+            return new JsonResponse(400, ErrorNormalizer::normalize($th, __METHOD__));
+        }
+
+        try {
+
+            $collection = MongoDBHelper::getClient()->selectCollection(
+                $decodedRequestBody['databaseName'], $decodedRequestBody['collectionName']
+            );
+
+            // TODO: Check drop result?
+            $collection->drop();
+
+        } catch (\Throwable $th) {
+            return new JsonResponse(500, ErrorNormalizer::normalize($th, __METHOD__));
+        }
+
+        return new JsonResponse(200, true);
+
+    }
+
     /**
      * @see https://docs.mongodb.com/php-library/v1.6/reference/method/MongoDBCollection-insertMany/
      */
@@ -470,7 +539,7 @@ class CollectionController extends Controller {
                 $decodedRequestBody['databaseName'], $decodedRequestBody['collectionName']
             );
 
-            // TODO: Check dropIndex result.
+            // TODO: Check dropIndex result?
             $collection->dropIndex($decodedRequestBody['indexName']);
 
         } catch (\Throwable $th) {

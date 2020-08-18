@@ -112,6 +112,16 @@
 
 }
 
+@media screen and (min-width: 768px) {
+
+    #mpg-create-coll-button, #mpg-rename-coll-button {
+
+        margin-right: 7px;
+    
+    }
+
+}
+
 #mpg-import-notice {
 
     margin-top: 10px;

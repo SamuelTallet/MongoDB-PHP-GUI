@@ -31,14 +31,6 @@ class DatabaseController extends Controller {
 
     }
 
-    public function renderCreateViewAction() : Response {
-
-        LoginController::ensureUserIsLogged();
-
-        return new Response(200, $this->renderView('database.create'));
-
-    }
-
     public function renderQueryViewAction() : Response {
 
         LoginController::ensureUserIsLogged();
@@ -97,6 +89,7 @@ class DatabaseController extends Controller {
                 $decodedRequestBody['databaseName']
             );
 
+            // TODO: Check createCollection result?
             $database->createCollection($decodedRequestBody['collectionName']);
 
         } catch (\Throwable $th) {

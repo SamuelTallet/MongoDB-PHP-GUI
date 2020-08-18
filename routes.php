@@ -37,8 +37,23 @@ $router->post(
 );
 
 $router->get(
-	MPG_SERVER_PATH . '/createDatabase',
-	DatabaseController::class . '@renderCreateViewAction'
+	MPG_SERVER_PATH . '/manageCollections',
+	CollectionController::class . '@renderViewAction'
+);
+
+$router->post(
+	MPG_SERVER_PATH . '/ajaxDatabaseCreateCollection',
+	DatabaseController::class . '@createCollectionAction'
+);
+
+$router->post(
+	MPG_SERVER_PATH . '/ajaxCollectionRename',
+	CollectionController::class . '@renameAction'
+);
+
+$router->post(
+	MPG_SERVER_PATH . '/ajaxCollectionDrop',
+	CollectionController::class . '@dropAction'
 );
 
 $router->get(
@@ -59,11 +74,6 @@ $router->get(
 $router->post(
 	MPG_SERVER_PATH . '/ajaxDatabaseListCollections',
 	DatabaseController::class . '@listCollectionsAction'
-);
-
-$router->post(
-	MPG_SERVER_PATH . '/ajaxDatabaseCreateCollection',
-	DatabaseController::class . '@createCollectionAction'
 );
 
 $router->post(
