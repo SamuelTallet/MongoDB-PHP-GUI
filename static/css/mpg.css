@@ -145,6 +145,12 @@
 
 }
 
+.vis-network:focus {
+
+    outline: none;
+
+}
+
 code {
 
     font-size: 100%;

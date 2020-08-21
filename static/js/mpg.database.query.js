@@ -489,6 +489,8 @@ MPG.eventListeners.addCollections = function() {
 
                     document.querySelector('#mpg-output-code').innerHTML = '';
 
+                    document.querySelector('#mpg-find-button').click();
+
                 },
                 JSON.stringify(requestBody)
             );

@@ -28,6 +28,7 @@
         <div class="navbar-nav">
             <a class="nav-item nav-link" href="<?php echo MPG_BASE_URL; ?>/manageCollections">Manage collections</a>
             <a class="nav-item nav-link active" href="<?php echo MPG_BASE_URL; ?>/importDocuments">Import documents</a>
+            <a class="nav-item nav-link" href="<?php echo MPG_BASE_URL; ?>/visualizeDatabase">Visualize database</a>
             <a class="nav-item nav-link" href="<?php echo MPG_BASE_URL; ?>/queryDatabase">Query database</a>
             <a class="nav-item nav-link" href="<?php echo MPG_BASE_URL; ?>/manageIndexes">Manage indexes</a>
             <a class="nav-item nav-link" href="<?php echo MPG_BASE_URL; ?>/logout">Logout</a>

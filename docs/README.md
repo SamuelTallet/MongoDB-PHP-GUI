@@ -8,9 +8,11 @@ Additional features: Export documents to JSON. Import documents from JSON. ISODa
 Screenshots
 -----------
 
-![MongoDB PHP GUI](https://raw.githubusercontent.com/SamuelTS/MongoDB-PHP-GUI/master/docs/screenshots/new-mpg-database-query.png)
+![MongoDB PHP GUI - Visualize Database](https://raw.githubusercontent.com/SamuelTS/MongoDB-PHP-GUI/master/docs/screenshots/newest-mpg-database-visualize.png)
 
-![MongoDB PHP GUI](https://raw.githubusercontent.com/SamuelTS/MongoDB-PHP-GUI/master/docs/screenshots/new-mpg-collection-indexes.png)
+![MongoDB PHP GUI - Query Database](https://raw.githubusercontent.com/SamuelTS/MongoDB-PHP-GUI/master/docs/screenshots/newest-mpg-database-query.png)
+
+![MongoDB PHP GUI - Manage Indexes](https://raw.githubusercontent.com/SamuelTS/MongoDB-PHP-GUI/master/docs/screenshots/newest-mpg-collection-indexes.png)
 
 Installation
 ------------
@@ -24,7 +26,7 @@ Thanks
 ------
 
 ❤️ Thanks to [Limber](https://github.com/nimbly/Limber), [Capsule](https://github.com/nimbly/Capsule), [Font Awesome](https://fontawesome.com/), [Bootstrap](https://getbootstrap.com/), [CodeMirror](https://github.com/codemirror/codemirror) and [JsonView](https://github.com/pgrabovets/json-view).<br>
-Special thanks to [MongoDB PHP library](https://github.com/mongodb/mongo-php-library) and [SQL to MongoDB Query Converter](https://github.com/vincentrussell/sql-to-mongo-db-query-converter). ❤️
+Thanks also to [MongoDB PHP lib](https://github.com/mongodb/mongo-php-library), [vis.js](https://github.com/visjs) and [SQL to MongoDB Query Converter](https://github.com/vincentrussell/sql-to-mongo-db-query-converter). ❤️
 
 Copyright
 ---------

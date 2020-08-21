@@ -67,6 +67,16 @@ $router->post(
 );
 
 $router->get(
+	MPG_SERVER_PATH . '/visualizeDatabase',
+	DatabaseController::class . '@renderVisualizeViewAction'
+);
+
+$router->get(
+	MPG_SERVER_PATH . '/ajaxDatabaseGetNetworkGraph',
+	DatabaseController::class . '@getNetworkGraphAction'
+);
+
+$router->get(
 	MPG_SERVER_PATH . '/queryDatabase',
 	DatabaseController::class . '@renderQueryViewAction'
 );

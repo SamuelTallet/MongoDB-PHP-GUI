@@ -31,6 +31,107 @@ class DatabaseController extends Controller {
 
     }
 
+    public function renderVisualizeViewAction() : Response {
+
+        LoginController::ensureUserIsLogged();
+        
+        return new Response(200, $this->renderView('database.visualize'));
+
+    }
+
+    public function getNetworkGraphAction() : Response {
+
+        $networkGraph = [
+            'visData' => [
+                'nodes' => [
+                    [
+                        'id' => 1,
+                        'label' => 'MongoDB server',
+                        'shape' => 'image',
+                        'image' => MPG_BASE_URL . '/static/images/leaf-icon.svg',
+                        'size' => 32
+                    ]
+                ],
+                'edges' => []
+            ],
+            'mapping' => [
+
+                1 => [
+                    'databaseName' => null,
+                    'collectionName' => null
+                ]
+
+            ]
+        ];
+
+        $nodeCounter = 1;
+
+        try {
+
+            foreach (MongoDBHelper::getClient()->listDatabases() as $databaseInfo) {
+
+                $nodeCounter++;
+
+                $databaseNode = [
+                    'id' => $nodeCounter,
+                    'label' => 'DB: ' . $databaseInfo['name'],
+                    'shape' => 'image',
+                    'image' => MPG_BASE_URL . '/static/images/database-icon.svg',
+                    'size' => 24
+                ];
+
+                $database = MongoDBHelper::getClient()->selectDatabase(
+                    $databaseInfo['name']
+                );
+    
+                foreach ($database->listCollections() as $collectionInfo) {
+
+                    $nodeCounter++;
+                    
+                    $collectionNode = [
+                        'id' => $nodeCounter,
+                        'label' => 'Coll: ' . $collectionInfo['name'],
+                        'shape' => 'image',
+                        'image' => MPG_BASE_URL . '/static/images/document-icon.svg',
+                        'size' => 24
+                    ];
+
+                    array_push($networkGraph['visData']['nodes'], $collectionNode);
+
+                    array_push($networkGraph['visData']['edges'], [
+                        'from' => $databaseNode['id'],
+                        'to' => $collectionNode['id']
+                    ]);
+
+                    $networkGraph['mapping'][ $collectionNode['id'] ] = [
+                        'databaseName' => $databaseInfo['name'],
+                        'collectionName' => $collectionInfo['name']
+                    ];
+
+                }
+                
+                array_push($networkGraph['visData']['nodes'], $databaseNode);
+
+                array_push($networkGraph['visData']['edges'], [
+                    'from' => 1, // MongoDB server
+                    'to' => $databaseNode['id']
+                ]);
+
+                $networkGraph['mapping'][ $databaseNode['id'] ] = [
+                    'databaseName' => $databaseInfo['name'],
+                    'collectionName' => null
+                ];
+
+            }
+
+        } catch (\Throwable $th) {
+            return new JsonResponse(500, ErrorNormalizer::normalize($th, __METHOD__));
+        }
+
+        return new JsonResponse(200, $networkGraph);
+
+    }
+
     public function renderQueryViewAction() : Response {
 
         LoginController::ensureUserIsLogged();
