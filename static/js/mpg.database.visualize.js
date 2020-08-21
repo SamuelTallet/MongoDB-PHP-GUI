@@ -14,7 +14,7 @@ var MPG = {};
 MPG.visNetworkOptions = {
 
     width:  '100%',
-    height: '400px',
+    height: (window.innerHeight - 100) + 'px',
     nodes: {
         color: {
             background: "transparent",
