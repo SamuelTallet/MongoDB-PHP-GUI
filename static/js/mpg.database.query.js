@@ -28,6 +28,21 @@ MPG.databaseName = '';
 MPG.collectionName = '';
 
 /**
+ * To do list sub-namespace.
+ * 
+ * @type {object}
+ */
+MPG.toDoList = {};
+
+/**
+ * Name of collection to reselect.
+ * XXX Used for navigation.
+ * 
+ * @type {string}
+ */
+MPG.toDoList.reselectCollection = '';
+
+/**
  * History of queries.
  * 
  * @type {Array}
@@ -145,6 +160,41 @@ MPG.helpers.doAjaxRequest = function(method, url, successCallback, body) {
 
     xhr.open(method, url);
     xhr.send(body);
+
+};
+
+/**
+ * Navigates on same page. Example: reselects database and collection after a refresh.
+ * 
+ * @returns {void}
+ */
+MPG.helpers.navigateOnSamePage = function() {
+
+    var fragmentUrl = window.location.hash.split('#');
+    var databaseAndCollectionName;
+    var databaseSelector;
+
+    if ( fragmentUrl.length === 2 && fragmentUrl[1] !== '' ) {
+
+        databaseAndCollectionName = fragmentUrl[1].split('/');
+
+        if ( databaseAndCollectionName.length === 1 ) {
+
+            databaseSelector = '.mpg-database-link' + '[data-database-name="'
+                + databaseAndCollectionName[0] + '"]';
+            document.querySelector(databaseSelector).click();
+
+        } else if ( databaseAndCollectionName.length === 2 ) {
+
+            MPG.toDoList.reselectCollection = databaseAndCollectionName[1];
+
+            databaseSelector = '.mpg-database-link' + '[data-database-name="'
+                + databaseAndCollectionName[0] + '"]';
+            document.querySelector(databaseSelector).click();
+
+        }
+
+    }
 
 };
 
@@ -446,6 +496,16 @@ MPG.eventListeners.addCollections = function() {
         });
 
     });
+
+    if ( MPG.toDoList.reselectCollection !== '' ) {
+
+        var collectionSelector = '.mpg-collection-link' + '[data-collection-name="'
+            + MPG.toDoList.reselectCollection + '"]';
+        document.querySelector(collectionSelector).click();
+
+        MPG.toDoList.reselectCollection = '';
+
+    }
 
 };
 
@@ -850,6 +910,6 @@ window.addEventListener('DOMContentLoaded', function(_event) {
     MPG.eventListeners.addCtrlSpace();
     MPG.eventListeners.addExport();
 
-    window.location.hash = '';
+    MPG.helpers.navigateOnSamePage();
 
 });

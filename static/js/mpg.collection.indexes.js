@@ -410,7 +410,8 @@ MPG.eventListeners.addDropIndex = function() {
  */
 MPG.eventListeners.addDismissible = function() {
 
-    document.querySelectorAll('[data-dismiss="alert"]').forEach(function(alertCloseButton) {
+    document.querySelectorAll('.alert .close[data-dismiss="alert"]')
+        .forEach(function(alertCloseButton) {
 
         alertCloseButton.addEventListener('click', function(event) {
 
