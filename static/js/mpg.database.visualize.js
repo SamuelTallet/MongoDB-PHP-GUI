@@ -9,6 +9,8 @@ var MPG = {};
 /**
  * vis.Network options.
  * 
+ * @see https://ww3.arb.ca.gov/ei/tools/lib/vis/docs/network.html#Configuration_options
+ * 
  * @type {object}
  */
 MPG.visNetworkOptions = {

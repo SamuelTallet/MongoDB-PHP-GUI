@@ -271,7 +271,7 @@ MPG.eventListeners.addDropColl = function() {
         var dropConfirmation = window.confirm(
             'Do you REALLY want to DROP collection: '
                 + MPG.databaseName + '.' + MPG.collectionName
-        )
+        );
 
         if ( dropConfirmation === false ) {
             return;

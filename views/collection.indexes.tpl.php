@@ -131,7 +131,7 @@
                             <thead class="thead-dark">
                                 <tr>
                                     <th>Name</th>
-                                    <th>Keys (Order)</th>
+                                    <th>Key (Order)</th>
                                     <th>Unique?</th>
                                     <th>Operation</th>
                                 </tr>

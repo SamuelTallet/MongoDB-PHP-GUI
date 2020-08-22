@@ -179,8 +179,6 @@ MPG.reloadCollectionIndexes = function() {
 
             MPG.collectionIndexes = JSON.parse(response);
             
-            document.querySelector('#mpg-indexes-column').classList.remove('d-none');
-
             var indexesTableBody = document.querySelector('#mpg-indexes-table tbody');
             indexesTableBody.innerHTML = '';
             
@@ -214,9 +212,11 @@ MPG.reloadCollectionIndexes = function() {
                         + '<td>' + (collectionIndex.isUnique ? 'Yes' : 'No') + '</td>'
                             + '<td>' + collectionIndexDropButton + '</td></tr>';
                 
-                MPG.eventListeners.addDropIndex();
-        
             });
+
+            MPG.eventListeners.addDropIndex();
+
+            document.querySelector('#mpg-indexes-column').classList.remove('d-none');
 
         },
         JSON.stringify(requestBody)
@@ -408,9 +408,9 @@ MPG.eventListeners.addDropIndex = function() {
  * 
  * @returns {void}
  */
-MPG.eventListeners.addDismissible = function() {
+MPG.eventListeners.addDismissibleAlerts = function() {
 
-    document.querySelectorAll('.alert .close[data-dismiss="alert"]')
+    document.querySelectorAll('.alert [data-dismiss="alert"]')
         .forEach(function(alertCloseButton) {
 
         alertCloseButton.addEventListener('click', function(event) {
@@ -430,6 +430,6 @@ window.addEventListener('DOMContentLoaded', function(_event) {
     MPG.eventListeners.addMenuToggle();
     MPG.eventListeners.addDatabases();
     MPG.eventListeners.addCreateIndex();
-    MPG.eventListeners.addDismissible();
+    MPG.eventListeners.addDismissibleAlerts();
 
 });

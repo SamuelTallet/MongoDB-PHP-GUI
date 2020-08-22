@@ -142,6 +142,26 @@ $router->post(
 );
 
 $router->get(
+	MPG_SERVER_PATH . '/manageUsers',
+	DatabaseController::class . '@renderUsersViewAction'
+);
+
+$router->post(
+	MPG_SERVER_PATH . '/ajaxDatabaseCreateUser',
+	DatabaseController::class . '@createUserAction'
+);
+
+$router->post(
+	MPG_SERVER_PATH . '/ajaxDatabaseListUsers',
+	DatabaseController::class . '@listUsersAction'
+);
+
+$router->post(
+	MPG_SERVER_PATH . '/ajaxDatabaseDropUser',
+	DatabaseController::class . '@dropUserAction'
+);
+
+$router->get(
 	MPG_SERVER_PATH . '/logout',
 	LoginController::class . '@logoutAction'
 );

@@ -201,4 +201,102 @@ class DatabaseController extends Controller {
 
     }
 
+    public function renderUsersViewAction() : Response {
+
+        LoginController::ensureUserIsLogged();
+        
+        return new Response(200, $this->renderView('database.users', [
+            'databaseNames' => self::getDatabaseNames()
+        ]));
+
+    }
+
+    /**
+     * @see https://docs.mongodb.com/manual/reference/command/createUser/
+     */
+    public function createUserAction() : Response {
+
+        try {
+            $decodedRequestBody = $this->getDecodedRequestBody();
+        } catch (\Throwable $th) {
+            return new JsonResponse(400, ErrorNormalizer::normalize($th, __METHOD__));
+        }
+
+        try {
+
+            $database = MongoDBHelper::getClient()->selectDatabase(
+                $decodedRequestBody['databaseName']
+            );
+
+            // TODO: Check createUser result?
+            $database->command([
+                'createUser' => $decodedRequestBody['userName'],
+                'pwd' => $decodedRequestBody['userPassword'],
+                'roles' => $decodedRequestBody['userRoles']
+            ]);
+
+        } catch (\Throwable $th) {
+            return new JsonResponse(500, ErrorNormalizer::normalize($th, __METHOD__));
+        }
+
+        return new JsonResponse(200, true);
+
+    }
+
+    /**
+     * @see https://docs.mongodb.com/manual/reference/command/usersInfo/
+     */
+    public function listUsersAction() : Response {
+
+        try {
+            $decodedRequestBody = $this->getDecodedRequestBody();
+        } catch (\Throwable $th) {
+            return new JsonResponse(400, ErrorNormalizer::normalize($th, __METHOD__));
+        }
+
+        try {
+
+            $database = MongoDBHelper::getClient()->selectDatabase(
+                $decodedRequestBody['databaseName']
+            );
+
+            $usersInfoCommandResult = $database->command(['usersInfo' => 1]);
+            $usersInfo = $usersInfoCommandResult->toArray()[0];
+
+        } catch (\Throwable $th) {
+            return new JsonResponse(500, ErrorNormalizer::normalize($th, __METHOD__));
+        }
+
+        return new JsonResponse(200, $usersInfo);
+
+    }
+
+    /**
+     * @see https://docs.mongodb.com/manual/reference/command/dropUser/
+     */
+    public function dropUserAction() : Response {
+
+        try {
+            $decodedRequestBody = $this->getDecodedRequestBody();
+        } catch (\Throwable $th) {
+            return new JsonResponse(400, ErrorNormalizer::normalize($th, __METHOD__));
+        }
+
+        try {
+
+            $database = MongoDBHelper::getClient()->selectDatabase(
+                $decodedRequestBody['databaseName']
+            );
+
+            // TODO: Check dropUser result?
+            $database->command(['dropUser' => $decodedRequestBody['userName']]);
+
+        } catch (\Throwable $th) {
+            return new JsonResponse(500, ErrorNormalizer::normalize($th, __METHOD__));
+        }
+
+        return new JsonResponse(200, true);
+
+    }
+
 }

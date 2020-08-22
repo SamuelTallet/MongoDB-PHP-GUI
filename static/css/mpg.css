@@ -5,6 +5,12 @@
 
 }
 
+.navbar.sticky-top {
+
+    z-index: 1060;
+
+}
+
 @media screen and (min-width: 768px) {
 
     .navbar {
@@ -239,7 +245,7 @@ button, input {
 
 }
 
-#mpg-export-button {
+#mpg-export-button, #mpg-open-create-user-modal-button {
 
     position: relative;
     top: -5px;
@@ -279,6 +285,32 @@ button, input {
 
         margin-top: 10px;
     
+    }
+
+}
+
+#mpg-create-user-modal {
+
+    top: 50px;
+
+}
+
+@media screen and (min-width: 768px) {
+
+    #mpg-create-user-modal {
+
+        top: 45px;
+    
+    }
+
+}
+
+@media screen and (min-width: 768px) {
+
+    #mpg-create-user-modal .modal-dialog {
+
+        max-width: 300px;
+
     }
 
 }
