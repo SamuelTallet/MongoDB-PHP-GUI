@@ -8,11 +8,11 @@ Additional features: Export documents to JSON. Import documents from JSON. Manag
 Screenshots
 -----------
 
-![MongoDB PHP GUI - Visualize Database](https://raw.githubusercontent.com/SamuelTS/MongoDB-PHP-GUI/master/docs/screenshots/newest-mpg-database-visualize.png)
+![MongoDB PHP GUI - Visualize Database](https://raw.githubusercontent.com/SamuelTS/MongoDB-PHP-GUI/master/docs/screenshots/mpg-visualize-database.png)
 
-![MongoDB PHP GUI - Query Database](https://raw.githubusercontent.com/SamuelTS/MongoDB-PHP-GUI/master/docs/screenshots/newest-mpg-database-query.png)
+![MongoDB PHP GUI - Query Database](https://raw.githubusercontent.com/SamuelTS/MongoDB-PHP-GUI/master/docs/screenshots/mpg-query-database.png)
 
-![MongoDB PHP GUI - Manage Indexes](https://raw.githubusercontent.com/SamuelTS/MongoDB-PHP-GUI/master/docs/screenshots/newest-mpg-collection-indexes.png)
+![MongoDB PHP GUI - Manage Indexes](https://raw.githubusercontent.com/SamuelTS/MongoDB-PHP-GUI/master/docs/screenshots/mpg-manage-indexes.png)
 
 Installation
 ------------
