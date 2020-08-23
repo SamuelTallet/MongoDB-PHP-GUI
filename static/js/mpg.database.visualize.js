@@ -34,7 +34,38 @@ MPG.visNetworkOptions = {
 };
 
 /**
+ * Forwards navigation links.
+ * 
+ * @returns {void}
+ */
+MPG.helpers.forwardNavLinks = function() {
+
+    var fragmentUrl = window.location.hash.split('#');
+
+    if ( fragmentUrl.length === 2 && fragmentUrl[1] !== '' ) {
+
+        databaseAndCollectionName = fragmentUrl[1].split('/');
+
+        if ( databaseAndCollectionName.length === 1 ) {
+
+            MPG.helpers.completeNavLinks('#' + databaseAndCollectionName[0]);
+
+        } else if ( databaseAndCollectionName.length === 2 ) {
+
+            MPG.helpers.completeNavLinks(
+                '#' + databaseAndCollectionName[0] + '/' + databaseAndCollectionName[1]
+            );
+
+        }
+
+    }
+
+};
+
+/**
  * Draws vis.Network graph.
+ * 
+ * @returns {void}
  */
 MPG.drawVisNetwork = function() {
 
@@ -84,7 +115,9 @@ MPG.drawVisNetwork = function() {
 // When document is ready:
 window.addEventListener('DOMContentLoaded', function(_event) {
 
+    MPG.helpers.forwardNavLinks();
     MPG.eventListeners.addMenuToggle();
+    
     MPG.drawVisNetwork();
 
 });

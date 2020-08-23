@@ -128,7 +128,9 @@ MPG.helpers.navigateOnSamePage = function() {
 /**
  * Completes navigation links with an URL fragment.
  * 
- * @param {string} urlFragment 
+ * @param {string} urlFragment
+ * 
+ * @returns {void}
  */
 MPG.helpers.completeNavLinks = function(urlFragment) {
 
