@@ -36,6 +36,10 @@ class MongoDBHelper {
      */
     private static function createClient() : Client {
 
+        if ( !isset($_SESSION['mpg']['user_is_logged']) ) {
+            throw new \Exception('Session expired. Refresh browser.');
+        }
+
         $clientUri = 'mongodb://';
 
         if ( isset($_SESSION['mpg']['mongodb_user'])
