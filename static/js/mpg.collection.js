@@ -72,6 +72,7 @@ MPG.eventListeners.addRenameColl = function() {
 
                 if ( JSON.parse(response) === true ) {
                     window.location.hash = '#' + MPG.databaseName;
+                    MPG.helpers.completeNavLinks(window.location.hash);
                     MPG.reloadCollections(MPG.databaseName);
                 }
 
