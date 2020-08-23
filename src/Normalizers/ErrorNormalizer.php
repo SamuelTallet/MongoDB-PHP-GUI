@@ -32,13 +32,18 @@ class ErrorNormalizer {
     }
 
     /**
-     * Normalizes then prints an error prettily.
+     * Normalizes then prints an error prettily then terminates script.
      * 
      * @param \Throwable $error
      */
-    public static function prettyPrint(\Throwable $error) {
+    public static function prettyPrintAndDie(\Throwable $error) {
 
-        echo '<pre>' . print_r(self::normalize($error), true) . '</pre>';
+        http_response_code(500);
+        header('Content-Type: application/json');
+
+        echo json_encode(self::normalize($error), JSON_PRETTY_PRINT);
+
+        die;
 
     }
 

@@ -22,7 +22,7 @@ class DatabaseController extends Controller {
                     $databaseNames[] = $databaseInfo['name'];
                 }
             } catch (\Throwable $th) {
-                ErrorNormalizer::prettyPrint($th); exit;
+                ErrorNormalizer::prettyPrintAndDie($th);
             }
 
         }
@@ -68,21 +68,19 @@ class DatabaseController extends Controller {
 
         try {
 
-            foreach (MongoDBHelper::getClient()->listDatabases() as $databaseInfo) {
+            foreach (self::getDatabaseNames() as $databaseName) {
 
                 $nodeCounter++;
 
                 $databaseNode = [
                     'id' => $nodeCounter,
-                    'label' => 'DB: ' . $databaseInfo['name'],
+                    'label' => 'DB: ' . $databaseName,
                     'shape' => 'image',
                     'image' => MPG_BASE_URL . '/static/images/database-icon.svg',
                     'size' => 24
                 ];
 
-                $database = MongoDBHelper::getClient()->selectDatabase(
-                    $databaseInfo['name']
-                );
+                $database = MongoDBHelper::getClient()->selectDatabase($databaseName);
     
                 foreach ($database->listCollections() as $collectionInfo) {
 
@@ -104,7 +102,7 @@ class DatabaseController extends Controller {
                     ]);
 
                     $networkGraph['mapping'][ $collectionNode['id'] ] = [
-                        'databaseName' => $databaseInfo['name'],
+                        'databaseName' => $databaseName,
                         'collectionName' => $collectionInfo['name']
                     ];
 
@@ -118,7 +116,7 @@ class DatabaseController extends Controller {
                 ]);
 
                 $networkGraph['mapping'][ $databaseNode['id'] ] = [
-                    'databaseName' => $databaseInfo['name'],
+                    'databaseName' => $databaseName,
                     'collectionName' => null
                 ];
 
