@@ -289,6 +289,12 @@ button, input {
 
 }
 
+.table td {
+
+    vertical-align: middle;
+
+}
+
 #mpg-create-user-modal {
 
     top: 50px;
