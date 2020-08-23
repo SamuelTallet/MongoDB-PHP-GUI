@@ -15,6 +15,7 @@
         var MPG_BASE_URL = '<?php echo MPG_BASE_URL; ?>';
     </script>
 
+    <script src="<?php echo MPG_BASE_URL; ?>/static/js/mpg.js"></script>
     <script src="<?php echo MPG_BASE_URL; ?>/static/js/mpg.collection.indexes.js"></script>
 
 </head>

@@ -1,13 +1,13 @@
 
 /**
- * MongoDB PHP GUI namespace.
+ * Instance of vis.Network.
  * 
  * @type {object}
  */
-var MPG = {};
+MPG.visNetwork = null;
 
 /**
- * vis.Network options.
+ * Options of vis.Network.
  * 
  * @see https://ww3.arb.ca.gov/ei/tools/lib/vis/docs/network.html#Configuration_options
  * 
@@ -34,65 +34,7 @@ MPG.visNetworkOptions = {
 };
 
 /**
- * Helpers sub-namespace.
- * 
- * @type {object}
- */
-MPG.helpers = {};
-
-/**
- * Does an ajax request.
- * 
- * @param {string} method 
- * @param {string} url 
- * @param {function} successCallback 
- * @param {?string} body
- * 
- * @returns {void}
- */
-MPG.helpers.doAjaxRequest = function(method, url, successCallback, body) {
-
-    var xhr = new XMLHttpRequest();
-
-    xhr.addEventListener('readystatechange', function() {
-
-        if ( this.readyState === 4 ) {
-            if ( this.status === 200 ) {
-                successCallback(this.responseText);
-            } else {
-                window.alert('Error: ' + JSON.parse(this.responseText).error.message);
-            }
-        }
-
-    });
-
-    xhr.open(method, url);
-    xhr.send(body);
-
-};
-
-/**
- * Event listeners sub-namespace.
- * 
- * @type {object}
- */
-MPG.eventListeners = {};
-
-/**
- * Adds an event listener on "Menu toggle" button.
- * 
- * @returns {void}
- */
-MPG.eventListeners.addMenuToggle = function() {
-
-    document.querySelector('#menu-toggle-button').addEventListener('click', function(_event) {
-        document.querySelector('.navbar').classList.toggle('menu-expanded');
-    });
-
-};
-
-/**
- * Draws vis.Network.
+ * Draws vis.Network graph.
  */
 MPG.drawVisNetwork = function() {
 
@@ -104,11 +46,11 @@ MPG.drawVisNetwork = function() {
             var visNetworkContainer = document.querySelector('#vis-network-container');
             var networkGraph = JSON.parse(response);
 
-            var visNetwork = new vis.Network(
+            MPG.visNetwork = new vis.Network(
                 visNetworkContainer, networkGraph.visData, MPG.visNetworkOptions
             );
 
-            visNetwork.on('select', function(nodeProperties) {
+            MPG.visNetwork.on('select', function(nodeProperties) {
 
                 if ( nodeProperties.nodes.length === 0 ) {
                     return;

@@ -1,26 +1,5 @@
 
 /**
- * MongoDB PHP GUI namespace.
- * 
- * @type {object}
- */
-var MPG = {};
-
-/**
- * Name of current database.
- * 
- * @type {string}
- */
-MPG.databaseName = '';
-
-/**
- * Name of current collection.
- * 
- * @type {string}
- */
-MPG.collectionName = '';
-
-/**
  * Field names of current collection.
  * 
  * @type {Array}
@@ -33,85 +12,6 @@ MPG.collectionFields = [];
  * @type {Array}
  */
 MPG.collectionIndexes = [];
-
-/**
- * Helpers sub-namespace.
- * 
- * @type {object}
- */
-MPG.helpers = {};
-
-/**
- * Does an ajax request.
- * 
- * @param {string} method 
- * @param {string} url 
- * @param {function} successCallback 
- * @param {?string} body
- * 
- * @returns {void}
- */
-MPG.helpers.doAjaxRequest = function(method, url, successCallback, body) {
-
-    var xhr = new XMLHttpRequest();
-
-    xhr.addEventListener('readystatechange', function() {
-
-        if ( this.readyState === 4 ) {
-            if ( this.status === 200 ) {
-                successCallback(this.responseText);
-            } else {
-                window.alert('Error: ' + JSON.parse(this.responseText).error.message);
-            }
-        }
-
-    });
-
-    xhr.open(method, url);
-    xhr.send(body);
-
-};
-
-/**
- * Reloads collections of a specific database.
- * 
- * @param {string} databaseName
- * 
- * @returns {void}
- */
-MPG.reloadCollections = function(databaseName) {
-
-    var requestBody = { 'databaseName': databaseName };
-
-    MPG.helpers.doAjaxRequest(
-        'POST', MPG_BASE_URL + '/ajaxDatabaseListCollections', function(response) {
-
-            var collectionsList = document.querySelector('#mpg-collections-list');
-
-            collectionsList.innerHTML = '';
-            MPG.collectionName = '';
-
-            JSON.parse(response).forEach(function(collectionName) {
-
-                collectionsList.innerHTML +=
-                    '<li class="collection-name">'
-                        + '<i class="fa fa-file-text" aria-hidden="true"></i> '
-                        + '<a class="mpg-collection-link" '
-                        + 'data-collection-name="' + collectionName
-                        + '" href="#' + MPG.databaseName + '/' + collectionName + '">'
-                        + collectionName
-                        + '</a>'
-                    + '</li>';
-                
-            });
-
-            MPG.eventListeners.addCollections();
-
-        },
-        JSON.stringify(requestBody)
-    );
-
-};
 
 /**
  * Reloads fields of current collection.
@@ -225,26 +125,6 @@ MPG.reloadCollectionIndexes = function() {
 };
 
 /**
- * Event listeners sub-namespace.
- * 
- * @type {object}
- */
-MPG.eventListeners = {};
-
-/**
- * Adds an event listener on "Menu toggle" button.
- * 
- * @returns {void}
- */
-MPG.eventListeners.addMenuToggle = function() {
-
-    document.querySelector('#menu-toggle-button').addEventListener('click', function(_event) {
-        document.querySelector('.navbar').classList.toggle('menu-expanded');
-    });
-
-};
-
-/**
  * Adds an event listener on each database.
  * 
  * @returns {void}
@@ -256,6 +136,7 @@ MPG.eventListeners.addDatabases = function() {
         databaseLink.addEventListener('click', function(_event) {
             
             MPG.databaseName = databaseLink.dataset.databaseName;
+            MPG.helpers.completeNavLinks('#' + MPG.databaseName);
 
             document.querySelectorAll('.mpg-database-link').forEach(function(databaseLink) {
                 databaseLink.classList.remove('font-weight-bold');
@@ -288,6 +169,7 @@ MPG.eventListeners.addCollections = function() {
         collectionLink.addEventListener('click', function(_event) {
             
             MPG.collectionName = collectionLink.dataset.collectionName;
+            MPG.helpers.completeNavLinks('#' + MPG.databaseName + '/' + MPG.collectionName);
 
             document.querySelectorAll('.mpg-collection-link').forEach(function(collectionLink) {
                 collectionLink.classList.remove('font-weight-bold');
@@ -303,6 +185,24 @@ MPG.eventListeners.addCollections = function() {
         });
 
     });
+
+    if ( MPG.toDoList.reselectCollection !== '' ) {
+
+        var collectionSelector = '.mpg-collection-link' + '[data-collection-name="'
+            + MPG.toDoList.reselectCollection + '"]';
+
+        var collection = document.querySelector(collectionSelector);
+
+        if ( collection ) {
+            collection.click();
+        } else {
+            window.alert('Error: Collection not found. Select another one.');
+            window.location.hash = '';
+        }
+
+        MPG.toDoList.reselectCollection = '';
+
+    }
 
 };
 
@@ -403,27 +303,6 @@ MPG.eventListeners.addDropIndex = function() {
 
 };
 
-/**
- * Adds an event listener on dismissible alerts.
- * 
- * @returns {void}
- */
-MPG.eventListeners.addDismissibleAlerts = function() {
-
-    document.querySelectorAll('.alert [data-dismiss="alert"]')
-        .forEach(function(alertCloseButton) {
-
-        alertCloseButton.addEventListener('click', function(event) {
-
-            var alert = document.getElementById(event.currentTarget.dataset.alertId);
-            alert.classList.add('d-none');
-
-        });
-        
-    });
-
-};
-
 // When document is ready:
 window.addEventListener('DOMContentLoaded', function(_event) {
 
@@ -431,5 +310,7 @@ window.addEventListener('DOMContentLoaded', function(_event) {
     MPG.eventListeners.addDatabases();
     MPG.eventListeners.addCreateIndex();
     MPG.eventListeners.addDismissibleAlerts();
+
+    MPG.helpers.navigateOnSamePage();
 
 });

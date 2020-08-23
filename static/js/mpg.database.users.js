@@ -1,57 +1,5 @@
 
 /**
- * MongoDB PHP GUI namespace.
- * 
- * @type {object}
- */
-var MPG = {};
-
-/**
- * Name of current database.
- * 
- * @type {string}
- */
-MPG.databaseName = '';
-
-/**
- * Helpers sub-namespace.
- * 
- * @type {object}
- */
-MPG.helpers = {};
-
-/**
- * Does an ajax request.
- * 
- * @param {string} method 
- * @param {string} url 
- * @param {function} successCallback 
- * @param {?string} body
- * 
- * @returns {void}
- */
-MPG.helpers.doAjaxRequest = function(method, url, successCallback, body) {
-
-    var xhr = new XMLHttpRequest();
-
-    xhr.addEventListener('readystatechange', function() {
-
-        if ( this.readyState === 4 ) {
-            if ( this.status === 200 ) {
-                successCallback(this.responseText);
-            } else {
-                window.alert('Error: ' + JSON.parse(this.responseText).error.message);
-            }
-        }
-
-    });
-
-    xhr.open(method, url);
-    xhr.send(body);
-
-};
-
-/**
  * Reloads users of a specific database.
  * 
  * @param {string} databaseName
@@ -106,26 +54,6 @@ MPG.reloadUsers = function(databaseName) {
 };
 
 /**
- * Event listeners sub-namespace.
- * 
- * @type {object}
- */
-MPG.eventListeners = {};
-
-/**
- * Adds an event listener on "Menu toggle" button.
- * 
- * @returns {void}
- */
-MPG.eventListeners.addMenuToggle = function() {
-
-    document.querySelector('#menu-toggle-button').addEventListener('click', function(_event) {
-        document.querySelector('.navbar').classList.toggle('menu-expanded');
-    });
-
-};
-
-/**
  * Adds an event listener on each database.
  * 
  * @returns {void}
@@ -137,6 +65,7 @@ MPG.eventListeners.addDatabases = function() {
         databaseLink.addEventListener('click', function(_event) {
             
             MPG.databaseName = databaseLink.dataset.databaseName;
+            MPG.helpers.completeNavLinks('#' + MPG.databaseName);
 
             document.querySelectorAll('.mpg-database-link').forEach(function(databaseLink) {
                 databaseLink.classList.remove('font-weight-bold');
@@ -151,27 +80,6 @@ MPG.eventListeners.addDatabases = function() {
 
         });
 
-    });
-
-};
-
-/**
- * Adds an event listener on buttons that open modals.
- * 
- * @returns {void}
- */
-MPG.eventListeners.addModalOpen = function() {
-
-    document.querySelectorAll('.btn[data-open="modal"]')
-        .forEach(function(modalOpenButton) {
-
-        modalOpenButton.addEventListener('click', function(event) {
-
-            var modal = document.getElementById(event.currentTarget.dataset.modalId);
-            modal.classList.add('d-block');
-
-        });
-        
     });
 
 };
@@ -279,27 +187,6 @@ MPG.eventListeners.addDropUser = function() {
 
 };
 
-/**
- * Adds an event listener on buttons that close modals.
- * 
- * @returns {void}
- */
-MPG.eventListeners.addModalClose = function() {
-
-    document.querySelectorAll('.btn[data-dismiss="modal"]')
-        .forEach(function(modalCloseButton) {
-
-        modalCloseButton.addEventListener('click', function(event) {
-
-            var modal = document.getElementById(event.currentTarget.dataset.modalId);
-            modal.classList.remove('d-block');
-
-        });
-        
-    });
-
-};
-
 // When document is ready:
 window.addEventListener('DOMContentLoaded', function(_event) {
 
@@ -308,5 +195,7 @@ window.addEventListener('DOMContentLoaded', function(_event) {
     MPG.eventListeners.addModalOpen();
     MPG.eventListeners.addCreateUser();
     MPG.eventListeners.addModalClose();
+
+    MPG.helpers.navigateOnSamePage();
 
 });
