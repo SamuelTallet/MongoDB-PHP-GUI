@@ -274,6 +274,23 @@ class CollectionController extends Controller {
 
     }
 
+    private static function formatRecursively(&$document) {
+
+        foreach ($document as &$documentValue) {
+
+            if ( is_a($documentValue, '\MongoDB\Model\BSONDocument') ) {
+    
+                $documentValue = $documentValue->jsonSerialize();
+                self::formatRecursively($documentValue);
+    
+            } elseif ( is_a($documentValue, '\MongoDB\BSON\UTCDateTime') ) {
+                $documentValue = $documentValue->toDateTime()->format('Y-m-d\TH:i:s.v\Z');
+            }
+
+        }
+
+    }
+
     /**
      * @see https://docs.mongodb.com/php-library/v1.6/reference/method/MongoDBCollection-find/index.html
      */
@@ -314,27 +331,7 @@ class CollectionController extends Controller {
                     $document->_id = (string) $document->_id;
             }
 
-            foreach ($document as &$documentValue) {
-
-                if ( is_a($documentValue, '\MongoDB\Model\BSONDocument') ) {
-    
-                    $documentValue = $documentValue->jsonSerialize();
-    
-                    foreach ($documentValue as &$documentSubValue) {
-    
-                        if ( is_a($documentSubValue, '\MongoDB\BSON\UTCDateTime') ) {
-                            $documentSubValue = $documentSubValue->toDateTime()->format('Y-m-d\TH:i:s.v\Z');
-                        }
-    
-                        // TODO: Support more nested documents.
-    
-                    }
-    
-                } elseif ( is_a($documentValue, '\MongoDB\BSON\UTCDateTime') ) {
-                    $documentValue = $documentValue->toDateTime()->format('Y-m-d\TH:i:s.v\Z');
-                }
-    
-            }
+            self::formatRecursively($document);
 
         }
 
@@ -414,27 +411,7 @@ class CollectionController extends Controller {
                 $document->_id = (string) $document->_id;
         }
 
-        foreach ($document as &$documentValue) {
-
-            if ( is_a($documentValue, '\MongoDB\Model\BSONDocument') ) {
-
-                $documentValue = $documentValue->jsonSerialize();
-
-                foreach ($documentValue as &$documentSubValue) {
-
-                    if ( is_a($documentSubValue, '\MongoDB\BSON\UTCDateTime') ) {
-                        $documentSubValue = $documentSubValue->toDateTime()->format('Y-m-d\TH:i:s.v\Z');
-                    }
-
-                    // TODO: Support more nested documents.
-
-                }
-
-            } elseif ( is_a($documentValue, '\MongoDB\BSON\UTCDateTime') ) {
-                $documentValue = $documentValue->toDateTime()->format('Y-m-d\TH:i:s.v\Z');
-            }
-
-        }
+        self::formatRecursively($document);
 
         $array = json_decode(json_encode($document), JSON_OBJECT_AS_ARRAY);
 
