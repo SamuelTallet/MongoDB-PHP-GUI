@@ -298,6 +298,7 @@ button, input {
 #mpg-create-user-modal {
 
     top: 50px;
+    overflow-y: auto;
 
 }
 

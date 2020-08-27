@@ -278,7 +278,8 @@ class CollectionController extends Controller {
 
         foreach ($document as &$documentValue) {
 
-            if ( is_a($documentValue, '\MongoDB\Model\BSONDocument') ) {
+            if ( is_a($documentValue, '\MongoDB\Model\BSONArray')
+                || is_a($documentValue, '\MongoDB\Model\BSONDocument') ) {
     
                 $documentValue = $documentValue->jsonSerialize();
                 self::formatRecursively($documentValue);
