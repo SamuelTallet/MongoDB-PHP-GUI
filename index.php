@@ -34,8 +34,7 @@ define('MPG_DEV_MODE', false);
  */
 define('MPG_ABS_PATH', __DIR__);
 
-$baseUrl = ( isset($_SERVER['HTTPS']) && !empty($_SERVER['HTTPS']) ) ? 'https' : 'http';
-$baseUrl .= '://' . $_SERVER['HTTP_HOST'];
+$baseUrl = '//' . $_SERVER['HTTP_HOST'];
 $serverPath = str_replace('\\', '/', dirname($_SERVER['REQUEST_URI']));
 $serverPath = ( $serverPath === '/' ) ? '' : $serverPath;
 $baseUrl .= $serverPath;
