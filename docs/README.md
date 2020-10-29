@@ -22,6 +22,11 @@ Installation
 3. Run `composer install` at project's root directory to install all PHP dependencies.
 4. Optionnaly, if you want to query DB with SQL, you must have [Java JDK](https://jdk.java.net/) installed...
 
+### Apache HTTP server
+
+Clone current repository in Apache Web root directory or setup a virtual host.<br>
+Be sure to have `AllowOverride All` in your Apache (virtual host) configuration.
+
 Thanks
 ------
 
