@@ -24,9 +24,9 @@ Installation
 
 ### Apache HTTP server
 
-Clone current repository in Apache Web root directory or setup a virtual host.<br>
-Check that `rewrite_module` module is enabled in your Apache configuration.<br>
-Be sure to have `AllowOverride All` in your Apache (virtual host) configuration.
+- Clone current repository in Apache Web root directory or setup a virtual host.
+- Check that `rewrite_module` module is enabled in your Apache configuration.
+- Be sure to have `AllowOverride All` in your Apache (virtual host) configuration.
 
 Thanks
 ------
