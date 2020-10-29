@@ -18,13 +18,14 @@ Installation
 ------------
 
 1. `git clone` current repository somewhere in the cloud or on your local machine.
-2. Be sure to have PHP >= 7 with [MongoDB extension](https://www.php.net/manual/en/mongodb.installation.php) enabled in this environment.
+2. Be sure to have PHP >= 7.2 with [MongoDB extension](https://www.php.net/manual/en/mongodb.installation.php) enabled in this environment.
 3. Run `composer install` at project's root directory to install all PHP dependencies.
 4. Optionnaly, if you want to query DB with SQL, you must have [Java JDK](https://jdk.java.net/) installed...
 
 ### Apache HTTP server
 
 Clone current repository in Apache Web root directory or setup a virtual host.<br>
+Check that `rewrite_module` module is enabled in your Apache configuration.<br>
 Be sure to have `AllowOverride All` in your Apache (virtual host) configuration.
 
 Thanks
