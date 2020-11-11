@@ -17,16 +17,19 @@ Screenshots
 Installation
 ------------
 
-1. `git clone` current repository somewhere in the cloud or on your local machine.
-2. Be sure to have PHP >= 7.2 with [MongoDB extension](https://www.php.net/manual/en/mongodb.installation.php) enabled in this environment.
-3. Run `composer install` at project's root directory to install all PHP dependencies.
-4. Optionnaly, if you want to query DB with SQL, you must have [Java JDK](https://jdk.java.net/) installed...
+### Docker (PHP built-in server)
+1. Run once `docker build -t mongodb-php-gui .` at project's root directory.
+2. Run `docker run -it -p 5000:5000 mongodb-php-gui` at project's root directory.
+3. Open your browser at this address: http://127.0.0.1:5000/ to access GUI.
 
 ### Apache HTTP server
-
-- Clone current repository in Apache Web root directory or setup a virtual host.
-- Check that `rewrite_module` module is enabled in your Apache configuration.
-- Be sure to have `AllowOverride All` in your Apache (virtual host) configuration.
+1. Clone current repository in Apache Web root directory or setup a virtual host.
+2. Be sure to have PHP >= 7.2 with [MongoDB ext.](https://www.php.net/manual/en/mongodb.installation.php) enabled.
+3. Check that `rewrite_module` module is enabled in your Apache configuration.
+4. Be sure to have `AllowOverride All` in your Apache (virtual host) configuration.
+5. Run `composer install` at project's root directory to install all PHP dependencies.
+6. Optionnaly, if you want to query DB with SQL, you must have [Java JDK](https://jdk.java.net/) installed.
+7. Open your browser at Apache server URL to access GUI.
 
 Thanks
 ------
