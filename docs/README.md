@@ -18,9 +18,10 @@ Installation
 ------------
 
 ### Docker (PHP built-in server)
-1. Run once `docker build -t mongodb-php-gui .` at project's root directory.
-2. Run `docker run -it -p 5000:5000 mongodb-php-gui` at project's root directory.
-3. Open your browser at this address: http://127.0.0.1:5000/ to access GUI.
+1. Clone current repository.
+2. Run once `docker build -t mongodb-php-gui .` at project's root directory.
+3. Run `docker run -it -p 5000:5000 mongodb-php-gui` at project's root directory.
+4. Open your browser at this address: http://127.0.0.1:5000/ to access GUI.
 
 ### Apache HTTP server
 1. Clone current repository in Apache Web root directory or setup a virtual host.
