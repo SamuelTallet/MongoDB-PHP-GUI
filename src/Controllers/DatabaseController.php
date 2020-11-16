@@ -27,6 +27,8 @@ class DatabaseController extends Controller {
 
         }
 
+        sort($databaseNames);
+
         return $databaseNames;
 
     }
@@ -166,6 +168,8 @@ class DatabaseController extends Controller {
         } catch (\Throwable $th) {
             return new JsonResponse(500, ErrorNormalizer::normalize($th, __METHOD__));
         }
+
+        sort($collectionNames);
 
         return new JsonResponse(200, $collectionNames);
 
