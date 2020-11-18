@@ -7,7 +7,7 @@ WORKDIR /opt/mongodb-php-gui
 RUN git clone https://github.com/SamuelTS/MongoDB-PHP-GUI.git .
 
 # Enable MongoDB PHP ext.
-RUN apk add --no-cache autoconf build-base
+RUN apk add --no-cache autoconf build-base curl-dev openssl-dev
 RUN pecl install mongodb-1.8.2 && docker-php-ext-enable mongodb
 
 # Install PHP dependencies.
