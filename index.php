@@ -63,7 +63,7 @@ $serverRequest = ServerRequestFactory::createFromGlobals();
 try {
     $response = $application->dispatch($serverRequest);
 } catch (NotFoundHttpException $e) {
-    header('Location: ' . $_SERVER['REQUEST_URI'] . '/index');
+    header('Location: ' . $_SERVER['REQUEST_URI'] . 'index');
 }
 
 $application->send($response);
