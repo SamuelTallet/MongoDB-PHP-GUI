@@ -42,4 +42,4 @@ Thanks also to [MongoDB PHP library](https://github.com/mongodb/mongo-php-librar
 Copyright
 ---------
 
-© 2020 Samuel Tallet
+© 2021 Samuel Tallet
