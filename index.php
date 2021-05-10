@@ -18,7 +18,7 @@ define('MPG_APP_NAME', 'MongoDB PHP GUI');
  * 
  * @var string
  */
-define('MPG_APP_VERSION', '1.1.0');
+define('MPG_APP_VERSION', '1.1.1');
 
 /**
  * Development mode?
@@ -63,7 +63,7 @@ $serverRequest = ServerRequestFactory::createFromGlobals();
 try {
     $response = $application->dispatch($serverRequest);
 } catch (NotFoundHttpException $e) {
-    header('Location: ' . $_SERVER['REQUEST_URI'] . '/index');
+    header('Location: ' . rtrim($_SERVER['REQUEST_URI'], '/') . '/index');
 }
 
 $application->send($response);
