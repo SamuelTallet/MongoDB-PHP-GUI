@@ -25,7 +25,7 @@ Installation
 5. If your MongoDB is running on localhost, use 172.17.0.1 as host to login.
 
 ### Apache HTTP server
-1. Clone current repository in Apache Web root directory or setup a virtual host.
+1. Clone current repository in an Apache Web server folder or setup a virtual host.
 2. Be sure to have PHP >= 7.2 with [MongoDB ext.](https://www.php.net/manual/en/mongodb.installation.php) enabled.
 3. Check that `rewrite_module` module is enabled in your Apache configuration.
 4. Be sure to have `AllowOverride All` in your Apache (virtual host) configuration.
