@@ -1,11 +1,15 @@
 
-name: Docker Image CI
+name: Docker
 
 on:
   push:
     branches: [ master ]
   pull_request:
     branches: [ master ]
+
+env:
+  DOCKER_USER: samueltallet
+  DOCKER_REPO: mongodb-php-gui
 
 jobs:
 
@@ -15,14 +19,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    
     - name: docker login
-      env:
-        DOCKER_USER: ${{secrets.DOCKER_USER}}
-        DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
       run: |
-        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD 
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag samueltallet/mongodb-php-gui:latest
+        docker login -u ${{ env.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
+        
+    - name: docker build
+      run: docker build . --file Dockerfile --tag ${{ env.DOCKER_USER }}/${{ env.DOCKER_REPO }}:latest
       
-    - name: Docker Push
-      run: docker push samueltallet/mongodb-php-gui:latest
+    - name: docker push
+      run: docker push ${{ env.DOCKER_USER }}/${{ env.DOCKER_REPO }}:latest
