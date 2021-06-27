@@ -18,7 +18,7 @@ define('MPG_APP_NAME', 'MongoDB PHP GUI');
  * 
  * @var string
  */
-define('MPG_APP_VERSION', '1.1.2');
+define('MPG_APP_VERSION', '1.1.3');
 
 /**
  * Development mode?
@@ -31,18 +31,37 @@ define('MPG_DEV_MODE', false);
  * Absolute path. XXX Without trailing slash.
  * 
  * @var string
+ * @example /opt/mongodb-php-gui
  */
 define('MPG_ABS_PATH', __DIR__);
 
 $baseUrl = '//' . $_SERVER['HTTP_HOST'];
-$serverPath = str_replace('\\', '/', dirname($_SERVER['REQUEST_URI']));
-$serverPath = ( $serverPath === '/' ) ? '' : $serverPath;
+
+// If request matches a folder. For example: /mongo/
+if ( preg_match('#/$#', $_SERVER['REQUEST_URI']) ) {
+
+    $serverPath = $_SERVER['REQUEST_URI'];
+
+} else {
+
+    $serverPath = dirname($_SERVER['REQUEST_URI']);
+
+    // Normalize directory separator in server path.
+    if ( DIRECTORY_SEPARATOR !== '/' ) {
+        $serverPath = str_replace(DIRECTORY_SEPARATOR, '/', $serverPath);
+    }
+
+}
+
+$serverPath = rtrim($serverPath, '/');
+
 $baseUrl .= $serverPath;
 
 /**
  * Server path. XXX Without trailing slash.
  * 
  * @var string
+ * @example /mongo
  */
 define('MPG_SERVER_PATH', $serverPath);
 
@@ -50,20 +69,20 @@ define('MPG_SERVER_PATH', $serverPath);
  * Base URL. XXX Without trailing slash.
  * 
  * @var string
+ * @example http://127.0.0.1:5000/mongo
  */
 define('MPG_BASE_URL', $baseUrl);
 
-require __DIR__ . '/autoload.php';
-require __DIR__ . '/routes.php';
+require MPG_ABS_PATH . '/autoload.php';
+require MPG_ABS_PATH . '/routes.php';
 
 $application = new Application($router);
 $serverRequest = ServerRequestFactory::createFromGlobals();
 
-// XXX This hack makes index to work in sub-folder case.
 try {
     $response = $application->dispatch($serverRequest);
 } catch (NotFoundHttpException $e) {
-    header('Location: ' . rtrim($_SERVER['REQUEST_URI'], '/') . '/index');
+    die('Route not found. Try to append a slash to URL.');
 }
 
 $application->send($response);

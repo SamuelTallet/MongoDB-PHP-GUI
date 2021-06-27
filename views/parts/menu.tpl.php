@@ -1,6 +1,6 @@
 <nav class="navbar sticky-top navbar-dark bg-mongodb">
 
-    <a class="navbar-brand" href="<?php echo MPG_BASE_URL; ?>/index"><?php echo MPG_APP_NAME; ?></a>
+    <a class="navbar-brand" href="<?php echo MPG_BASE_URL; ?>/"><?php echo MPG_APP_NAME; ?></a>
 
     <div class="navbar-nav">
         <a class="nav-item nav-link<?php echo ('collection' === $viewName) ? ' active' : ''; ?>" data-canonical-url="<?php echo MPG_BASE_URL; ?>/manageCollections" href="<?php echo MPG_BASE_URL; ?>/manageCollections">Manage collections</a>

@@ -9,16 +9,7 @@ use Controllers\SQLController;
 
 $router = new Router();
 
-$router->get('/', function() {
-
-	LoginController::ensureUserIsLogged();
-
-	Controller::redirectTo('/queryDatabase');
-
-});
-
-// XXX This hack makes index to work in sub-folder case.
-$router->get(MPG_SERVER_PATH . '/index', function() {
+$router->get(MPG_SERVER_PATH . '/', function() {
 
 	LoginController::ensureUserIsLogged();
 

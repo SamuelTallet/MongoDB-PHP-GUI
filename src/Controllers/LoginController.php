@@ -65,7 +65,7 @@ class LoginController extends Controller {
             } else {
 
                 $_SESSION['mpg']['user_is_logged'] = true;
-                Controller::redirectTo('/index');
+                Controller::redirectTo('/');
 
             }
 
