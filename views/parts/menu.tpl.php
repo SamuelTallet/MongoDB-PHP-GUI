@@ -1,6 +1,9 @@
-<nav class="navbar sticky-top navbar-dark bg-mongodb">
+<nav class="navbar sticky-top navbar-dark bg-dark">
 
-    <a class="navbar-brand" href="<?php echo MPG_BASE_URL; ?>/"><?php echo MPG_APP_NAME; ?></a>
+    <a class="navbar-brand" href="<?php echo MPG_BASE_URL; ?>/">
+        <img class="navbar-brand-icon" src="<?php echo MPG_BASE_URL; ?>/static/images/alt-leaf-icon.svg" width="24" height="24" />
+        <?php echo MPG_APP_NAME; ?>
+    </a>
 
     <div class="navbar-nav">
         <a class="nav-item nav-link<?php echo ('collection' === $viewName) ? ' active' : ''; ?>" data-canonical-url="<?php echo MPG_BASE_URL; ?>/manageCollections" href="<?php echo MPG_BASE_URL; ?>/manageCollections">Manage collections</a>

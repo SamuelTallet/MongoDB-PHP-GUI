@@ -18,12 +18,12 @@ define('MPG_APP_NAME', 'MongoDB PHP GUI');
  * 
  * @var string
  */
-define('MPG_APP_VERSION', '1.1.4');
+define('MPG_APP_VERSION', '1.1.5');
 
 /**
  * Development mode?
  * 
- * @var string
+ * @var boolean
  */
 define('MPG_DEV_MODE', false);
 
@@ -69,7 +69,7 @@ define('MPG_SERVER_PATH', $serverPath);
  * Base URL. XXX Without trailing slash.
  * 
  * @var string
- * @example http://127.0.0.1:5000/mongo
+ * @example //127.0.0.1:5000/mongo
  */
 define('MPG_BASE_URL', $baseUrl);
 

@@ -1,3 +1,17 @@
+:root {
+
+    --mpg-color-light: #7bcc29;
+    --mpg-color-regular: #6eb825;
+    --mpg-color-dark: #5dad1d;
+    
+}
+
+body {
+
+    font-family: Arial, sans-serif;
+    
+}
+
 .navbar {
 
     margin-bottom: 10px;
@@ -24,9 +38,15 @@
 
 }
 
-.bg-mongodb {
+.bg-dark {
 
-    background-color: #13aa52;
+    background-color: var(--mpg-color-dark) !important;
+
+}
+
+.navbar-brand {
+
+    font-family: Ubuntu, ubuntu-medium;
 
 }
 
@@ -37,6 +57,8 @@
     top: 4px;
 
     padding: 5px;
+
+    color: white !important;
 
 }
 
@@ -83,6 +105,14 @@
     
     }
     
+}
+
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+
+    .navbar-brand-icon {
+        display: none;
+    }
+
 }
 
 #menu-toggle-button {
@@ -236,6 +266,20 @@ button, input {
 #mpg-find-button, #mpg-delete-one-button {
 
     margin-left: 10px;
+
+}
+
+.btn-success {
+
+    background-color: var(--mpg-color-regular);
+    border-color: var(--mpg-color-regular);
+
+}
+
+.btn-success:hover, .btn-success:focus {
+
+    background-color: var(--mpg-color-dark);
+    border-color: var(--mpg-color-dark);
 
 }
 

@@ -7,6 +7,9 @@
 
     <title><?php echo MPG_APP_NAME; ?></title>
 
+    <link rel="icon" type="image/png" sizes="32x32" href="<?php echo MPG_BASE_URL; ?>/static/images/favicon-32x32.png">
+
+    <link rel="stylesheet" href="<?php echo MPG_BASE_URL; ?>/static/css/ubuntu-font.css">
     <link rel="stylesheet" href="<?php echo MPG_BASE_URL; ?>/static/css/font-awesome.min.css">
     <link rel="stylesheet" href="<?php echo MPG_BASE_URL; ?>/static/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo MPG_BASE_URL; ?>/static/css/mpg.login.css">
@@ -35,8 +38,9 @@
 
             <div class="card">
 
-                <div class="card-header">
-                    <h3 class="text-center"><?php echo MPG_APP_NAME; ?></h3>
+                <div class="card-header text-center">
+                    <img src="<?php echo MPG_BASE_URL; ?>/static/images/alt-leaf-icon.svg" width="32" height="32" />
+                    <h3 class="card-header-name d-inline align-middle"><?php echo MPG_APP_NAME; ?></h3>
                 </div>
                 
                 <div class="card-body">

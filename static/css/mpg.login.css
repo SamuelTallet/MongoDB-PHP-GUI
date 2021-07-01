@@ -1,4 +1,3 @@
-
 /**
  * @see https://teamtreehouse.com/community/shake-effect-with-javascript-only
  */
@@ -22,7 +21,7 @@
 }
 
 .apply-shake {
-    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+    animation: shake 0.82s cubic-bezier(.36, .07, .19, .97) both;
 }
 
 /**
@@ -41,6 +40,12 @@ html, body {
 
 }
 
+body {
+
+    font-family: Arial, sans-serif;
+    
+}
+
 .alert {
 
     max-width: 290px;
@@ -57,12 +62,17 @@ html, body {
 
 }
 
+.card-header-name {
 
-.input-group-prepend span {
+    font-family: Ubuntu, ubuntu-medium;
+
+}
+
+.input-group-text {
 
     width: 40px;
 
-    background-color: #13aa52;
+    background-color: #5dad1d;
     color: white;
 
     border: 0 !important;
