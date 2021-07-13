@@ -350,7 +350,7 @@ MPG.eventListeners.addInsertOne = function() {
             return window.alert('Please fill the document text area.');
         }
         
-        requestBody.document = JSON.parse(filterOrDocTextAreaValue);
+        requestBody.document = jsonic(filterOrDocTextAreaValue);
         
         MPG.helpers.doAjaxRequest(
             'POST',
@@ -394,7 +394,7 @@ MPG.eventListeners.addCount = function() {
         if ( filterOrDocTextAreaValue === '' ) {
             requestBody.filter = {};
         } else {
-            requestBody.filter = JSON.parse(filterOrDocTextAreaValue);
+            requestBody.filter = jsonic(filterOrDocTextAreaValue);
         }
 
         MPG.helpers.doAjaxRequest(
@@ -448,7 +448,7 @@ MPG.eventListeners.addDeleteOne = function() {
             return;
         }
 
-        requestBody.filter = JSON.parse(filterOrDocTextAreaValue);
+        requestBody.filter = jsonic(filterOrDocTextAreaValue);
         
         MPG.helpers.doAjaxRequest(
             'POST',
@@ -627,7 +627,7 @@ MPG.eventListeners.addFind = function() {
             requestBody.filter = {};
         } else {
             MPG.queryHistory.push(filterOrDocTextAreaValue);
-            requestBody.filter = JSON.parse(filterOrDocTextAreaValue);
+            requestBody.filter = jsonic(filterOrDocTextAreaValue);
         }
 
         requestBody.options = {};

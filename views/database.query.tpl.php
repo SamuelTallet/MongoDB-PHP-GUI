@@ -22,8 +22,9 @@
     <script src="<?php echo MPG_BASE_URL; ?>/static/js/codemirror-mode/sql.js"></script>
     <script src="<?php echo MPG_BASE_URL; ?>/static/js/codemirror-addon/show-hint.js"></script>
     <script src="<?php echo MPG_BASE_URL; ?>/static/js/codemirror-addon/mpg-hint.js"></script>
+    <script src="<?php echo MPG_BASE_URL; ?>/static/js/jsonic.min.js"></script>
     <script src="<?php echo MPG_BASE_URL; ?>/static/js/jsonview.bundle.mod.js"></script>
-
+    
     <script>
         var MPG_BASE_URL = '<?php echo MPG_BASE_URL; ?>';
     </script>

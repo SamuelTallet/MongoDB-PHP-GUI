@@ -34,7 +34,7 @@ Installation
 Credits
 -------
 
-This GUI uses [Limber](https://github.com/nimbly/Limber), [Capsule](https://github.com/nimbly/Capsule), [Font Awesome](https://fontawesome.com/), [Bootstrap](https://getbootstrap.com/), [CodeMirror](https://github.com/codemirror/codemirror), [JsonView](https://github.com/pgrabovets/json-view), [MongoDB PHP library](https://github.com/mongodb/mongo-php-library), [vis.js](https://github.com/visjs) and [SQL to MongoDB Query Converter](https://github.com/vincentrussell/sql-to-mongo-db-query-converter). Leaf icon was made by [Freepik](https://www.freepik.com) from [Flaticon](https://www.flaticon.com).
+This GUI uses [Limber](https://github.com/nimbly/Limber), [Capsule](https://github.com/nimbly/Capsule), [Font Awesome](https://fontawesome.com/), [Bootstrap](https://getbootstrap.com/), [CodeMirror](https://github.com/codemirror/codemirror), [jsonic](https://github.com/jsonicjs/jsonic), [JsonView](https://github.com/pgrabovets/json-view), [MongoDB PHP library](https://github.com/mongodb/mongo-php-library), [vis.js](https://github.com/visjs) and [SQL to MongoDB Query Converter](https://github.com/vincentrussell/sql-to-mongo-db-query-converter). Leaf icon was made by [Freepik](https://www.freepik.com) from [Flaticon](https://www.flaticon.com).
 
 Copyright
 ---------
