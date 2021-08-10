@@ -1,10 +1,10 @@
-FROM php:7.4-cli-alpine
+FROM php:8.0-cli-alpine
 
 WORKDIR /opt/mongodb-php-gui
 COPY . /opt/mongodb-php-gui
 
 RUN apk update && apk add --no-cache --virtual .build-deps autoconf build-base openssl-dev curl \
-  && pecl install mongodb-1.8.2 && docker-php-ext-enable mongodb \
+  && pecl install mongodb-1.9.0 && docker-php-ext-enable mongodb \
   && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
   && apk del .build-deps \
   && composer install \

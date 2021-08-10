@@ -24,7 +24,7 @@ Installation
 
 ### Apache HTTP server
 1. Clone current repository in an Apache Web server folder or setup a virtual host.
-2. Be sure to have PHP >= 7.2 with [MongoDB ext.](https://www.php.net/manual/en/mongodb.installation.php) enabled.
+2. Be sure to have PHP >= 7.3 with [MongoDB ext.](https://www.php.net/manual/en/mongodb.installation.php) enabled.
 3. Check that `rewrite_module` module is enabled in your Apache configuration.
 4. Be sure to have `AllowOverride All` in your Apache (virtual host) configuration.
 5. Run `composer install` at project's root directory to install all PHP dependencies.
