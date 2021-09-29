@@ -1,7 +1,7 @@
 <?php
 
 if ( !file_exists($autoload_file = MPG_ABS_PATH . '/vendor/autoload.php') ) {
-    die('Install dependencies with `composer install` to run this script successfully.');
+    die('Run `composer install` to complete ' . MPG_APP_NAME . ' installation.');
 }
 
 $loader = require_once $autoload_file;

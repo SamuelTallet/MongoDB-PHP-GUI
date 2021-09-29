@@ -50,7 +50,11 @@ class MongoDBHelper {
         }
 
         $clientUri .= $_SESSION['mpg']['mongodb_host'];
-        $clientUri .= ':' . $_SESSION['mpg']['mongodb_port'];
+
+        if ( isset($_SESSION['mpg']['mongodb_port']) ) {
+            $clientUri .= ':' . $_SESSION['mpg']['mongodb_port'];
+        }
+        // When it's not defined: port defaults to 27017.
 
         if ( isset($_SESSION['mpg']['mongodb_database']) ) {
             $clientUri .= '/' . $_SESSION['mpg']['mongodb_database'];

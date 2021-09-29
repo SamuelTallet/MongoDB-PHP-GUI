@@ -79,7 +79,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fa fa-filter"></i></span>
                             </div>
-                            <input type="number" class="form-control" placeholder="Port" name="port" required>
+                            <input type="number" class="form-control" placeholder="Port" name="port">
                         </div>
 
                         <div class="input-group form-group">

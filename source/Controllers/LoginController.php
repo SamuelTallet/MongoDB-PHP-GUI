@@ -38,8 +38,6 @@ class LoginController extends Controller {
 
         if ( isset($_POST['port']) && !empty($_POST['port']) ) {
             $_SESSION['mpg']['mongodb_port'] = $_POST['port'];
-        } else {
-            $errors[] = 'Port';
         }
         
         if ( isset($_POST['database']) && !empty($_POST['database']) ) {

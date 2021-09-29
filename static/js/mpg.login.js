@@ -60,10 +60,10 @@ MPG.eventListeners.addLoginButton = function() {
 
     document.getElementById('mpg-login-button').addEventListener('click', function(_event) {
 
-        if ( document.querySelector('input[name="host"]').value === '' 
-            || document.querySelector('input[name="port"]').value === '' )
-        {
+        if ( document.querySelector('input[name="host"]').value === '' ) {
+
             document.querySelector('.card').classList.add('apply-shake');
+            
         }
 
     });
