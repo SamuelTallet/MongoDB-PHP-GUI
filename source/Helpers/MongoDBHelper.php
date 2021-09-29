@@ -45,8 +45,8 @@ class MongoDBHelper {
         if ( isset($_SESSION['mpg']['mongodb_user'])
             && isset($_SESSION['mpg']['mongodb_password'])
         ) {
-            $clientUri .= $_SESSION['mpg']['mongodb_user'] . ':';
-            $clientUri .= $_SESSION['mpg']['mongodb_password'] . '@';
+            $clientUri .= rawurlencode($_SESSION['mpg']['mongodb_user']) . ':';
+            $clientUri .= rawurlencode($_SESSION['mpg']['mongodb_password']) . '@';
         }
 
         $clientUri .= $_SESSION['mpg']['mongodb_host'];

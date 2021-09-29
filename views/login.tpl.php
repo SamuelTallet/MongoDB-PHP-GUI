@@ -45,7 +45,14 @@
                 
                 <div class="card-body">
 
-                    <form method="POST">
+                    <form method="POST" spellcheck="false">
+
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-globe"></i></span>
+                            </div>
+                            <input id="mpg-uri-field" type="url" class="form-control" placeholder="mongodb://" title="URI" pattern="^mongodb://.+">
+                        </div>
 
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
@@ -72,7 +79,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fa fa-filter"></i></span>
                             </div>
-                            <input type="text" class="form-control" placeholder="Port" name="port" required>
+                            <input type="number" class="form-control" placeholder="Port" name="port" required>
                         </div>
 
                         <div class="input-group form-group">
