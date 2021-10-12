@@ -89,6 +89,9 @@ class CollectionController extends Controller {
             throw new \Exception('Impossible to read the import file.');
         }
 
+        // Remove UTF-8 BOM from uploaded file since UTF-8 BOM can disturb decoding of JSON.
+        $documentsFileContents = preg_replace('/\x{FEFF}/u', '', $documentsFileContents, 1);
+
         $documents = json_decode($documentsFileContents, JSON_OBJECT_AS_ARRAY);
 
         if ( is_null($documents) ) {
