@@ -1,8 +1,25 @@
+/* Bootstrap reset */
+
+.form-control:focus, .btn.focus, .btn:focus {
+
+    box-shadow: unset;
+    
+}
+
+.input-group-text {
+
+    border: unset;
+
+}
+
 /**
+ * Shake effect.
+ * 
  * @see https://teamtreehouse.com/community/shake-effect-with-javascript-only
  */
  
 @keyframes shake {
+
     10%, 90% {
         transform: translate3d(-1px, 0, 0);
     }
@@ -18,14 +35,17 @@
     40%, 60% {
         transform: translate3d(4px, 0, 0);
     }
+
 }
 
-.apply-shake {
+.shake {
+
     animation: shake 0.82s cubic-bezier(.36, .07, .19, .97) both;
+    
 }
 
 /**
- * Based on a snippet made by Mutiullah Samim.
+ * Template based on a snippet created by Mutiullah Samim.
  *
  * @see https://bootsnipp.com/snippets/vl4R7
  */
@@ -62,7 +82,7 @@ body {
 
 }
 
-.card-header-name {
+.mpg-card-header-title {
 
     font-family: Ubuntu, ubuntu-medium;
 
@@ -75,13 +95,59 @@ body {
     background-color: #5dad1d;
     color: white;
 
-    border: 0 !important;
+}
+
+/**
+ * Flip card.
+ * 
+ * @see https://stackoverflow.com/questions/57512246/bootstrap-4-flip-card-on-click
+ */
+
+.flip-card {
+
+    min-height: 190px;
+    min-width: 322px;
+
+    perspective: 1000px;
+
+    transition: min-height 0.6s;
 
 }
 
-input:focus {
+.flip-card.flipped {
 
-    outline: 0 0 0 0 !important;
-    box-shadow: 0 0 0 0 !important;
+    min-height: 405px;
+
+}
+
+.flip-card-inner {
+
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+
+}
+
+.flip-card.flipped .flip-card-inner {
+
+    transform: rotateY(180deg);
+
+}
+
+.flip-card-front, .flip-card-back {
     
+    position: absolute;
+    backface-visibility: hidden;
+
+}
+
+.flip-card-back {
+
+    transform: rotateY(180deg);
+
+}
+
+.mpg-flip-card-button {
+
+    padding-left: 0;
+
 }

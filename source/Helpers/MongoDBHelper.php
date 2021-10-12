@@ -7,6 +7,13 @@ use MongoDB\Client;
 class MongoDBHelper {
 
     /**
+     * Regular expression for a MongoDB URI.
+     * 
+     * @var string
+     */
+    public const MDB_URI_REGEX = '/^mongodb(\+srv)?:\/\/.+$/';
+
+    /**
      * Regular expression for a MongoDB ObjectID.
      * 
      * @var string
@@ -40,24 +47,32 @@ class MongoDBHelper {
             throw new \Exception('Session expired. Refresh browser.');
         }
 
-        $clientUri = 'mongodb://';
+        if ( isset($_SESSION['mpg']['mongodb_uri']) ) {
 
-        if ( isset($_SESSION['mpg']['mongodb_user'])
-            && isset($_SESSION['mpg']['mongodb_password'])
-        ) {
-            $clientUri .= rawurlencode($_SESSION['mpg']['mongodb_user']) . ':';
-            $clientUri .= rawurlencode($_SESSION['mpg']['mongodb_password']) . '@';
-        }
+            $clientUri = $_SESSION['mpg']['mongodb_uri'];
 
-        $clientUri .= $_SESSION['mpg']['mongodb_host'];
+        } else {
+            
+            $clientUri = 'mongodb://';
 
-        if ( isset($_SESSION['mpg']['mongodb_port']) ) {
-            $clientUri .= ':' . $_SESSION['mpg']['mongodb_port'];
-        }
-        // When it's not defined: port defaults to 27017.
+            if ( isset($_SESSION['mpg']['mongodb_user'])
+                && isset($_SESSION['mpg']['mongodb_password'])
+            ) {
+                $clientUri .= rawurlencode($_SESSION['mpg']['mongodb_user']) . ':';
+                $clientUri .= rawurlencode($_SESSION['mpg']['mongodb_password']) . '@';
+            }
+    
+            $clientUri .= $_SESSION['mpg']['mongodb_host'];
+    
+            if ( isset($_SESSION['mpg']['mongodb_port']) ) {
+                $clientUri .= ':' . $_SESSION['mpg']['mongodb_port'];
+            }
+            // When it's not defined: port defaults to 27017.
+    
+            if ( isset($_SESSION['mpg']['mongodb_database']) ) {
+                $clientUri .= '/' . $_SESSION['mpg']['mongodb_database'];
+            }
 
-        if ( isset($_SESSION['mpg']['mongodb_database']) ) {
-            $clientUri .= '/' . $_SESSION['mpg']['mongodb_database'];
         }
 
         return new Client($clientUri);

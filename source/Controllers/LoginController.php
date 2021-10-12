@@ -2,6 +2,7 @@
 
 namespace Controllers;
 
+use Helpers\MongoDBHelper;
 use Capsule\Response;
 
 class LoginController extends Controller {
@@ -16,48 +17,61 @@ class LoginController extends Controller {
 
     }
 
-    public function processFormData() : array {
+    private function processFormData() : array {
 
-        $errors = [];
-
+        $requiredFields = [];
         $_SESSION['mpg'] = [];
 
-        if ( isset($_POST['user']) && !empty($_POST['user']) ) {
-            $_SESSION['mpg']['mongodb_user'] = $_POST['user'];
-        }
+        if ( isset($_POST['uri']) ) {
 
-        if ( isset($_POST['password']) && !empty($_POST['password']) ) {
-            $_SESSION['mpg']['mongodb_password'] = $_POST['password'];
-        }
+            if ( preg_match(MongoDBHelper::MDB_URI_REGEX, $_POST['uri']) ) {
+                $_SESSION['mpg']['mongodb_uri'] = $_POST['uri'];
+            } else {
+                $requiredFields[] = 'URI';
+            }
 
-        if ( isset($_POST['host']) && !empty($_POST['host']) ) {
-            $_SESSION['mpg']['mongodb_host'] = $_POST['host'];
+        } elseif ( isset($_POST['host']) ) {
+
+            if ( isset($_POST['user']) && !empty($_POST['user']) ) {
+                $_SESSION['mpg']['mongodb_user'] = $_POST['user'];
+            }
+    
+            if ( isset($_POST['password']) && !empty($_POST['password']) ) {
+                $_SESSION['mpg']['mongodb_password'] = $_POST['password'];
+            }
+    
+            if ( !empty($_POST['host']) ) {
+                $_SESSION['mpg']['mongodb_host'] = $_POST['host'];
+            } else {
+                $requiredFields[] = 'Host';
+            }
+    
+            if ( isset($_POST['port']) && !empty($_POST['port']) ) {
+                $_SESSION['mpg']['mongodb_port'] = $_POST['port'];
+            }
+            
+            if ( isset($_POST['database']) && !empty($_POST['database']) ) {
+                $_SESSION['mpg']['mongodb_database'] = $_POST['database'];
+            }
+
         } else {
-            $errors[] = 'Host';
+            $requiredFields[] = 'URI or Host';
         }
 
-        if ( isset($_POST['port']) && !empty($_POST['port']) ) {
-            $_SESSION['mpg']['mongodb_port'] = $_POST['port'];
-        }
-        
-        if ( isset($_POST['database']) && !empty($_POST['database']) ) {
-            $_SESSION['mpg']['mongodb_database'] = $_POST['database'];
-        }
-
-        return $errors;
+        return $requiredFields;
 
     }
 
     public function renderViewAction() : Response {
 
-        if ( isset($_POST['login']) ) {
+        if ( isset($_POST['uri']) || isset($_POST['host']) ) {
 
-            $errors = $this->processFormData();
+            $requiredFields = $this->processFormData();
             
-            if ( count($errors) >= 1 ) {
+            if ( count($requiredFields) >= 1 ) {
 
                 return new Response(200, $this->renderView('login', [
-                    'errors' => $errors
+                    'requiredFields' => $requiredFields
                 ]));
                 
             } else {
