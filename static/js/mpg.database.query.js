@@ -670,16 +670,22 @@ MPG.eventListeners.addFind = function() {
 };
 
 /**
- * Adds an event listener for autocompletion.
+ * Adds an event listener for autocompletion/find key shortcuts.
  * 
  * @returns {void}
  */
-MPG.eventListeners.addCtrlSpace = function() {
+MPG.eventListeners.addKeyShortcuts = function() {
 
     document.addEventListener('keydown', function(event) {
-        if ( event.ctrlKey && event.code == 'Space' ) {
-            MPG.codeMirror.showHint();
+
+        if ( event.ctrlKey ) {
+            if ( event.code === 'Space' ) {
+                MPG.codeMirror.showHint();
+            } else if ( event.key === 'Enter' ) {
+                document.querySelector('#mpg-find-button').click();
+            }
         }
+
     });
 
 };
@@ -721,7 +727,7 @@ window.addEventListener('DOMContentLoaded', function(_event) {
     MPG.eventListeners.addCodeMirror();
     MPG.eventListeners.addHistoryPop();
     MPG.eventListeners.addFind();
-    MPG.eventListeners.addCtrlSpace();
+    MPG.eventListeners.addKeyShortcuts();
     MPG.eventListeners.addExport();
 
     MPG.helpers.navigateOnSamePage();
