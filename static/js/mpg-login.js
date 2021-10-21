@@ -25,7 +25,7 @@ MPGLogin.eventListeners = {};
         flipCardButton.addEventListener('click', function(event) {
 
             event.preventDefault();
-            document.querySelector('.flip-card').classList.toggle('flipped');
+            document.getElementById('mpg-cards').classList.toggle('flipped');
 
         });
 
@@ -40,14 +40,14 @@ MPGLogin.eventListeners = {};
  */
 MPGLogin.eventListeners.addRequiredInputs = function() {
 
-    document.querySelector('.card').addEventListener('animationend', function(event) {
+    document.getElementById('mpg-cards').addEventListener('animationend', function(event) {
         event.currentTarget.classList.remove('shake');
     });
 
     document.querySelectorAll('input[required]').forEach(function(requiredInput) {
 
         requiredInput.addEventListener('invalid', function(_event) {
-            document.querySelector('.card').classList.add('shake');
+            document.getElementById('mpg-cards').classList.add('shake');
         });
 
     });

@@ -73,12 +73,54 @@ body {
 
 }
 
+#mpg-cards {
+
+    min-height: 191px;
+    width: 322px;
+
+    transform-style: preserve-3d;
+    perspective: 1000px;
+
+}
+
 .card {
 
-    margin-top: auto;
-    margin-bottom: auto;
-
     background-color: rgba(255, 255, 255, 0.7);
+
+}
+
+.mpg-card-front, .mpg-card-back {
+
+    position: absolute;
+
+    -webkit-backface-visibility: hidden; /* Safari fix */
+    backface-visibility: hidden;
+
+    transition: transform 0.6s;
+
+}
+
+.mpg-card-front {
+
+    transform: rotateY(0deg);
+
+}
+
+#mpg-cards.flipped .mpg-card-front {
+
+    transform: rotateY(-180deg);
+
+}
+
+.mpg-card-back {
+
+    transform: rotateY(180deg);
+
+}
+
+#mpg-cards.flipped .mpg-card-back {
+
+    transform: rotateY(0deg);
 
 }
 
@@ -94,55 +136,6 @@ body {
 
     background-color: #5dad1d;
     color: white;
-
-}
-
-/**
- * Flip card.
- * 
- * @see https://stackoverflow.com/questions/57512246/bootstrap-4-flip-card-on-click
- */
-
-.flip-card {
-
-    min-height: 190px;
-    min-width: 322px;
-
-    perspective: 1000px;
-
-    transition: min-height 0.6s;
-
-}
-
-.flip-card.flipped {
-
-    min-height: 405px;
-
-}
-
-.flip-card-inner {
-
-    transition: transform 0.6s;
-    transform-style: preserve-3d;
-
-}
-
-.flip-card.flipped .flip-card-inner {
-
-    transform: rotateY(180deg);
-
-}
-
-.flip-card-front, .flip-card-back {
-    
-    position: absolute;
-    backface-visibility: hidden;
-
-}
-
-.flip-card-back {
-
-    transform: rotateY(180deg);
 
 }
 
