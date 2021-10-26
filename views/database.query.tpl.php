@@ -14,16 +14,16 @@
     <link rel="stylesheet" href="<?php echo MPG_BASE_URL; ?>/static/css/ubuntu-font.css">
     <link rel="stylesheet" href="<?php echo MPG_BASE_URL; ?>/static/css/fontawesome-custom.css">
     <link rel="stylesheet" href="<?php echo MPG_BASE_URL; ?>/static/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<?php echo MPG_BASE_URL; ?>/static/css/codemirror.css">
-    <link rel="stylesheet" href="<?php echo MPG_BASE_URL; ?>/static/css/codemirror-addon/show-hint.css">
+    <link rel="stylesheet" href="<?php echo MPG_BASE_URL; ?>/static/css/codemirror.min.css">
+    <link rel="stylesheet" href="<?php echo MPG_BASE_URL; ?>/static/css/codemirror-show-hint.min.css">
     <link rel="stylesheet" href="<?php echo MPG_BASE_URL; ?>/static/css/jsonview.bundle.css">
     <link rel="stylesheet" href="<?php echo MPG_BASE_URL; ?>/static/css/mpg.css">
 
-    <script src="<?php echo MPG_BASE_URL; ?>/static/js/codemirror.js"></script>
-    <script src="<?php echo MPG_BASE_URL; ?>/static/js/codemirror-mode/javascript.js"></script>
-    <script src="<?php echo MPG_BASE_URL; ?>/static/js/codemirror-mode/sql.js"></script>
-    <script src="<?php echo MPG_BASE_URL; ?>/static/js/codemirror-addon/show-hint.js"></script>
-    <script src="<?php echo MPG_BASE_URL; ?>/static/js/codemirror-addon/mpg-hint.js"></script>
+    <script src="<?php echo MPG_BASE_URL; ?>/static/js/codemirror.min.js"></script>
+    <script src="<?php echo MPG_BASE_URL; ?>/static/js/codemirror-js-mode.js"></script>
+    <script src="<?php echo MPG_BASE_URL; ?>/static/js/codemirror-sql-mode.js"></script>
+    <script src="<?php echo MPG_BASE_URL; ?>/static/js/codemirror-show-hint.min.js"></script>
+    <script src="<?php echo MPG_BASE_URL; ?>/static/js/codemirror-mpg-hint.js"></script>
     <script src="<?php echo MPG_BASE_URL; ?>/static/js/jsonic.min.js"></script>
     <script src="<?php echo MPG_BASE_URL; ?>/static/js/jsonview.bundle.mod.js"></script>
     

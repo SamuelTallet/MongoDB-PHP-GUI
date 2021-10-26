@@ -199,13 +199,13 @@ var JsonView = (function (exports) {
       } else {
         var documentFieldIsUpdatable = false;
       }
+      if ( _typeof(node.value) === 'string' ) {
+        node.value = MPG.helpers.escapeHTML(node.value);
+      }
 
       el.innerHTML = notExpandedTemplate({
         key: node.key,
-
-        // XXX Modification made for MongoDB PHP GUI.
-        value: ( node.value === '' ) ? '<i>empty</i>' : node.value,
-        
+        value: node.value,
         type: _typeof(node.value),
 
         // XXX Modification made for MongoDB PHP GUI.

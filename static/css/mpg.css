@@ -257,6 +257,12 @@ button, input {
 
 }
 
+.json-container .json-string {
+
+    min-width: 50px; /* This hack allows empty string update. */
+
+}
+
 #mpg-databases-list, #mpg-collections-list, #mpg-indexable-fields-list {
 
     list-style-type: none;
