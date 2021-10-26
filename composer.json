@@ -2,6 +2,6 @@
     "require": {
         "nimbly/limber": "^1.3",
         "nimbly/capsule": "^1.1",
-        "mongodb/mongodb": "^1.8"
+        "mongodb/mongodb": "^1.9"
     }
 }
