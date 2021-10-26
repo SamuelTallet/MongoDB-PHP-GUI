@@ -483,7 +483,10 @@ MPG.eventListeners.addUpdate = function() {
 
             var documentField = event.currentTarget;
 
-            var documentFieldNewValue = window.prompt('New value', documentField.innerHTML);
+            var documentFieldNewValue = window.prompt(
+                'New value',
+                MPG.helpers.unescapeHTML(documentField.innerHTML)
+            );
 
             if ( documentFieldNewValue === null ) {
                 return;
@@ -518,8 +521,8 @@ MPG.eventListeners.addUpdate = function() {
                 function(response) {
 
                     if ( JSON.parse(response) === 1 ) {
-                        documentField.innerHTML = MPG.helpers.convertAnyToString(
-                            documentFieldNewValue
+                        documentField.innerHTML = MPG.helpers.escapeHTML(
+                            MPG.helpers.convertAnyToString(documentFieldNewValue)
                         );
                     }
 

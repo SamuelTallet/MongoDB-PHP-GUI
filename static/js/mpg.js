@@ -141,6 +141,33 @@ MPG.helpers.completeNavLinks = function(urlFragment) {
 };
 
 /**
+ * Escapes HTML tags and entities.
+ * This prevents HTML stored in MongoDB documents to be interpreted by browser.
+ * 
+ * @param {string} html
+ * 
+ * @returns {string}
+ */
+MPG.helpers.escapeHTML = function(html) {
+
+    return html.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+};
+
+/**
+ * Unescapes HTML tags and entities.
+ * 
+ * @param {string} html
+ * 
+ * @returns {string}
+ */
+MPG.helpers.unescapeHTML = function(html) {
+
+    return html.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+
+};
+
+/**
  * Reloads collections of a specific database.
  * 
  * @param {string} databaseName
