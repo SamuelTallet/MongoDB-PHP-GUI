@@ -59,9 +59,9 @@
                             <i>Please select a database.</i>
                         </div>
                         
-                        <table id="mpg-users-table" class="table table-bordered table-hover d-none">
+                        <table id="mpg-users-table" class="table d-none">
 
-                            <thead class="thead-dark">
+                            <thead>
                                 <tr>
                                     <th>Name</th>
                                     <th>Role (Database)</th>

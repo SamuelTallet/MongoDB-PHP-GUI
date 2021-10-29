@@ -139,10 +139,10 @@ MPG.eventListeners.addDatabases = function() {
             MPG.helpers.completeNavLinks('#' + MPG.databaseName);
 
             document.querySelectorAll('.mpg-database-link').forEach(function(databaseLink) {
-                databaseLink.classList.remove('font-weight-bold');
+                databaseLink.classList.remove('active');
             });
 
-            databaseLink.classList.add('font-weight-bold');
+            databaseLink.classList.add('active');
 
             MPG.reloadCollections(databaseLink.dataset.databaseName);
 
@@ -172,10 +172,10 @@ MPG.eventListeners.addCollections = function() {
             MPG.helpers.completeNavLinks('#' + MPG.databaseName + '/' + MPG.collectionName);
 
             document.querySelectorAll('.mpg-collection-link').forEach(function(collectionLink) {
-                collectionLink.classList.remove('font-weight-bold');
+                collectionLink.classList.remove('active');
             });
 
-            collectionLink.classList.add('font-weight-bold');
+            collectionLink.classList.add('active');
 
             MPG.collectionFields = [];
 

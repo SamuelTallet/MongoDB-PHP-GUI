@@ -132,9 +132,9 @@
 
                         <h2>Indexes</h2>
 
-                        <table id="mpg-indexes-table" class="table table-bordered table-hover">
+                        <table id="mpg-indexes-table" class="table">
 
-                            <thead class="thead-dark">
+                            <thead>
                                 <tr>
                                     <th>Name</th>
                                     <th>Key (Order)</th>

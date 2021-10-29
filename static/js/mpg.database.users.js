@@ -68,10 +68,10 @@ MPG.eventListeners.addDatabases = function() {
             MPG.helpers.completeNavLinks('#' + MPG.databaseName);
 
             document.querySelectorAll('.mpg-database-link').forEach(function(databaseLink) {
-                databaseLink.classList.remove('font-weight-bold');
+                databaseLink.classList.remove('active');
             });
 
-            databaseLink.classList.add('font-weight-bold');
+            databaseLink.classList.add('active');
 
             document.querySelector('#mpg-please-select-a-db').classList.add('d-none');
             document.querySelector('#mpg-open-create-user-modal-button').classList.remove('d-none');

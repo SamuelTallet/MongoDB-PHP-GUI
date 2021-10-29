@@ -258,10 +258,10 @@ MPG.eventListeners.addCollections = function() {
             MPG.helpers.completeNavLinks('#' + MPG.databaseName + '/' + MPG.collectionName);
             
             document.querySelectorAll('.mpg-collection-link').forEach(function(collectionLink) {
-                collectionLink.classList.remove('font-weight-bold');
+                collectionLink.classList.remove('active');
             });
 
-            collectionLink.classList.add('font-weight-bold');
+            collectionLink.classList.add('active');
 
             MPG.collectionFields = [];
 

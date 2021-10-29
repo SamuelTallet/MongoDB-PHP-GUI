@@ -18,15 +18,18 @@ MPG.visNetworkOptions = {
     width:  '100%',
     height: (window.innerHeight - 100) + 'px',
     nodes: {
+        font: {
+            color: "white"
+        },
         color: {
-            background: "transparent",
-            border: "transparent"
+            background: 'transparent',
+            border: 'transparent'
         }
     },
     edges: {
         width: 1,
         color: {
-            color: '#ddd',
+            color: '#6eb72480',
             highlight: '#0062cc'
         },
     }

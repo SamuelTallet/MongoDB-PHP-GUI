@@ -1,13 +1,35 @@
 :root {
 
-    --mpg-color-light: #7bcc29;
-    --mpg-color-regular: #6eb825;
-    --mpg-color-dark: #5dad1d;
+    --mpg-background-color: rgb(64, 64, 64);
+    --mpg-brand-color-darker: hsl(93, 71%, 40%);
+    --mpg-brand-color-lighter: hsl(90, 67%, 48%);
+    --mpg-brand-color: hsl(90, 67%, 43%);
+    --mpg-code-background-color: rgb(51, 51, 51);
+    --mpg-code-padding: 10px;
+    --mpg-danger-color: hsl(354, 70%, 54%);
+    --mpg-info-color: hsl(188, 78%, 41%);
+    --mpg-json-boolean-color: hsl(351, 94%, 83%);
+    --mpg-json-key-color: hsl(174, 68%, 56%);
+    --mpg-json-number-color: hsl(120, 67%, 75%);
+    --mpg-json-string-color: hsl(39, 84%, 50%);
+    --mpg-primary-color-darker: hsl(252, 53%, 50%);
+    --mpg-primary-color: hsl(252, 53%, 55%);
+    --mpg-secondary-color: hsl(45, 100%, 51%);
+    --mpg-secondary-color-darker: hsl(45, 100%, 45%);
+    --mpg-text-color: white;
     
+}
+
+*:focus {
+
+    box-shadow: none !important;
+
 }
 
 body {
 
+    background-color: var(--mpg-background-color);
+    color: var(--mpg-text-color);
     font-family: Arial, sans-serif;
     
 }
@@ -33,14 +55,13 @@ body {
         -ms-flex-pack: start;
         justify-content: flex-start;
     
-    
     }
 
 }
 
 .bg-dark {
 
-    background-color: var(--mpg-color-dark) !important;
+    background-color: var(--mpg-brand-color-darker) !important;
 
 }
 
@@ -90,10 +111,8 @@ body {
 
     .navbar-brand, .navbar-nav .nav-link {
 
-        top: 15px;
-        padding-top: 10px;
-        padding-bottom: 15px;
-    
+        /* FIXME */
+
     }
 
     .navbar-nav {
@@ -123,9 +142,9 @@ body {
     display: block;
     position: absolute;
     right: 10px;
-    top: 10px;
+    top: 14px;
 
-    color: white;
+    color: var(--mpg-text-color);
 
 }
 
@@ -139,12 +158,15 @@ body {
 
 }
 
-.navbar-nav .nav-link.active {
+.navbar-nav .nav-link {
 
-    background-color: white;
-    color: black !important;
+    opacity: 0.5;
 
-    border-radius: 5px;
+}
+
+.navbar-nav .nav-link:hover, .navbar-nav .nav-link.active {
+
+    opacity: 1;
 
 }
 
@@ -199,28 +221,82 @@ button, input {
 
 }
 
+.CodeMirror,
+.json-container {
+
+    background-color: var(--mpg-code-background-color);
+    font-family: Consolas, monospace;
+    padding: var(--mpg-code-padding);
+
+}
+
+.CodeMirror .cm-keyword {
+
+    color: var(--mpg-json-string-color);
+
+}
+
+.CodeMirror .cm-variable, /* Cf. Relaxed JSON syntax. */
+.CodeMirror .cm-property,
+.json-container .json-key {
+
+    color: var(--mpg-json-key-color);
+
+}
+
+.CodeMirror .cm-string,
+.json-container .json-string {
+
+    color: var(--mpg-json-string-color);
+
+}
+
+.CodeMirror .cm-number,
+.json-container .json-number {
+
+    color: var(--mpg-json-number-color);
+
+}
+
+.CodeMirror .cm-atom,
+.json-container .json-boolean {
+
+    color: var(--mpg-json-boolean-color);
+
+}
+
 .CodeMirror {
 
-    width: 100%;
+    border: none;
+    color: var(--mpg-text-color);
     height: auto;
-    min-height: 60px;
-
     margin-bottom: 10px;
-    border: 1px solid #ddd;
+    min-height: 60px;
+    width: 100%;
 
-    font-family: Consolas, monospace;
+}
+
+.CodeMirror .CodeMirror-selected {
+
+    background-color: black;
+
+}
+
+li.CodeMirror-hint-active {
+
+    background-color: var(--mpg-brand-color);
 
 }
 
 .CodeMirror .mpg-history-pop-button {
 
-    position: absolute;
-    right: 0;
-    top: 0;
-    z-index: 100;
-
-    border: none;
     background: none;
+    border: none;
+    color: var(--mpg-text-color);
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    z-index: 100;
 
 }
 
@@ -230,16 +306,16 @@ button, input {
 
 }
 
+.CodeMirror-cursor {
+
+    border-color: var(--mpg-text-color);
+
+}
+
 .CodeMirror-hints {
 
     font-family: Consolas, monospace;
     font-size: 100%;
-
-}
-
-.json-container {
-
-    font-family: Consolas, monospace;
 
 }
 
@@ -252,20 +328,33 @@ button, input {
 
 .json-container .json-value[data-document-field-is-updatable="true"]:hover {
 
-    cursor: url("../images/edit-icon-32x32.png") 16 16, text;
-    outline: 1.5px solid #ddd;
+    cursor: url("../images/pencil-icon.svg") 16 16, text;
 
 }
 
-.json-container .json-string {
+.json-container .json-value {
 
-    min-width: 50px; /* This hack allows empty string update. */
+    min-width: 50px; /* This hack allows update of a short or empty value. */
 
 }
 
 #mpg-databases-list, #mpg-collections-list, #mpg-indexable-fields-list {
 
     list-style-type: none;
+
+}
+
+.mpg-database-link, .mpg-collection-link {
+
+    color: var(--mpg-text-color);
+
+}
+
+.mpg-database-link:hover, .mpg-collection-link:hover,
+.mpg-database-link.active, .mpg-collection-link.active {
+
+    color: var(--mpg-brand-color);
+    font-weight: bold;
 
 }
 
@@ -277,21 +366,50 @@ button, input {
 
 .btn-success {
 
-    background-color: var(--mpg-color-regular);
-    border-color: var(--mpg-color-regular);
+    background-color: var(--mpg-brand-color);
+    border-color: var(--mpg-brand-color);
 
 }
 
 .btn-success:hover, .btn-success:focus {
 
-    background-color: var(--mpg-color-dark);
-    border-color: var(--mpg-color-dark);
+    background-color: var(--mpg-brand-color-darker);
+    border-color: var(--mpg-brand-color-darker);
 
 }
 
 #mpg-output-column, #mpg-indexes-column {
 
     margin-top: 15px;
+
+}
+
+.btn-primary {
+
+    background-color: var(--mpg-primary-color);
+    border-color: var(--mpg-primary-color);
+
+}
+
+.btn-primary:hover, .btn-primary:focus {
+
+    background-color: var(--mpg-primary-color-darker) !important;
+    border-color: var(--mpg-primary-color-darker) !important;
+
+}
+
+.btn-secondary {
+
+    background-color: var(--mpg-secondary-color);
+    border-color: var(--mpg-secondary-color);
+    color: black !important;
+
+}
+
+.btn-secondary:hover, .btn-secondary:focus {
+
+    background-color: var(--mpg-secondary-color-darker) !important;
+    border-color: var(--mpg-secondary-color-darker) !important;
 
 }
 
@@ -317,6 +435,31 @@ button, input {
 
 }
 
+.alert {
+
+    border: none;
+    color: var(--mpg-text-color);
+
+}
+
+.alert-danger {
+
+    background-color: var(--mpg-danger-color);
+
+}
+
+.alert-info {
+
+    background-color: var(--mpg-info-color);
+
+}
+
+.alert-success {
+
+    background-color: var(--mpg-brand-color-darker);
+
+}
+
 .alert-dismissible {
 
     width: fit-content;
@@ -339,7 +482,24 @@ button, input {
 
 }
 
-.table td {
+#mpg-users-table,
+#mpg-indexes-table {
+
+    background-color: white;
+
+}
+
+#mpg-users-table thead th,
+#mpg-indexes-table thead th {
+
+    background-color: var(--mpg-code-background-color);
+    border: none;
+    color: var(--mpg-text-color);
+
+}
+
+#mpg-users-table tbody td,
+#mpg-indexes-table tbody td {
 
     vertical-align: middle;
 
@@ -349,6 +509,12 @@ button, input {
 
     top: 50px;
     overflow-y: auto;
+
+}
+
+#mpg-create-user-modal label {
+
+    color: black;
 
 }
 

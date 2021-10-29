@@ -36,7 +36,8 @@ var JsonView = (function (exports) {
         documentFieldName = params.documentFieldName;
 
     // XXX Modification made for MongoDB PHP GUI.
-    return "\n    <div class=\"line\">\n      <div class=\"empty-icon\"></div>\n      <div class=\"json-key\">".concat(key, "</div>\n      <div class=\"json-separator\">:</div>\n      <div data-document-id=\"" + documentId + "\" data-document-field-is-updatable=\"" + documentFieldIsUpdatable + "\" data-document-field-name=\"" + documentFieldName + "\" data-document-field-type=\"" + type + "\" class=\"json-value json-").concat(type, "\">").concat(value, "</div>\n    </div>\n  ");
+    var title = ( documentFieldIsUpdatable === 'true' ) ? 'Edit value' : '';
+    return "\n    <div class=\"line\">\n      <div class=\"empty-icon\"></div>\n      <div class=\"json-key\">".concat(key, "</div>\n      <div class=\"json-separator\">:</div>\n      <div data-document-id=\"" + documentId + "\" data-document-field-is-updatable=\"" + documentFieldIsUpdatable + "\" data-document-field-name=\"" + documentFieldName + "\" data-document-field-type=\"" + type + "\" title=\"" + title + "\" class=\"json-value json-").concat(type, "\">").concat(value, "</div>\n    </div>\n  ");
   }
 
   function hideNodeChildren(node) {

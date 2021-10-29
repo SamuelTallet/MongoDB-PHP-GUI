@@ -94,7 +94,7 @@
                             <input type="hidden" name="database_name" value="">
                             <input type="hidden" name="collection_name" value="">
 
-                            <button id="mpg-import-button" type="submit" class="btn btn-warning d-inline">
+                            <button id="mpg-import-button" type="submit" class="btn btn-primary d-inline">
                                 Import
                             </button>
 

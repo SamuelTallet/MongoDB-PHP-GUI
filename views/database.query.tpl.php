@@ -84,7 +84,7 @@
 
                         <textarea id="mpg-filter-or-doc-textarea"></textarea>
 
-                        <button id="mpg-insert-one-button" class="btn btn-warning float-left">
+                        <button id="mpg-insert-one-button" class="btn btn-primary float-left">
                             Insert one
                         </button>
 
@@ -139,7 +139,7 @@
 
                         <h2 class="d-inline-block">Output</h2>
 
-                        <button id="mpg-export-button" class="btn btn-primary">Export</button>
+                        <button id="mpg-export-button" class="btn btn-secondary">Export</button>
                         
                         <div>
                             <code id="mpg-output-code"></code>

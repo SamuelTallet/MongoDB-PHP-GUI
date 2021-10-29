@@ -73,7 +73,7 @@
 
                         <button id="mpg-create-coll-button" class="btn btn-primary">Create coll.</button>
 
-                        <button id="mpg-rename-coll-button" class="btn btn-warning">Rename coll.</button>
+                        <button id="mpg-rename-coll-button" class="btn btn-secondary">Rename coll.</button>
 
                         <button id="mpg-drop-coll-button" class="btn btn-danger">Drop coll.</button>
 
