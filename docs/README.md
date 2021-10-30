@@ -7,22 +7,20 @@ Additional features: Export documents to JSON. Import documents from JSON. Manag
 
 ## Screenshots
 
-![MongoDB PHP GUI - Visualize Database](https://raw.githubusercontent.com/SamuelTS/MongoDB-PHP-GUI/master/docs/screenshots/mpg-visualize-database.png)
+![MongoDB PHP GUI - Visualize Database](https://raw.githubusercontent.com/SamuelTS/MongoDB-PHP-GUI/master/docs/screenshots/visualize-database.png)
 
-![MongoDB PHP GUI - Query Database](https://raw.githubusercontent.com/SamuelTS/MongoDB-PHP-GUI/master/docs/screenshots/mpg-query-database.png)
-
-![MongoDB PHP GUI - Manage Indexes](https://raw.githubusercontent.com/SamuelTS/MongoDB-PHP-GUI/master/docs/screenshots/mpg-manage-indexes.png)
+![MongoDB PHP GUI - Query Database](https://raw.githubusercontent.com/SamuelTS/MongoDB-PHP-GUI/master/docs/screenshots/query-database.png)
 
 ## Installation
 
 ### Docker (PHP built-in server)
-1. Run `docker pull samueltallet/mongodb-php-gui`<br>
-2. Run `docker run --rm -p 5000:5000 samueltallet/mongodb-php-gui`<br>
+1. In a case of an upgrade, run `docker pull samueltallet/mongodb-php-gui`<br>
+2. Always run `docker run --rm -p 5000:5000 samueltallet/mongodb-php-gui`<br>
 3. Open your browser at this address: http://127.0.0.1:5000/ to access GUI.<br>
 4. If your MongoDB is running on localhost, use 172.17.0.1 as host to login.
 
 ### Apache HTTP server
-1. Clone current repository in an Apache Web server folder or setup a virtual host.
+1. Clone current repository in a folder served by Apache.
 2. Be sure to have PHP >= 7.3 with [MongoDB ext.](https://www.php.net/manual/en/mongodb.installation.php) enabled.
 3. Check that `rewrite_module` module is enabled in your Apache configuration.
 4. Be sure to have `AllowOverride All` in your Apache (virtual host) configuration.
