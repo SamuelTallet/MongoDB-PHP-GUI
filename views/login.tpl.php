@@ -52,10 +52,7 @@
                         <form method="POST" spellcheck="false">
 
                             <div class="input-group form-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fa fa-globe"></i></span>
-                                </div>
-                                <input type="url" class="form-control" placeholder="mongodb://" title="URI" name="uri" pattern="^mongodb(\+srv)?://.+$" required>
+                                <input type="url" class="form-control" placeholder="mongodb://user:pass@host:port/db" title="URI" name="uri" pattern="^mongodb(\+srv)?://.+$" required>
                             </div>
 
                             <button class="btn mpg-flip-card-button text-info font-weight-bold float-left">I don't have an URI</button>
