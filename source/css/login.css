@@ -52,7 +52,7 @@
 
 html, body {
 
-    background-image: url('../images/login-background.jpg');
+    background-image: url('../../assets/images/login-background.jpg');
     background-size: cover;
     background-repeat: no-repeat;
 

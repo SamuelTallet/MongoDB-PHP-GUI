@@ -7,7 +7,7 @@ use Responses\JsonResponse;
 
 class SQLController extends Controller {
 
-    public function convertToMongoDBQuery() {
+    public function convertToMongoDBQuery() : JsonResponse {
 
         try {
             $decodedRequestBody = $this->getDecodedRequestBody();
@@ -21,7 +21,7 @@ class SQLController extends Controller {
         $decodedRequestBody['sql'] = str_replace('"', '\"', $decodedRequestBody['sql']);
 
         $jarPath = '"' . MPG_ABS_PATH 
-            . '/static/jar/sql-to-mongo-db-query-converter-1.13-standalone.jar"';
+            . '/addons/sql-to-mongo-db-query-converter-1.13-standalone.jar"';
         $jarArgs = '--sql "' . $decodedRequestBody['sql'] . '"';
         
         $command = 'java -jar ' . $jarPath . ' ' . $jarArgs;

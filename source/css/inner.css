@@ -328,7 +328,7 @@ li.CodeMirror-hint-active {
 
 .json-container .json-value[data-document-field-is-updatable="true"]:hover {
 
-    cursor: url("../images/pencil-icon.svg") 16 16, text;
+    cursor: url("../../assets/images/pencil-icon.svg") 16 16, text;
 
 }
 
