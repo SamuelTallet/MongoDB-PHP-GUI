@@ -1,158 +1,160 @@
 <?php
 
 use Limber\Router\Router;
-use Controllers\LoginController;
+use Controllers\AuthController;
 use Controllers\Controller;
-use Controllers\DatabaseController;
-use Controllers\CollectionController;
+use Controllers\CollectionsController;
+use Controllers\DocumentsController;
+use Controllers\DatabasesController;
 use Controllers\SQLController;
+use Controllers\IndexesController;
+use Controllers\UsersController;
 
 $router = new Router();
 
 $router->get(MPG_SERVER_PATH . '/', function() {
 
-	LoginController::ensureUserIsLogged();
-
+	AuthController::ensureUserIsLogged();
 	Controller::redirectTo('/queryDatabase');
 
 });
 
 $router->get(
 	MPG_SERVER_PATH . '/login',
-	LoginController::class . '@renderViewAction'
+	AuthController::class . '@login'
 );
 
 $router->post(
 	MPG_SERVER_PATH . '/login',
-	LoginController::class . '@renderViewAction'
+	AuthController::class . '@login'
 );
 
 $router->get(
 	MPG_SERVER_PATH . '/manageCollections',
-	CollectionController::class . '@renderViewAction'
+	CollectionsController::class . '@manage'
 );
 
 $router->post(
-	MPG_SERVER_PATH . '/ajaxDatabaseCreateCollection',
-	DatabaseController::class . '@createCollectionAction'
+	MPG_SERVER_PATH . '/listCollections',
+	CollectionsController::class . '@list'
 );
 
 $router->post(
-	MPG_SERVER_PATH . '/ajaxCollectionRename',
-	CollectionController::class . '@renameAction'
+	MPG_SERVER_PATH . '/createCollection',
+	CollectionsController::class . '@create'
 );
 
 $router->post(
-	MPG_SERVER_PATH . '/ajaxCollectionDrop',
-	CollectionController::class . '@dropAction'
+	MPG_SERVER_PATH . '/renameCollection',
+	CollectionsController::class . '@rename'
+);
+
+$router->post(
+	MPG_SERVER_PATH . '/dropCollection',
+	CollectionsController::class . '@drop'
 );
 
 $router->get(
 	MPG_SERVER_PATH . '/importDocuments',
-	CollectionController::class . '@renderImportViewAction'
+	DocumentsController::class . '@import'
 );
 
 $router->post(
 	MPG_SERVER_PATH . '/importDocuments',
-	CollectionController::class . '@renderImportViewAction'
+	DocumentsController::class . '@import'
 );
 
 $router->get(
 	MPG_SERVER_PATH . '/visualizeDatabase',
-	DatabaseController::class . '@renderVisualizeViewAction'
+	DatabasesController::class . '@visualize'
 );
 
 $router->get(
-	MPG_SERVER_PATH . '/ajaxDatabaseGetNetworkGraph',
-	DatabaseController::class . '@getNetworkGraphAction'
+	MPG_SERVER_PATH . '/getDatabaseNetworkGraph',
+	DatabasesController::class . '@getNetworkGraph'
 );
 
 $router->get(
 	MPG_SERVER_PATH . '/queryDatabase',
-	DatabaseController::class . '@renderQueryViewAction'
+	DatabasesController::class . '@query'
 );
 
 $router->post(
-	MPG_SERVER_PATH . '/ajaxDatabaseListCollections',
-	DatabaseController::class . '@listCollectionsAction'
+	MPG_SERVER_PATH . '/insertOneDocument',
+	DocumentsController::class . '@insertOne'
 );
 
 $router->post(
-	MPG_SERVER_PATH . '/ajaxCollectionInsertOne',
-	CollectionController::class . '@insertOneAction'
+	MPG_SERVER_PATH . '/countDocuments',
+	DocumentsController::class . '@count'
 );
 
 $router->post(
-	MPG_SERVER_PATH . '/ajaxCollectionCount',
-	CollectionController::class . '@countAction'
+	MPG_SERVER_PATH . '/deleteOneDocument',
+	DocumentsController::class . '@deleteOne'
 );
 
 $router->post(
-	MPG_SERVER_PATH . '/ajaxCollectionDeleteOne',
-	CollectionController::class . '@deleteOneAction'
+	MPG_SERVER_PATH . '/convertSQLToMongoDBQuery',
+	SQLController::class . '@convertToMongoDBQuery'
 );
 
 $router->post(
-	MPG_SERVER_PATH . '/ajaxSQLConvertToMongoDBQuery',
-	SQLController::class . '@convertToMongoDBQueryAction'
+	MPG_SERVER_PATH . '/findDocuments',
+	DocumentsController::class . '@find'
 );
 
 $router->post(
-	MPG_SERVER_PATH . '/ajaxCollectionFind',
-	CollectionController::class . '@findAction'
+	MPG_SERVER_PATH . '/updateOneDocument',
+	DocumentsController::class . '@updateOne'
 );
 
 $router->post(
-	MPG_SERVER_PATH . '/ajaxCollectionUpdateOne',
-	CollectionController::class . '@updateOneAction'
-);
-
-$router->post(
-	MPG_SERVER_PATH . '/ajaxCollectionEnumFields',
-	CollectionController::class . '@enumFieldsAction'
+	MPG_SERVER_PATH . '/enumCollectionFields',
+	CollectionsController::class . '@enumFields'
 );
 
 $router->get(
 	MPG_SERVER_PATH . '/manageIndexes',
-	CollectionController::class . '@renderIndexesViewAction'
+	IndexesController::class . '@manage'
 );
 
 $router->post(
-	MPG_SERVER_PATH . '/ajaxCollectionCreateIndex',
-	CollectionController::class . '@createIndexAction'
+	MPG_SERVER_PATH . '/createIndex',
+	IndexesController::class . '@create'
 );
 
 $router->post(
-	MPG_SERVER_PATH . '/ajaxCollectionListIndexes',
-	CollectionController::class . '@listIndexesAction'
+	MPG_SERVER_PATH . '/listIndexes',
+	IndexesController::class . '@list'
 );
 
 $router->post(
-	MPG_SERVER_PATH . '/ajaxCollectionDropIndex',
-	CollectionController::class . '@dropIndexAction'
+	MPG_SERVER_PATH . '/dropIndex',
+	IndexesController::class . '@drop'
 );
 
 $router->get(
 	MPG_SERVER_PATH . '/manageUsers',
-	DatabaseController::class . '@renderUsersViewAction'
+	UsersController::class . '@manage'
 );
 
 $router->post(
-	MPG_SERVER_PATH . '/ajaxDatabaseCreateUser',
-	DatabaseController::class . '@createUserAction'
+	MPG_SERVER_PATH . '/createUser',
+	UsersController::class . '@create'
 );
 
 $router->post(
-	MPG_SERVER_PATH . '/ajaxDatabaseListUsers',
-	DatabaseController::class . '@listUsersAction'
+	MPG_SERVER_PATH . '/listUsers',
+	UsersController::class . '@list'
 );
 
 $router->post(
-	MPG_SERVER_PATH . '/ajaxDatabaseDropUser',
-	DatabaseController::class . '@dropUserAction'
+	MPG_SERVER_PATH . '/dropUser',
+	UsersController::class . '@drop'
 );
 
 $router->get(
 	MPG_SERVER_PATH . '/logout',
-	LoginController::class . '@logoutAction'
+	AuthController::class . '@logout'
 );

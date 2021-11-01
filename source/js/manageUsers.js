@@ -11,7 +11,7 @@ MPG.reloadUsers = function(databaseName) {
     var requestBody = { 'databaseName': databaseName };
 
     MPG.helpers.doAjaxRequest(
-        'POST', MPG_BASE_URL + '/ajaxDatabaseListUsers', function(response) {
+        'POST', MPG_BASE_URL + '/listUsers', function(response) {
 
             var usersInfo = JSON.parse(response);
 
@@ -124,7 +124,7 @@ MPG.eventListeners.addCreateUser = function() {
 
         MPG.helpers.doAjaxRequest(
             'POST',
-            MPG_BASE_URL + '/ajaxDatabaseCreateUser',
+            MPG_BASE_URL + '/createUser',
             function(response) {
 
                 if ( JSON.parse(response) === true ) {
@@ -170,7 +170,7 @@ MPG.eventListeners.addDropUser = function() {
 
             MPG.helpers.doAjaxRequest(
                 'POST',
-                MPG_BASE_URL + '/ajaxDatabaseDropUser',
+                MPG_BASE_URL + '/dropUser',
                 function(response) {
     
                     if ( JSON.parse(response) === true ) {

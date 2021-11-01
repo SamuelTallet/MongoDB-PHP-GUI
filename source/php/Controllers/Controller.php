@@ -70,7 +70,7 @@ class Controller {
 
         ob_start();
 
-        require MPG_ABS_PATH . '/views/' . $viewName . '.tpl.php';
+        require MPG_ABS_PATH . '/views/' . $viewName . '.view.php';
 
         $viewResult = (string) ob_get_contents();
 

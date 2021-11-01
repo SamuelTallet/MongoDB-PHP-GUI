@@ -11,7 +11,7 @@ class MongoDBHelper {
      * 
      * @var string
      */
-    public const MDB_URI_REGEX = '/^mongodb(\+srv)?:\/\/.+$/';
+    public const URI_REGEX = '/^mongodb(\+srv)?:\/\/.+$/';
 
     /**
      * Regular expression for a MongoDB ObjectID.
@@ -19,7 +19,7 @@ class MongoDBHelper {
      * @var string
      * @see https://stackoverflow.com/questions/20988446/regex-for-mongodb-objectid
      */
-    public const MDB_OBJECT_ID_REGEX = '/^[a-f\d]{24}$/i';
+    public const OBJECT_ID_REGEX = '/^[a-f\d]{24}$/i';
 
     /**
      * Regular expression for an ISO date-time.

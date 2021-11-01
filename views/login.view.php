@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="<?php echo MPG_BASE_URL; ?>/static/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo MPG_BASE_URL; ?>/static/css/mpg-login.css">
 
-    <script src="<?php echo MPG_BASE_URL; ?>/static/js/mpg-login.js"></script>
+    <script src="<?php echo MPG_BASE_URL; ?>/source/js/login.js"></script>
 
 </head>
 

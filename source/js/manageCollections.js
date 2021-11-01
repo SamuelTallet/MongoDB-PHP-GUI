@@ -25,7 +25,7 @@ MPG.eventListeners.addCreateColl = function() {
     
         MPG.helpers.doAjaxRequest(
             'POST',
-            MPG_BASE_URL + '/ajaxDatabaseCreateCollection',
+            MPG_BASE_URL + '/createCollection',
             function(response) {
 
                 if ( JSON.parse(response) === true ) {
@@ -67,7 +67,7 @@ MPG.eventListeners.addRenameColl = function() {
 
         MPG.helpers.doAjaxRequest(
             'POST',
-            MPG_BASE_URL + '/ajaxCollectionRename',
+            MPG_BASE_URL + '/renameCollection',
             function(response) {
 
                 if ( JSON.parse(response) === true ) {
@@ -113,7 +113,7 @@ MPG.eventListeners.addDropColl = function() {
 
         MPG.helpers.doAjaxRequest(
             'POST',
-            MPG_BASE_URL + '/ajaxCollectionDrop',
+            MPG_BASE_URL + '/dropCollection',
             function(response) {
 
                 if ( JSON.parse(response) === true ) {

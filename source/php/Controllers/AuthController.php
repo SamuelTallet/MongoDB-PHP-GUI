@@ -2,10 +2,10 @@
 
 namespace Controllers;
 
-use Helpers\MongoDBHelper;
+use Helpers\MongoDBHelper as MongoDB;
 use Capsule\Response;
 
-class LoginController extends Controller {
+class AuthController extends Controller {
 
     public static function ensureUserIsLogged() {
 
@@ -17,6 +17,31 @@ class LoginController extends Controller {
 
     }
 
+    public function login() : Response {
+
+        if ( isset($_POST['uri']) || isset($_POST['host']) ) {
+
+            $requiredFields = $this->processFormData();
+            
+            if ( count($requiredFields) >= 1 ) {
+
+                return new Response(200, $this->renderView('login', [
+                    'requiredFields' => $requiredFields
+                ]));
+                
+            } else {
+
+                $_SESSION['mpg']['user_is_logged'] = true;
+                Controller::redirectTo('/');
+
+            }
+
+        } else {
+            return new Response(200, $this->renderView('login'));
+        }
+
+    }
+
     private function processFormData() : array {
 
         $requiredFields = [];
@@ -24,7 +49,7 @@ class LoginController extends Controller {
 
         if ( isset($_POST['uri']) ) {
 
-            if ( preg_match(MongoDBHelper::MDB_URI_REGEX, $_POST['uri']) ) {
+            if ( preg_match(MongoDB::URI_REGEX, $_POST['uri']) ) {
                 $_SESSION['mpg']['mongodb_uri'] = $_POST['uri'];
             } else {
                 $requiredFields[] = 'URI';
@@ -62,32 +87,7 @@ class LoginController extends Controller {
 
     }
 
-    public function renderViewAction() : Response {
-
-        if ( isset($_POST['uri']) || isset($_POST['host']) ) {
-
-            $requiredFields = $this->processFormData();
-            
-            if ( count($requiredFields) >= 1 ) {
-
-                return new Response(200, $this->renderView('login', [
-                    'requiredFields' => $requiredFields
-                ]));
-                
-            } else {
-
-                $_SESSION['mpg']['user_is_logged'] = true;
-                Controller::redirectTo('/');
-
-            }
-
-        } else {
-            return new Response(200, $this->renderView('login'));
-        }
-
-    }
-
-    public function logoutAction() {
+    public function logout() {
 
         $_SESSION['mpg'] = [];
 

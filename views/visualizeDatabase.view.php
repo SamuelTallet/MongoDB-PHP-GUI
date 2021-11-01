@@ -22,14 +22,14 @@
         var MPG_BASE_URL = '<?php echo MPG_BASE_URL; ?>';
     </script>
     
-    <script src="<?php echo MPG_BASE_URL; ?>/static/js/mpg.js"></script>
-    <script src="<?php echo MPG_BASE_URL; ?>/static/js/mpg.database.visualize.js"></script>
+    <script src="<?php echo MPG_BASE_URL; ?>/source/js/_base.js"></script>
+    <script src="<?php echo MPG_BASE_URL; ?>/source/js/visualizeDatabase.js"></script>
 
 </head>
 
 <body>
 
-    <?php require MPG_ABS_PATH . '/views/parts/menu.tpl.php'; ?>
+    <?php require MPG_ABS_PATH . '/views/parts/menu.view.php'; ?>
 
     <div class="container-fluid">
 

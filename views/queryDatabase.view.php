@@ -25,20 +25,20 @@
     <script src="<?php echo MPG_BASE_URL; ?>/static/js/codemirror-show-hint.min.js"></script>
     <script src="<?php echo MPG_BASE_URL; ?>/static/js/codemirror-mpg-hint.js"></script>
     <script src="<?php echo MPG_BASE_URL; ?>/static/js/jsonic.min.js"></script>
-    <script src="<?php echo MPG_BASE_URL; ?>/static/js/jsonview.bundle.mod.js"></script>
-    
+
     <script>
         var MPG_BASE_URL = '<?php echo MPG_BASE_URL; ?>';
     </script>
 
-    <script src="<?php echo MPG_BASE_URL; ?>/static/js/mpg.js"></script>
-    <script src="<?php echo MPG_BASE_URL; ?>/static/js/mpg.database.query.js"></script>
+    <script src="<?php echo MPG_BASE_URL; ?>/source/js/_base.js"></script>
+    <script src="<?php echo MPG_BASE_URL; ?>/source/js/jsonViewModified.js"></script>
+    <script src="<?php echo MPG_BASE_URL; ?>/source/js/queryDatabase.js"></script>
 
 </head>
 
 <body>
 
-    <?php require MPG_ABS_PATH . '/views/parts/menu.tpl.php'; ?>
+    <?php require MPG_ABS_PATH . '/views/parts/menu.view.php'; ?>
 
     <div class="container-fluid">
 
@@ -50,7 +50,7 @@
 
                     <div class="col-md-12">
 
-                        <?php require MPG_ABS_PATH . '/views/parts/databases.tpl.php'; ?>
+                        <?php require MPG_ABS_PATH . '/views/parts/databases.view.php'; ?>
 
                     </div>
                     

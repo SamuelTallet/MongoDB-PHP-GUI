@@ -20,14 +20,14 @@
         var MPG_BASE_URL = '<?php echo MPG_BASE_URL; ?>';
     </script>
 
-    <script src="<?php echo MPG_BASE_URL; ?>/static/js/mpg.js"></script>
-    <script src="<?php echo MPG_BASE_URL; ?>/static/js/mpg.database.users.js"></script>
+    <script src="<?php echo MPG_BASE_URL; ?>/source/js/_base.js"></script>
+    <script src="<?php echo MPG_BASE_URL; ?>/source/js/manageUsers.js"></script>
 
 </head>
 
 <body>
 
-    <?php require MPG_ABS_PATH . '/views/parts/menu.tpl.php'; ?>
+    <?php require MPG_ABS_PATH . '/views/parts/menu.view.php'; ?>
 
     <div class="container-fluid">
 
@@ -39,7 +39,7 @@
 
                     <div class="col-md-12">
 
-                        <?php require MPG_ABS_PATH . '/views/parts/databases.tpl.php'; ?>
+                        <?php require MPG_ABS_PATH . '/views/parts/databases.view.php'; ?>
 
                     </div>
                     

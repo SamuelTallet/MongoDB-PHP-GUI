@@ -7,7 +7,7 @@ use Responses\JsonResponse;
 
 class SQLController extends Controller {
 
-    public function convertToMongoDBQueryAction() {
+    public function convertToMongoDBQuery() {
 
         try {
             $decodedRequestBody = $this->getDecodedRequestBody();

@@ -116,7 +116,7 @@ MPG.helpers.convertSQLToMongoDBQuery = function(sql, successCallback) {
 
     MPG.helpers.doAjaxRequest(
         'POST',
-        MPG_BASE_URL + '/ajaxSQLConvertToMongoDBQuery',
+        MPG_BASE_URL + '/convertSQLToMongoDBQuery',
         successCallback,
         JSON.stringify({ "sql": sql })
     );
@@ -272,7 +272,7 @@ MPG.eventListeners.addCollections = function() {
 
             MPG.helpers.doAjaxRequest(
                 'POST',
-                MPG_BASE_URL + '/ajaxCollectionEnumFields',
+                MPG_BASE_URL + '/enumCollectionFields',
                 function(response) {
 
                     JSON.parse(response).forEach(function(collectionField) {
@@ -354,7 +354,7 @@ MPG.eventListeners.addInsertOne = function() {
         
         MPG.helpers.doAjaxRequest(
             'POST',
-            MPG_BASE_URL + '/ajaxCollectionInsertOne',
+            MPG_BASE_URL + '/insertOneDocument',
             function(response) {
 
                 var outputCode = document.querySelector('#mpg-output-code');
@@ -399,7 +399,7 @@ MPG.eventListeners.addCount = function() {
 
         MPG.helpers.doAjaxRequest(
             'POST',
-            MPG_BASE_URL + '/ajaxCollectionCount',
+            MPG_BASE_URL + '/countDocuments',
             function(response) {
 
                 var outputCode = document.querySelector('#mpg-output-code');
@@ -452,7 +452,7 @@ MPG.eventListeners.addDeleteOne = function() {
         
         MPG.helpers.doAjaxRequest(
             'POST',
-            MPG_BASE_URL + '/ajaxCollectionDeleteOne',
+            MPG_BASE_URL + '/deleteOneDocument',
             function(response) {
 
                 var outputCode = document.querySelector('#mpg-output-code');
@@ -517,7 +517,7 @@ MPG.eventListeners.addUpdate = function() {
 
             MPG.helpers.doAjaxRequest(
                 'POST',
-                MPG_BASE_URL + '/ajaxCollectionUpdateOne',
+                MPG_BASE_URL + '/updateOneDocument',
                 function(response) {
 
                     if ( JSON.parse(response) === 1 ) {
@@ -649,7 +649,7 @@ MPG.eventListeners.addFind = function() {
 
         MPG.helpers.doAjaxRequest(
             'POST',
-            MPG_BASE_URL + '/ajaxCollectionFind',
+            MPG_BASE_URL + '/findDocuments',
             function(response) {
 
                 MPG.cachedOutput = response;
