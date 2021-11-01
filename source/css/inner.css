@@ -203,6 +203,12 @@ body {
 
 }
 
+.vis-network {
+
+    cursor: pointer;
+
+}
+
 .vis-network:focus {
 
     outline: none;

@@ -67,7 +67,7 @@
 
                     <div class="col-md-12">
                         
-                        <div id="mpg-import-notice" class="alert alert-info" role="alert">Use form below to import documents. Max file size: <?php echo $maxFileSize; ?></div>
+                        <div id="mpg-import-notice" class="alert alert-info" role="alert">Imported docs are appended. Max file size: <?php echo $maxFileSize; ?></div>
                         
                         <?php
                         if ( !empty($successMessage) ) :
