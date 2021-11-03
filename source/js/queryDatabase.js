@@ -357,8 +357,15 @@ MPG.eventListeners.addInsertOne = function() {
             MPG_BASE_URL + '/insertOneDocument',
             function(response) {
 
+                MPG.cachedOutput = '';
+
                 var outputCode = document.querySelector('#mpg-output-code');
-                outputCode.innerHTML = 'Inserted: ' + JSON.parse(response);
+                outputCode.innerHTML = '';
+
+                var jsonViewTree = JsonView.createTree(response);
+                JsonView.render(jsonViewTree, outputCode);
+                document.querySelector('.json-key').textContent = 'inserted';
+                JsonView.expandChildren(jsonViewTree);
 
             },
             JSON.stringify(requestBody)
@@ -402,8 +409,15 @@ MPG.eventListeners.addCount = function() {
             MPG_BASE_URL + '/countDocuments',
             function(response) {
 
+                MPG.cachedOutput = '';
+
                 var outputCode = document.querySelector('#mpg-output-code');
-                outputCode.innerHTML = 'Count: ' + JSON.parse(response);
+                outputCode.innerHTML = '';
+
+                var jsonViewTree = JsonView.createTree(response);
+                JsonView.render(jsonViewTree, outputCode);
+                document.querySelector('.json-key').textContent = 'count';
+                JsonView.expandChildren(jsonViewTree);
 
             },
             JSON.stringify(requestBody)
@@ -455,8 +469,15 @@ MPG.eventListeners.addDeleteOne = function() {
             MPG_BASE_URL + '/deleteOneDocument',
             function(response) {
 
+                MPG.cachedOutput = '';
+
                 var outputCode = document.querySelector('#mpg-output-code');
-                outputCode.innerHTML = 'Deleted: ' + JSON.parse(response);
+                outputCode.innerHTML = '';
+
+                var jsonViewTree = JsonView.createTree(response);
+                JsonView.render(jsonViewTree, outputCode);
+                document.querySelector('.json-key').textContent = 'deleted';
+                JsonView.expandChildren(jsonViewTree);
 
             },
             JSON.stringify(requestBody)
@@ -659,7 +680,23 @@ MPG.eventListeners.addFind = function() {
 
                 var jsonViewTree = JsonView.createTree(response);
                 JsonView.render(jsonViewTree, outputCode);
-                JsonView.expandChildren(jsonViewTree);
+                document.querySelector('.json-key').textContent = 'documents';
+
+                var foundDocuments = JSON.parse(response).length;
+
+                if ( foundDocuments === 0 ) {
+
+                    MPG.cachedOutput = '';
+                    document.querySelector('.json-value').textContent = 'none';
+
+                } else if ( foundDocuments <= 100 ) {
+
+                    JsonView.expandChildren(jsonViewTree);
+
+                } else {
+                    window.alert('To preserve performances, output docs were collapsed.');
+                }
+
                 MPG.documentId = '';
 
                 MPG.eventListeners.addUpdate();
