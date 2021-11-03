@@ -88,15 +88,15 @@
                             Insert one
                         </button>
 
-                        <button id="mpg-find-button" class="btn btn-success float-right">
-                            Find 
+                        <button id="mpg-find-button" class="btn btn-success float-right" title="Ctrl + Enter">
+                            Find
                         </button>
 
                         <button id="mpg-delete-one-button" class="btn btn-danger float-right">
                             Delete one
                         </button>
 
-                        <button id="mpg-count-button" class="btn btn-info float-right">
+                        <button id="mpg-count-button" class="btn btn-info float-right" title="Ctrl + *">
                             Count
                         </button>
 

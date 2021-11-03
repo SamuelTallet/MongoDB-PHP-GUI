@@ -719,11 +719,28 @@ MPG.eventListeners.addKeyShortcuts = function() {
     document.addEventListener('keydown', function(event) {
 
         if ( event.ctrlKey ) {
-            if ( event.code === 'Space' ) {
-                MPG.codeMirror.showHint();
-            } else if ( event.key === 'Enter' ) {
-                document.querySelector('#mpg-find-button').click();
+
+            switch (event.key) {
+
+                case ' ':
+                case 'Spacebar': // For old browsers.
+                    MPG.codeMirror.showHint();
+                    break;
+
+                case 'Enter':
+                    var findButton = document.querySelector('#mpg-find-button');
+                    findButton.focus();
+                    findButton.click();
+                    break;
+
+                case '*':
+                    var countButton = document.querySelector('#mpg-count-button');
+                    countButton.focus();
+                    countButton.click();
+                    break;
+
             }
+
         }
 
     });
