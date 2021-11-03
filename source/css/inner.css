@@ -1,21 +1,20 @@
 :root {
 
+    --mpg-background-color-darker: rgb(51, 51, 51);
     --mpg-background-color: rgb(64, 64, 64);
     --mpg-brand-color-darker: hsl(93, 71%, 40%);
     --mpg-brand-color-lighter: hsl(90, 67%, 48%);
     --mpg-brand-color: hsl(90, 67%, 43%);
-    --mpg-code-background-color: rgb(51, 51, 51);
-    --mpg-code-padding: 10px;
     --mpg-danger-color: hsl(354, 70%, 54%);
     --mpg-info-color: hsl(188, 78%, 41%);
     --mpg-json-boolean-color: hsl(351, 94%, 83%);
     --mpg-json-key-color: hsl(174, 68%, 56%);
     --mpg-json-number-color: hsl(120, 67%, 75%);
     --mpg-json-string-color: hsl(39, 84%, 50%);
-    --mpg-primary-color-darker: hsl(252, 53%, 50%);
+    --mpg-primary-color-darker: hsl(252, 53%, 52%);
     --mpg-primary-color: hsl(252, 53%, 55%);
-    --mpg-secondary-color: hsl(45, 100%, 51%);
     --mpg-secondary-color-darker: hsl(45, 100%, 45%);
+    --mpg-secondary-color: hsl(45, 100%, 51%);
     --mpg-text-color: white;
     
 }
@@ -36,8 +35,8 @@ body {
 
 .navbar {
 
+    background-color: var(--mpg-brand-color-darker);
     margin-bottom: 10px;
-    padding-top: 0;
 
 }
 
@@ -59,33 +58,19 @@ body {
 
 }
 
-.bg-dark {
-
-    background-color: var(--mpg-brand-color-darker) !important;
-
-}
-
 .navbar-brand {
 
     font-family: Ubuntu, ubuntu-medium;
+    position: relative;
+    left: 0;
+    top: -1px;
 
 }
 
 .navbar-brand, .navbar-nav .nav-link {
 
-    position: relative;
-    left: 0;
-    top: 4px;
-
-    padding: 5px;
-
     color: white !important;
-
-}
-
-.navbar.menu-expanded .navbar-brand {
-
-    display: none;
+    padding: 5px;
 
 }
 
@@ -97,23 +82,15 @@ body {
 
 .navbar.menu-expanded .navbar-nav {
 
+    -ms-flex-direction: column;
     display: -ms-flexbox;
     display: flex;
-    -ms-flex-direction: column;
     flex-direction: column;
-
     width: 100%;
-    margin-top: 35px;
 
 }
 
 @media screen and (min-width: 768px) {
-
-    .navbar-brand, .navbar-nav .nav-link {
-
-        /* FIXME */
-
-    }
 
     .navbar-nav {
 
@@ -142,7 +119,7 @@ body {
     display: block;
     position: absolute;
     right: 10px;
-    top: 14px;
+    top: 17px;
 
     color: var(--mpg-text-color);
 
@@ -230,9 +207,9 @@ button, input {
 .CodeMirror,
 .json-container {
 
-    background-color: var(--mpg-code-background-color);
+    background-color: var(--mpg-background-color-darker);
     font-family: Consolas, monospace;
-    padding: var(--mpg-code-padding);
+    padding: 10px;
 
 }
 
@@ -498,7 +475,7 @@ li.CodeMirror-hint-active {
 #mpg-users-table thead th,
 #mpg-indexes-table thead th {
 
-    background-color: var(--mpg-code-background-color);
+    background-color: var(--mpg-background-color-darker);
     border: none;
     color: var(--mpg-text-color);
 
