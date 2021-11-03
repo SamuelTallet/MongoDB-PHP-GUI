@@ -39,13 +39,14 @@ class DocumentsController extends Controller {
 
                 try {
 
-                    $importedDocumentsCount = $this->importFromFile(
+                    $importedDocumentsCount = self::importFromFile(
                         $_FILES['import']['tmp_name'],
                         $_POST['database_name'],
                         $_POST['collection_name']
                     );
 
-                    $successMessage = $importedDocumentsCount . ' document(s) imported.';
+                    $successMessage = $importedDocumentsCount . ' document(s) imported in '; 
+                    $successMessage .= $_POST['collection_name'] . '.';
 
                 } catch (\Throwable $th) {
                     $errorMessage = $th->getMessage();
@@ -65,7 +66,7 @@ class DocumentsController extends Controller {
     /**
      * @see https://docs.mongodb.com/php-library/v1.6/reference/method/MongoDBCollection-insertMany/
      */
-    private function importFromFile($documentsFilename, $databaseName, $collectionName) : int {
+    private static function importFromFile($documentsFilename, $databaseName, $collectionName) : int {
 
         $documentsFileContents = @file_get_contents($documentsFilename);
 
@@ -84,9 +85,8 @@ class DocumentsController extends Controller {
 
         foreach ($documents as &$document) {
 
-            if ( isset($document['_id'])
-                && preg_match(MongoDB::OBJECT_ID_REGEX, $document['_id']) ) {
-                    $document['_id'] = new \MongoDB\BSON\ObjectId($document['_id']);
+            if ( isset($document['_id']) && preg_match(MongoDB::OBJECT_ID_REGEX, $document['_id']) ) {
+                $document['_id'] = new \MongoDB\BSON\ObjectId($document['_id']);
             }
 
             array_walk_recursive($document, function(&$documentValue) {
@@ -169,6 +169,12 @@ class DocumentsController extends Controller {
 
         try {
 
+            foreach ($decodedRequestBody['filter'] as &$filterValue) {
+                if ( preg_match(MongoDB::REGEX, $filterValue) ) {
+                    $filterValue = MongoDB::createRegexFromString($filterValue);
+                }
+            }
+
             $collection = MongoDB::getClient()->selectCollection(
                 $decodedRequestBody['databaseName'], $decodedRequestBody['collectionName']
             );
@@ -201,6 +207,12 @@ class DocumentsController extends Controller {
         }
 
         try {
+
+            foreach ($decodedRequestBody['filter'] as &$filterValue) {
+                if ( preg_match(MongoDB::REGEX, $filterValue) ) {
+                    $filterValue = MongoDB::createRegexFromString($filterValue);
+                }
+            }
 
             $collection = MongoDB::getClient()->selectCollection(
                 $decodedRequestBody['databaseName'], $decodedRequestBody['collectionName']
@@ -235,6 +247,12 @@ class DocumentsController extends Controller {
 
         try {
 
+            foreach ($decodedRequestBody['filter'] as &$filterValue) {
+                if ( preg_match(MongoDB::REGEX, $filterValue) ) {
+                    $filterValue = MongoDB::createRegexFromString($filterValue);
+                }
+            }
+
             $collection = MongoDB::getClient()->selectCollection(
                 $decodedRequestBody['databaseName'], $decodedRequestBody['collectionName']
             );
@@ -251,9 +269,8 @@ class DocumentsController extends Controller {
 
             $document = $document->jsonSerialize();
 
-            if ( property_exists($document, '_id')
-                && is_a($document->_id, '\MongoDB\BSON\ObjectId') ) {
-                    $document->_id = (string) $document->_id;
+            if ( property_exists($document, '_id') && is_a($document->_id, '\MongoDB\BSON\ObjectId') ) {
+                $document->_id = (string) $document->_id;
             }
 
             self::formatRecursively($document);

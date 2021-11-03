@@ -3,6 +3,7 @@
 namespace Helpers;
 
 use MongoDB\Client;
+use \MongoDB\BSON\Regex;
 
 class MongoDBHelper {
 
@@ -30,15 +31,23 @@ class MongoDBHelper {
     public const ISO_DATE_TIME_REGEX = '/\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\d:[0-5]\d|Z)/';
 
     /**
+     * Regular expression for a regular expression.
+     * 
+     * @var string
+     */
+    public const REGEX = '#^/(.+)/([igmsuy]*)$#';
+
+    /**
      * MongoDB client singleton instance.
      * 
-     * @var MongoDB\Client|null
+     * @var null|MongoDB\Client
      */
     private static $client;
 
     /**
      * Creates a MongoDB client.
      * 
+     * @throws \Exception
      * @return MongoDB\Client
      */
     private static function createClient() : Client {
@@ -91,6 +100,27 @@ class MongoDBHelper {
         }
 
         return self::$client;
+
+    }
+
+    /**
+     * Creates a MongoDB Regex from a string.
+     * 
+     * @throws \Exception
+     * @return \MongoDB\BSON\Regex
+     */
+    public static function createRegexFromString(string $regexAsString) : Regex {
+
+        $regexParts = [];
+
+        if ( !preg_match(self::REGEX, $regexAsString, $regexParts) ) {
+            throw new \Exception($regexAsString . ' is not a regular expression.');
+        }
+
+        $regexPattern = $regexParts[1];
+        $regexFlags = $regexParts[2];
+
+        return new Regex($regexPattern, $regexFlags);
 
     }
 
