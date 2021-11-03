@@ -1,4 +1,4 @@
-<nav class="navbar sticky-top navbar-dark bg-dark">
+<nav class="navbar sticky-top">
 
     <a class="navbar-brand" href="<?php echo MPG_BASE_URL; ?>/">
         <img class="navbar-brand-icon" src="<?php echo MPG_BASE_URL; ?>/assets/images/mpg-icon.svg" width="24" height="24" />
