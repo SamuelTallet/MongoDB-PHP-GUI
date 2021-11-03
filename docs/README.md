@@ -1,9 +1,9 @@
 # Free MongoDB GUI powered by PHP
 
 Visually administrate your MongoDB database. Create, read, update & delete your documents.<br>
-Query your Mongo database with SELECT SQL statements. You can also create & drop indexes.<br>
+Query your MongoDB database with a [relax JSON syntax](#relaxed-json), regular expressions & SQL statements.<br>
 Autocompletion is available for collection fields, MongoDB & SQL keywords via [key shortcuts](#key-shortcuts).<br>
-Additional features: Export documents to JSON. Import documents from JSON. Manage users.
+Export documents to JSON. Import documents from JSON. Manage indexes. Manage users, etc.
 
 ## Screenshots
 
@@ -30,9 +30,47 @@ Additional features: Export documents to JSON. Import documents from JSON. Manag
 
 ## Usage
 
+### Query Syntax
+
+#### Relaxed JSON
+
+MongoDB PHP GUI supports a relaxed JSON syntax. In practice, this query:
+
+```js
+city: New York
+```
+
+Will produce same result that:
+
+```js
+{ "city": "New York" }
+```
+
+#### Regular Expressions
+
+Imagine you want to find all the US cities starting with "San An". This query:
+
+```js
+city: /^San An/
+```
+
+Will output:
+- San Antonio (FL)
+- San Angelo (TX)
+- ...
+
+#### SQL Statements
+
+If Java JDK is installed, you can query MongoDB with SQL statements such as:
+
+```sql
+SELECT * FROM Cities WHERE state = "CA"
+```
+
 ### Key Shortcuts
 
 <kbd>Ctrl + Space</kbd> Autocomplete the query<br>
+<kbd>Ctrl + *</kbd> Count doc(s) matching the query<br>
 <kbd>Ctrl + Enter</kbd> Find doc(s) matching the query
 
 ## Credits
