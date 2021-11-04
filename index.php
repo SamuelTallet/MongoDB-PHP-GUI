@@ -18,7 +18,7 @@ define('MPG_APP_NAME', 'MongoDB PHP GUI');
  * 
  * @var string
  */
-define('MPG_APP_VERSION', '1.2.5');
+define('MPG_APP_VERSION', '1.2.6');
 
 /**
  * Development mode?
@@ -80,8 +80,10 @@ $application = new Application($router);
 $serverRequest = ServerRequestFactory::createFromGlobals();
 
 try {
+
     $response = $application->dispatch($serverRequest);
     $application->send($response);
+    
 } catch (NotFoundHttpException $e) {
     die('Route not found. Try to append a slash to URL.');
 }
