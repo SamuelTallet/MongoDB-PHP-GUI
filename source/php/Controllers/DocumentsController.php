@@ -170,7 +170,7 @@ class DocumentsController extends Controller {
         try {
 
             foreach ($decodedRequestBody['filter'] as &$filterValue) {
-                if ( preg_match(MongoDB::REGEX, $filterValue) ) {
+                if ( is_string($filterValue) && preg_match(MongoDB::REGEX, $filterValue) ) {
                     $filterValue = MongoDB::createRegexFromString($filterValue);
                 }
             }
@@ -209,7 +209,7 @@ class DocumentsController extends Controller {
         try {
 
             foreach ($decodedRequestBody['filter'] as &$filterValue) {
-                if ( preg_match(MongoDB::REGEX, $filterValue) ) {
+                if ( is_string($filterValue) && preg_match(MongoDB::REGEX, $filterValue) ) {
                     $filterValue = MongoDB::createRegexFromString($filterValue);
                 }
             }
@@ -248,7 +248,7 @@ class DocumentsController extends Controller {
         try {
 
             foreach ($decodedRequestBody['filter'] as &$filterValue) {
-                if ( preg_match(MongoDB::REGEX, $filterValue) ) {
+                if ( is_string($filterValue) && preg_match(MongoDB::REGEX, $filterValue) ) {
                     $filterValue = MongoDB::createRegexFromString($filterValue);
                 }
             }
