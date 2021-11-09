@@ -7,20 +7,22 @@
 
     <title><?php echo MPG_APP_NAME; ?></title>
 
-    <link rel="icon" href="<?php echo MPG_BASE_URL; ?>/assets/images/mpg-icon.svg">
-    <link rel="mask-icon" href="<?php echo MPG_BASE_URL; ?>/assets/images/mpg-safari-icon.svg" color="#6eb825">
-    <link rel="apple-touch-icon" href="<?php echo MPG_BASE_URL; ?>/assets/images/mpg-ios-icon.png">
+    <link rel="icon" href="assets/images/mpg-icon.svg">
+    <link rel="mask-icon" href="assets/images/mpg-safari-icon.svg" color="#6eb825">
+    <link rel="apple-touch-icon" href="assets/images/mpg-ios-icon.png">
 
-    <link rel="stylesheet" href="<?php echo MPG_BASE_URL; ?>/assets/css/ubuntu-font.css">
-    <link rel="stylesheet" href="<?php echo MPG_BASE_URL; ?>/assets/css/fontawesome-custom.css">
-    <link rel="stylesheet" href="<?php echo MPG_BASE_URL; ?>/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<?php echo MPG_BASE_URL; ?>/source/css/login.css">
+    <link rel="stylesheet" href="assets/css/ubuntu-font.css">
+    <link rel="stylesheet" href="assets/css/fontawesome-custom.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="source/css/login.css">
 
-    <script src="<?php echo MPG_BASE_URL; ?>/source/js/login.js"></script>
+    <script type="module" src="source/js/login.mjs"></script>
 
 </head>
 
 <body>
+
+    <div id="mpg-background"></div>
 
     <div class="container h-100">
 
@@ -43,7 +45,7 @@
                 <div class="card mpg-card-front">
 
                     <div class="card-header text-center text-nowrap">
-                        <img src="<?php echo MPG_BASE_URL; ?>/assets/images/mpg-icon.svg" width="32" height="32" />
+                        <img src="assets/images/mpg-icon.svg" width="32" height="32" />
                         <h3 class="mpg-card-header-title d-inline align-middle"><?php echo MPG_APP_NAME; ?></h3>
                     </div>
                     
@@ -70,7 +72,7 @@
                 <div class="card mpg-card-back">
 
                     <div class="card-header text-center text-nowrap">
-                        <img src="<?php echo MPG_BASE_URL; ?>/assets/images/mpg-icon.svg" width="32" height="32" />
+                        <img src="assets/images/mpg-icon.svg" width="32" height="32" />
                         <h3 class="mpg-card-header-title d-inline align-middle"><?php echo MPG_APP_NAME; ?></h3>
                     </div>
 
