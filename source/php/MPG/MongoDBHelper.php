@@ -1,10 +1,13 @@
 <?php
 
-namespace Helpers;
+namespace MPG;
 
 use MongoDB\Client;
 use \MongoDB\BSON\Regex;
 
+/**
+ * @deprecated
+ */
 class MongoDBHelper {
 
     /**

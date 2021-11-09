@@ -1,21 +1,16 @@
 <?php
 
-namespace Controllers;
-
-use Capsule\Response;
-use Normalizers\ErrorNormalizer;
-use Responses\JsonResponse;
-use Helpers\MongoDBHelper as MongoDB;
+namespace MPG;
 
 class UsersController extends Controller {
 
-    public function manage() : Response {
+    public function manage() : ViewResponse {
 
         AuthController::ensureUserIsLogged();
         
-        return new Response(200, $this->renderView('manageUsers', [
+        return new ViewResponse(200, 'manageUsers', [
             'databaseNames' => DatabasesController::getDatabaseNames()
-        ]));
+        ]);
 
     }
 
@@ -32,7 +27,7 @@ class UsersController extends Controller {
 
         try {
 
-            $database = MongoDB::getClient()->selectDatabase(
+            $database = MongoDBHelper::getClient()->selectDatabase(
                 $decodedRequestBody['databaseName']
             );
 
@@ -64,7 +59,7 @@ class UsersController extends Controller {
 
         try {
 
-            $database = MongoDB::getClient()->selectDatabase(
+            $database = MongoDBHelper::getClient()->selectDatabase(
                 $decodedRequestBody['databaseName']
             );
 
@@ -92,7 +87,7 @@ class UsersController extends Controller {
 
         try {
 
-            $database = MongoDB::getClient()->selectDatabase(
+            $database = MongoDBHelper::getClient()->selectDatabase(
                 $decodedRequestBody['databaseName']
             );
 

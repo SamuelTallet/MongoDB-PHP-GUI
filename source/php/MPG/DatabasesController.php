@@ -1,11 +1,6 @@
 <?php
 
-namespace Controllers;
-
-use Helpers\MongoDBHelper as MongoDB;
-use Normalizers\ErrorNormalizer;
-use Capsule\Response;
-use Responses\JsonResponse;
+namespace MPG;
 
 class DatabasesController extends Controller {
 
@@ -18,7 +13,7 @@ class DatabasesController extends Controller {
         } else {
 
             try {
-                foreach (MongoDB::getClient()->listDatabases() as $databaseInfo) {
+                foreach (MongoDBHelper::getClient()->listDatabases() as $databaseInfo) {
                     $databaseNames[] = $databaseInfo['name'];
                 }
             } catch (\Throwable $th) {
@@ -33,11 +28,11 @@ class DatabasesController extends Controller {
 
     }
 
-    public function visualize() : Response {
+    public function visualize() : ViewResponse {
 
         AuthController::ensureUserIsLogged();
         
-        return new Response(200, $this->renderView('visualizeDatabase'));
+        return new ViewResponse(200, 'visualizeDatabase');
 
     }
 
@@ -82,7 +77,7 @@ class DatabasesController extends Controller {
                     'size' => 24
                 ];
 
-                $database = MongoDB::getClient()->selectDatabase($databaseName);
+                $database = MongoDBHelper::getClient()->selectDatabase($databaseName);
     
                 foreach ($database->listCollections() as $collectionInfo) {
 
@@ -132,13 +127,13 @@ class DatabasesController extends Controller {
 
     }
 
-    public function query() : Response {
+    public function query() : ViewResponse {
 
         AuthController::ensureUserIsLogged();
         
-        return new Response(200, $this->renderView('queryDatabase', [
+        return new ViewResponse(200, 'queryDatabase', [
             'databaseNames' => self::getDatabaseNames()
-        ]));
+        ]);
 
     }
 

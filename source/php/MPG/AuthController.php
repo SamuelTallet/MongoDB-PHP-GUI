@@ -1,9 +1,6 @@
 <?php
 
-namespace Controllers;
-
-use Helpers\MongoDBHelper as MongoDB;
-use Capsule\Response;
+namespace MPG;
 
 class AuthController extends Controller {
 
@@ -11,13 +8,13 @@ class AuthController extends Controller {
 
         if ( !isset($_SESSION['mpg']['user_is_logged']) ) {
 
-            Controller::redirectTo('/login#');
+            Redirect::to('/login#');
 
         }
 
     }
 
-    public function login() : Response {
+    public function login() : ViewResponse {
 
         if ( isset($_POST['uri']) || isset($_POST['host']) ) {
 
@@ -25,19 +22,19 @@ class AuthController extends Controller {
             
             if ( count($requiredFields) >= 1 ) {
 
-                return new Response(200, $this->renderView('login', [
+                return new ViewResponse(200, 'login', [
                     'requiredFields' => $requiredFields
-                ]));
+                ]);
                 
             } else {
 
                 $_SESSION['mpg']['user_is_logged'] = true;
-                Controller::redirectTo('/');
+                Redirect::to('/');
 
             }
 
         } else {
-            return new Response(200, $this->renderView('login'));
+            return new ViewResponse(200, 'login');
         }
 
     }
@@ -49,7 +46,7 @@ class AuthController extends Controller {
 
         if ( isset($_POST['uri']) ) {
 
-            if ( preg_match(MongoDB::URI_REGEX, $_POST['uri']) ) {
+            if ( preg_match(MongoDBHelper::URI_REGEX, $_POST['uri']) ) {
                 $_SESSION['mpg']['mongodb_uri'] = $_POST['uri'];
             } else {
                 $requiredFields[] = 'URI';
@@ -91,7 +88,7 @@ class AuthController extends Controller {
 
         $_SESSION['mpg'] = [];
 
-        Controller::redirectTo('/login');
+        Redirect::to('/login');
 
     }
 

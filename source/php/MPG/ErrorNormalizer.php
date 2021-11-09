@@ -1,6 +1,6 @@
 <?php
 
-namespace Normalizers;
+namespace MPG;
 
 class ErrorNormalizer {
 

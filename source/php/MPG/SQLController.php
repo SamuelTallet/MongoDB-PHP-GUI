@@ -1,9 +1,6 @@
 <?php
 
-namespace Controllers;
-
-use Normalizers\ErrorNormalizer;
-use Responses\JsonResponse;
+namespace MPG;
 
 class SQLController extends Controller {
 
@@ -21,7 +18,7 @@ class SQLController extends Controller {
         $decodedRequestBody['sql'] = str_replace('"', '\"', $decodedRequestBody['sql']);
 
         $jarPath = '"' . MPG_ABS_PATH 
-            . '/addons/sql-to-mongo-db-query-converter-1.13-standalone.jar"';
+            . '/extras/programs/sql-to-mongo-db-query-converter-1.13-standalone.jar"';
         $jarArgs = '--sql "' . $decodedRequestBody['sql'] . '"';
         
         $command = 'java -jar ' . $jarPath . ' ' . $jarArgs;

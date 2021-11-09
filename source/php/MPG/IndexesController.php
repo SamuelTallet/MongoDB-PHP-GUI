@@ -1,21 +1,16 @@
 <?php
 
-namespace Controllers;
-
-use Capsule\Response;
-use Helpers\MongoDBHelper as MongoDB;
-use Responses\JsonResponse;
-use Normalizers\ErrorNormalizer;
+namespace MPG;
 
 class IndexesController extends Controller {
 
-    public function manage() : Response {
+    public function manage() : ViewResponse {
 
         AuthController::ensureUserIsLogged();
 
-        return new Response(200, $this->renderView('manageIndexes', [
+        return new ViewResponse(200, 'manageIndexes', [
             'databaseNames' => DatabasesController::getDatabaseNames()
-        ]));
+        ]);
 
     }
 
@@ -32,7 +27,7 @@ class IndexesController extends Controller {
 
         try {
 
-            $collection = MongoDB::getClient()->selectCollection(
+            $collection = MongoDBHelper::getClient()->selectCollection(
                 $decodedRequestBody['databaseName'], $decodedRequestBody['collectionName']
             );
 
@@ -63,7 +58,7 @@ class IndexesController extends Controller {
 
         try {
 
-            $collection = MongoDB::getClient()->selectCollection(
+            $collection = MongoDBHelper::getClient()->selectCollection(
                 $decodedRequestBody['databaseName'], $decodedRequestBody['collectionName']
             );
 
@@ -96,7 +91,7 @@ class IndexesController extends Controller {
 
         try {
 
-            $collection = MongoDB::getClient()->selectCollection(
+            $collection = MongoDBHelper::getClient()->selectCollection(
                 $decodedRequestBody['databaseName'], $decodedRequestBody['collectionName']
             );
 

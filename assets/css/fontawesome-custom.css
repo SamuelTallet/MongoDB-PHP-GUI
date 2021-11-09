@@ -50,6 +50,7 @@
     content: "\e905";
 }
 
+/* Deprecated */
 .fa-globe:before {
     content: "\e906";
 }

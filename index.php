@@ -24,6 +24,7 @@ define('MPG_APP_VERSION', '1.2.6');
  * Development mode?
  * 
  * @var boolean
+ * @deprecated
  */
 define('MPG_DEV_MODE', false);
 
@@ -73,8 +74,14 @@ define('MPG_SERVER_PATH', $serverPath);
  */
 define('MPG_BASE_URL', $baseUrl);
 
-require MPG_ABS_PATH . '/autoload.php';
-require MPG_ABS_PATH . '/routes.php';
+if ( !file_exists($autoload_file = MPG_ABS_PATH . '/vendor/autoload.php') ) {
+    die('Run `composer install` to complete ' . MPG_APP_NAME . ' installation.');
+}
+
+$loader = require_once $autoload_file;
+$loader->add('MPG', MPG_ABS_PATH . '/source/php');
+
+$router = require MPG_ABS_PATH . '/routes.php';
 
 $application = new Application($router);
 $serverRequest = ServerRequestFactory::createFromGlobals();

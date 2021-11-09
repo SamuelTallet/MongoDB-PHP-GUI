@@ -1,11 +1,6 @@
 <?php
 
-namespace Controllers;
-
-use Capsule\Response;
-use Responses\JsonResponse;
-use Normalizers\ErrorNormalizer;
-use Helpers\MongoDBHelper as MongoDB;
+namespace MPG;
 
 class DocumentsController extends Controller {
 
@@ -27,7 +22,7 @@ class DocumentsController extends Controller {
 
     }
 
-    public function import() : Response {
+    public function import() : ViewResponse {
 
         AuthController::ensureUserIsLogged();
 
@@ -54,12 +49,12 @@ class DocumentsController extends Controller {
 
         }
 
-        return new Response(200, $this->renderView('importDocuments', [
+        return new ViewResponse(200, 'importDocuments', [
             'databaseNames' => DatabasesController::getDatabaseNames(),
             'maxFileSize' => ini_get('upload_max_filesize'),
             'successMessage' => $successMessage,
             'errorMessage' => $errorMessage
-        ]));
+        ]);
 
     }
 
@@ -85,13 +80,13 @@ class DocumentsController extends Controller {
 
         foreach ($documents as &$document) {
 
-            if ( isset($document['_id']) && preg_match(MongoDB::OBJECT_ID_REGEX, $document['_id']) ) {
+            if ( isset($document['_id']) && preg_match(MongoDBHelper::OBJECT_ID_REGEX, $document['_id']) ) {
                 $document['_id'] = new \MongoDB\BSON\ObjectId($document['_id']);
             }
 
             array_walk_recursive($document, function(&$documentValue) {
 
-                if ( preg_match(MongoDB::ISO_DATE_TIME_REGEX, $documentValue) ) {
+                if ( preg_match(MongoDBHelper::ISO_DATE_TIME_REGEX, $documentValue) ) {
                     $documentValue = new \MongoDB\BSON\UTCDateTime(new \DateTime($documentValue));
                 }
     
@@ -99,7 +94,7 @@ class DocumentsController extends Controller {
 
         }
 
-        $collection = MongoDB::getClient()->selectCollection(
+        $collection = MongoDBHelper::getClient()->selectCollection(
             $databaseName, $collectionName
         );
 
@@ -121,14 +116,14 @@ class DocumentsController extends Controller {
         }
 
         if ( isset($decodedRequestBody['document']['_id'])
-            && preg_match(MongoDB::OBJECT_ID_REGEX, $decodedRequestBody['document']['_id']) ) {
+            && preg_match(MongoDBHelper::OBJECT_ID_REGEX, $decodedRequestBody['document']['_id']) ) {
                 $decodedRequestBody['document']['_id'] =
                     new \MongoDB\BSON\ObjectId($decodedRequestBody['document']['_id']);
         }
 
         array_walk_recursive($decodedRequestBody['document'], function(&$documentValue) {
 
-            if ( preg_match(MongoDB::ISO_DATE_TIME_REGEX, $documentValue) ) {
+            if ( preg_match(MongoDBHelper::ISO_DATE_TIME_REGEX, $documentValue) ) {
                 $documentValue = new \MongoDB\BSON\UTCDateTime(new \DateTime($documentValue));
             }
 
@@ -136,7 +131,7 @@ class DocumentsController extends Controller {
 
         try {
 
-            $collection = MongoDB::getClient()->selectCollection(
+            $collection = MongoDBHelper::getClient()->selectCollection(
                 $decodedRequestBody['databaseName'], $decodedRequestBody['collectionName']
             );
 
@@ -162,7 +157,7 @@ class DocumentsController extends Controller {
         }
 
         if ( isset($decodedRequestBody['filter']['_id'])
-            && preg_match(MongoDB::OBJECT_ID_REGEX, $decodedRequestBody['filter']['_id']) ) {
+            && preg_match(MongoDBHelper::OBJECT_ID_REGEX, $decodedRequestBody['filter']['_id']) ) {
                 $decodedRequestBody['filter']['_id'] =
                     new \MongoDB\BSON\ObjectId($decodedRequestBody['filter']['_id']);
         }
@@ -170,12 +165,12 @@ class DocumentsController extends Controller {
         try {
 
             foreach ($decodedRequestBody['filter'] as &$filterValue) {
-                if ( is_string($filterValue) && preg_match(MongoDB::REGEX, $filterValue) ) {
-                    $filterValue = MongoDB::createRegexFromString($filterValue);
+                if ( is_string($filterValue) && preg_match(MongoDBHelper::REGEX, $filterValue) ) {
+                    $filterValue = MongoDBHelper::createRegexFromString($filterValue);
                 }
             }
 
-            $collection = MongoDB::getClient()->selectCollection(
+            $collection = MongoDBHelper::getClient()->selectCollection(
                 $decodedRequestBody['databaseName'], $decodedRequestBody['collectionName']
             );
 
@@ -201,7 +196,7 @@ class DocumentsController extends Controller {
         }
 
         if ( isset($decodedRequestBody['filter']['_id'])
-            && preg_match(MongoDB::OBJECT_ID_REGEX, $decodedRequestBody['filter']['_id']) ) {
+            && preg_match(MongoDBHelper::OBJECT_ID_REGEX, $decodedRequestBody['filter']['_id']) ) {
                 $decodedRequestBody['filter']['_id'] =
                     new \MongoDB\BSON\ObjectId($decodedRequestBody['filter']['_id']);
         }
@@ -209,12 +204,12 @@ class DocumentsController extends Controller {
         try {
 
             foreach ($decodedRequestBody['filter'] as &$filterValue) {
-                if ( is_string($filterValue) && preg_match(MongoDB::REGEX, $filterValue) ) {
-                    $filterValue = MongoDB::createRegexFromString($filterValue);
+                if ( is_string($filterValue) && preg_match(MongoDBHelper::REGEX, $filterValue) ) {
+                    $filterValue = MongoDBHelper::createRegexFromString($filterValue);
                 }
             }
 
-            $collection = MongoDB::getClient()->selectCollection(
+            $collection = MongoDBHelper::getClient()->selectCollection(
                 $decodedRequestBody['databaseName'], $decodedRequestBody['collectionName']
             );
 
@@ -240,7 +235,7 @@ class DocumentsController extends Controller {
         }
 
         if ( isset($decodedRequestBody['filter']['_id'])
-            && preg_match(MongoDB::OBJECT_ID_REGEX, $decodedRequestBody['filter']['_id']) ) {
+            && preg_match(MongoDBHelper::OBJECT_ID_REGEX, $decodedRequestBody['filter']['_id']) ) {
                 $decodedRequestBody['filter']['_id'] =
                     new \MongoDB\BSON\ObjectId($decodedRequestBody['filter']['_id']);
         }
@@ -248,12 +243,12 @@ class DocumentsController extends Controller {
         try {
 
             foreach ($decodedRequestBody['filter'] as &$filterValue) {
-                if ( is_string($filterValue) && preg_match(MongoDB::REGEX, $filterValue) ) {
-                    $filterValue = MongoDB::createRegexFromString($filterValue);
+                if ( is_string($filterValue) && preg_match(MongoDBHelper::REGEX, $filterValue) ) {
+                    $filterValue = MongoDBHelper::createRegexFromString($filterValue);
                 }
             }
 
-            $collection = MongoDB::getClient()->selectCollection(
+            $collection = MongoDBHelper::getClient()->selectCollection(
                 $decodedRequestBody['databaseName'], $decodedRequestBody['collectionName']
             );
 
@@ -293,20 +288,20 @@ class DocumentsController extends Controller {
         }
 
         if ( isset($decodedRequestBody['filter']['_id'])
-            && preg_match(MongoDB::OBJECT_ID_REGEX, $decodedRequestBody['filter']['_id']) ) {
+            && preg_match(MongoDBHelper::OBJECT_ID_REGEX, $decodedRequestBody['filter']['_id']) ) {
                 $decodedRequestBody['filter']['_id'] =
                     new \MongoDB\BSON\ObjectId($decodedRequestBody['filter']['_id']);
         }
 
         foreach ($decodedRequestBody['update']['$set'] as &$updateValue) {
-            if ( preg_match(MongoDB::ISO_DATE_TIME_REGEX, $updateValue) ) {
+            if ( preg_match(MongoDBHelper::ISO_DATE_TIME_REGEX, $updateValue) ) {
                 $updateValue = new \MongoDB\BSON\UTCDateTime(new \DateTime($updateValue));
             }
         }
 
         try {
 
-            $collection = MongoDB::getClient()->selectCollection(
+            $collection = MongoDBHelper::getClient()->selectCollection(
                 $decodedRequestBody['databaseName'], $decodedRequestBody['collectionName']
             );
 

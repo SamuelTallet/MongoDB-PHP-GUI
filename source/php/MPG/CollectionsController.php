@@ -1,21 +1,16 @@
 <?php
 
-namespace Controllers;
-
-use Capsule\Response;
-use Responses\JsonResponse;
-use Helpers\MongoDBHelper as MongoDB;
-use Normalizers\ErrorNormalizer;
+namespace MPG;
 
 class CollectionsController extends Controller {
 
-    public function manage() : Response {
+    public function manage() : ViewResponse {
 
         AuthController::ensureUserIsLogged();
         
-        return new Response(200, $this->renderView('manageCollections', [
+        return new ViewResponse(200, 'manageCollections', [
             'databaseNames' => DatabasesController::getDatabaseNames()
-        ]));
+        ]);
 
     }
 
@@ -32,7 +27,7 @@ class CollectionsController extends Controller {
 
         try {
 
-            $database = MongoDB::getClient()->selectDatabase(
+            $database = MongoDBHelper::getClient()->selectDatabase(
                 $decodedRequestBody['databaseName']
             );
 
@@ -65,7 +60,7 @@ class CollectionsController extends Controller {
 
         try {
 
-            $database = MongoDB::getClient()->selectDatabase(
+            $database = MongoDBHelper::getClient()->selectDatabase(
                 $decodedRequestBody['databaseName']
             );
 
@@ -93,7 +88,7 @@ class CollectionsController extends Controller {
 
         try {
 
-            $database = MongoDB::getClient()->selectDatabase('admin');
+            $database = MongoDBHelper::getClient()->selectDatabase('admin');
 
             // TODO: Check command result?
             $database->command([
@@ -124,7 +119,7 @@ class CollectionsController extends Controller {
 
         try {
 
-            $collection = MongoDB::getClient()->selectCollection(
+            $collection = MongoDBHelper::getClient()->selectCollection(
                 $decodedRequestBody['databaseName'], $decodedRequestBody['collectionName']
             );
 
@@ -149,7 +144,7 @@ class CollectionsController extends Controller {
 
         try {
 
-            $collection = MongoDB::getClient()->selectCollection(
+            $collection = MongoDBHelper::getClient()->selectCollection(
                 $decodedRequestBody['databaseName'], $decodedRequestBody['collectionName']
             );
 

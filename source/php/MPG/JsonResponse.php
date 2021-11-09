@@ -1,6 +1,6 @@
 <?php
 
-namespace Responses;
+namespace MPG;
 
 use Capsule\Response;
 
