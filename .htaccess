@@ -3,6 +3,11 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.*)$ index.php/$1 [QSA,L]
 
+# For JavaScript modules.
+<IfModule mod_mime.c>
+  AddType text/javascript mjs
+</IfModule>
+
 <IfModule php_module>
   php_value upload_max_filesize 25M
   php_value post_max_size 25M
