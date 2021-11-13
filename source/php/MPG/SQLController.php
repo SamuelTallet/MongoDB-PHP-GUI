@@ -17,7 +17,7 @@ class SQLController extends Controller {
 
         $decodedRequestBody['sql'] = str_replace('"', '\"', $decodedRequestBody['sql']);
 
-        $jarPath = '"' . MPG_ABS_PATH 
+        $jarPath = '"' . ABS_PATH 
             . '/extras/programs/sql-to-mongo-db-query-converter-1.13-standalone.jar"';
         $jarArgs = '--sql "' . $decodedRequestBody['sql'] . '"';
         
@@ -36,7 +36,7 @@ class SQLController extends Controller {
             if ( !preg_match_all('|^.*\.find\({(.*)}\)$|s', $commandResult, $mongoDBQuery) ) {
                 throw new \Exception(
                     'Impossible to convert (SELECT) SQL query to MongoDB query... ' . 
-                    'Try to install Java JDK on the computer hosting "' . MPG_APP_NAME . '".'
+                    'Try to install Java JDK on the computer hosting "' . APP_NAME . '".'
                 );
             }
         } catch (\Throwable $th) {

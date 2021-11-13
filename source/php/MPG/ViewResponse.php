@@ -22,7 +22,7 @@ class ViewResponse extends Response {
         extract($viewData);
 
         ob_start();
-        require MPG_ABS_PATH . '/views/' . $viewName . '.view.php';
+        require ABS_PATH . '/views/' . $viewName . '.view.php';
         $viewResult = (string) ob_get_contents();
         ob_end_clean();
 

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title><?php echo MPG_APP_NAME; ?></title>
+    <title><?php echo MPG\APP_NAME; ?></title>
 
     <link rel="icon" href="assets/images/mpg-icon.svg">
     <link rel="mask-icon" href="assets/images/mpg-safari-icon.svg" color="#6eb825">
@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="source/css/login.css">
 
-    <script type="module" src="source/js/login.mjs"></script>
+    <script type="module" src="source/js/login.esm.js"></script>
 
 </head>
 
@@ -46,7 +46,7 @@
 
                     <div class="card-header text-center text-nowrap">
                         <img src="assets/images/mpg-icon.svg" width="32" height="32" />
-                        <h3 class="mpg-card-header-title d-inline align-middle"><?php echo MPG_APP_NAME; ?></h3>
+                        <h3 class="mpg-card-header-title d-inline align-middle"><?php echo MPG\APP_NAME; ?></h3>
                     </div>
                     
                     <div class="card-body">
@@ -73,7 +73,7 @@
 
                     <div class="card-header text-center text-nowrap">
                         <img src="assets/images/mpg-icon.svg" width="32" height="32" />
-                        <h3 class="mpg-card-header-title d-inline align-middle"><?php echo MPG_APP_NAME; ?></h3>
+                        <h3 class="mpg-card-header-title d-inline align-middle"><?php echo MPG\APP_NAME; ?></h3>
                     </div>
 
                     <div class="card-body">

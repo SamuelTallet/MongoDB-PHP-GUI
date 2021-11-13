@@ -2,7 +2,7 @@
 
     <a class="navbar-brand" href="<?php echo MPG_BASE_URL; ?>/">
         <img class="navbar-brand-icon" src="<?php echo MPG_BASE_URL; ?>/assets/images/mpg-icon.svg" width="24" height="24" />
-        <?php echo MPG_APP_NAME; ?>
+        <?php echo MPG\APP_NAME; ?>
     </a>
 
     <div class="navbar-nav">

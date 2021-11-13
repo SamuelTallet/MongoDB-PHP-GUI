@@ -1,87 +1,42 @@
 <?php
 
+namespace MPG;
+
 use Limber\Application;
 use Capsule\Factory\ServerRequestFactory;
 use Limber\Exceptions\NotFoundHttpException;
 
+const APP_NAME = 'MongoDB PHP GUI';
+const VERSION = '1.2.6';
+
+/**
+ * Absolute path, without trailing slash.
+ * Example: /opt/mongodb-php-gui
+ */
+const ABS_PATH = __DIR__;
+
 session_start();
 
-/**
- * Application name.
- * 
- * @var string
- */
-define('MPG_APP_NAME', 'MongoDB PHP GUI');
-
-/**
- * Application version.
- * 
- * @var string
- */
-define('MPG_APP_VERSION', '1.2.6');
-
-/**
- * Development mode?
- * 
- * @var boolean
- * @deprecated
- */
-define('MPG_DEV_MODE', false);
-
-/**
- * Absolute path. XXX Without trailing slash.
- * 
- * @var string
- * @example /opt/mongodb-php-gui
- */
-define('MPG_ABS_PATH', __DIR__);
-
-$baseUrl = '//' . $_SERVER['HTTP_HOST'];
-
-// If request matches a folder. For example: /mongo/
-if ( preg_match('#/$#', $_SERVER['REQUEST_URI']) ) {
-
-    $serverPath = $_SERVER['REQUEST_URI'];
-
-} else {
-
-    $serverPath = dirname($_SERVER['REQUEST_URI']);
-
-    // Normalize directory separator in server path.
-    if ( DIRECTORY_SEPARATOR !== '/' ) {
-        $serverPath = str_replace(DIRECTORY_SEPARATOR, '/', $serverPath);
-    }
-
-}
-
-$serverPath = rtrim($serverPath, '/');
-
-$baseUrl .= $serverPath;
-
-/**
- * Server path. XXX Without trailing slash.
- * 
- * @var string
- * @example /mongo
- */
-define('MPG_SERVER_PATH', $serverPath);
-
-/**
- * Base URL. XXX Without trailing slash.
- * 
- * @var string
- * @example //127.0.0.1:5000/mongo
- */
-define('MPG_BASE_URL', $baseUrl);
-
-if ( !file_exists($autoload_file = MPG_ABS_PATH . '/vendor/autoload.php') ) {
-    die('Run `composer install` to complete ' . MPG_APP_NAME . ' installation.');
+if ( !file_exists($autoload_file = ABS_PATH . '/vendor/autoload.php') ) {
+    die('Run `composer install` to complete ' . APP_NAME . ' installation.');
 }
 
 $loader = require_once $autoload_file;
-$loader->add('MPG', MPG_ABS_PATH . '/source/php');
+$loader->add('MPG', ABS_PATH . '/source/php');
 
-$router = require MPG_ABS_PATH . '/routes.php';
+Request::initialize();
+
+$baseUrl = '//' . $_SERVER['HTTP_HOST'] . Request::getPath();
+
+/**
+ * Base URL, without trailing slash.
+ * 
+ * @var string
+ * Example: //127.0.0.1:5000/mongo
+ */
+define('MPG_BASE_URL', $baseUrl);
+
+$router = require ABS_PATH . '/routes.php';
 
 $application = new Application($router);
 $serverRequest = ServerRequestFactory::createFromGlobals();
@@ -91,6 +46,6 @@ try {
     $response = $application->dispatch($serverRequest);
     $application->send($response);
     
-} catch (NotFoundHttpException $e) {
+} catch (NotFoundHttpException $_error) {
     die('Route not found. Try to append a slash to URL.');
 }

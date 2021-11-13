@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title><?php echo MPG_APP_NAME . ' v' . MPG_APP_VERSION; ?></title>
+    <title><?php echo MPG\APP_NAME . ' v' . MPG\VERSION; ?></title>
 
     <link rel="icon" href="<?php echo MPG_BASE_URL; ?>/assets/images/mpg-icon.svg">
     <link rel="mask-icon" href="<?php echo MPG_BASE_URL; ?>/assets/images/mpg-safari-icon.svg" color="#6eb825">
@@ -38,7 +38,7 @@
 
 <body>
 
-    <?php require MPG_ABS_PATH . '/views/parts/menu.view.php'; ?>
+    <?php require MPG\ABS_PATH . '/views/parts/menu.view.php'; ?>
 
     <div class="container-fluid">
 
@@ -50,7 +50,7 @@
 
                     <div class="col-md-12">
 
-                        <?php require MPG_ABS_PATH . '/views/parts/databases.view.php'; ?>
+                        <?php require MPG\ABS_PATH . '/views/parts/databases.view.php'; ?>
 
                     </div>
                     

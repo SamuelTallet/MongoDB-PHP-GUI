@@ -6,150 +6,150 @@ use Limber\Router\Router;
 
 $router = new Router();
 
-$router->get(MPG_SERVER_PATH . '/', function() {
+$router->get(Request::getPath() . '/', function() {
 
     AuthController::ensureUserIsLogged();
-    Redirect::to('/queryDatabase');
+    Request::redirectTo('/queryDatabase');
 
 });
 
 $router->get(
-    MPG_SERVER_PATH . '/login',
+    Request::getPath() . '/login',
     AuthController::class . '@login'
 );
 
 $router->post(
-    MPG_SERVER_PATH . '/login',
+    Request::getPath() . '/login',
     AuthController::class . '@login'
 );
 
 $router->get(
-    MPG_SERVER_PATH . '/manageCollections',
+    Request::getPath() . '/manageCollections',
     CollectionsController::class . '@manage'
 );
 
 $router->post(
-    MPG_SERVER_PATH . '/listCollections',
+    Request::getPath() . '/listCollections',
     CollectionsController::class . '@list'
 );
 
 $router->post(
-    MPG_SERVER_PATH . '/createCollection',
+    Request::getPath() . '/createCollection',
     CollectionsController::class . '@create'
 );
 
 $router->post(
-    MPG_SERVER_PATH . '/renameCollection',
+    Request::getPath() . '/renameCollection',
     CollectionsController::class . '@rename'
 );
 
 $router->post(
-    MPG_SERVER_PATH . '/dropCollection',
+    Request::getPath() . '/dropCollection',
     CollectionsController::class . '@drop'
 );
 
 $router->get(
-    MPG_SERVER_PATH . '/importDocuments',
+    Request::getPath() . '/importDocuments',
     DocumentsController::class . '@import'
 );
 
 $router->post(
-    MPG_SERVER_PATH . '/importDocuments',
+    Request::getPath() . '/importDocuments',
     DocumentsController::class . '@import'
 );
 
 $router->get(
-    MPG_SERVER_PATH . '/visualizeDatabase',
+    Request::getPath() . '/visualizeDatabase',
     DatabasesController::class . '@visualize'
 );
 
 $router->get(
-    MPG_SERVER_PATH . '/getDatabaseNetworkGraph',
+    Request::getPath() . '/getDatabaseNetworkGraph',
     DatabasesController::class . '@getNetworkGraph'
 );
 
 $router->get(
-    MPG_SERVER_PATH . '/queryDatabase',
+    Request::getPath() . '/queryDatabase',
     DatabasesController::class . '@query'
 );
 
 $router->post(
-    MPG_SERVER_PATH . '/insertOneDocument',
+    Request::getPath() . '/insertOneDocument',
     DocumentsController::class . '@insertOne'
 );
 
 $router->post(
-    MPG_SERVER_PATH . '/countDocuments',
+    Request::getPath() . '/countDocuments',
     DocumentsController::class . '@count'
 );
 
 $router->post(
-    MPG_SERVER_PATH . '/deleteOneDocument',
+    Request::getPath() . '/deleteOneDocument',
     DocumentsController::class . '@deleteOne'
 );
 
 $router->post(
-    MPG_SERVER_PATH . '/convertSQLToMongoDBQuery',
+    Request::getPath() . '/convertSQLToMongoDBQuery',
     SQLController::class . '@convertToMongoDBQuery'
 );
 
 $router->post(
-    MPG_SERVER_PATH . '/findDocuments',
+    Request::getPath() . '/findDocuments',
     DocumentsController::class . '@find'
 );
 
 $router->post(
-    MPG_SERVER_PATH . '/updateOneDocument',
+    Request::getPath() . '/updateOneDocument',
     DocumentsController::class . '@updateOne'
 );
 
 $router->post(
-    MPG_SERVER_PATH . '/enumCollectionFields',
+    Request::getPath() . '/enumCollectionFields',
     CollectionsController::class . '@enumFields'
 );
 
 $router->get(
-    MPG_SERVER_PATH . '/manageIndexes',
+    Request::getPath() . '/manageIndexes',
     IndexesController::class . '@manage'
 );
 
 $router->post(
-    MPG_SERVER_PATH . '/createIndex',
+    Request::getPath() . '/createIndex',
     IndexesController::class . '@create'
 );
 
 $router->post(
-    MPG_SERVER_PATH . '/listIndexes',
+    Request::getPath() . '/listIndexes',
     IndexesController::class . '@list'
 );
 
 $router->post(
-    MPG_SERVER_PATH . '/dropIndex',
+    Request::getPath() . '/dropIndex',
     IndexesController::class . '@drop'
 );
 
 $router->get(
-    MPG_SERVER_PATH . '/manageUsers',
+    Request::getPath() . '/manageUsers',
     UsersController::class . '@manage'
 );
 
 $router->post(
-    MPG_SERVER_PATH . '/createUser',
+    Request::getPath() . '/createUser',
     UsersController::class . '@create'
 );
 
 $router->post(
-    MPG_SERVER_PATH . '/listUsers',
+    Request::getPath() . '/listUsers',
     UsersController::class . '@list'
 );
 
 $router->post(
-    MPG_SERVER_PATH . '/dropUser',
+    Request::getPath() . '/dropUser',
     UsersController::class . '@drop'
 );
 
 $router->get(
-    MPG_SERVER_PATH . '/logout',
+    Request::getPath() . '/logout',
     AuthController::class . '@logout'
 );
 

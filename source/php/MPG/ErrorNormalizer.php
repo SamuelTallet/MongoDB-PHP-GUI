@@ -23,10 +23,6 @@ class ErrorNormalizer {
             $normalizedError['error']['function'] = $function;
         }
 
-        if ( MPG_DEV_MODE === true ) {
-            $normalizedError['error']['trace'] = $error->getTrace();
-        }
-
         return $normalizedError;
 
     }
