@@ -64,8 +64,8 @@ $router->get(
 );
 
 $router->get(
-    Request::getPath() . '/getDatabaseNetworkGraph',
-    DatabasesController::class . '@getNetworkGraph'
+    Request::getPath() . '/getDatabaseGraph',
+    DatabasesController::class . '@getGraph'
 );
 
 $router->get(

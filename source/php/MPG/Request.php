@@ -51,7 +51,7 @@ class Request {
      */
     public static function redirectTo(string $route) {
 
-        header('Location: ' . MPG_BASE_URL . $route);
+        header('Location: ' . BASE_URL . $route);
         exit;
 
     }

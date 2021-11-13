@@ -36,7 +36,7 @@ class DatabasesController extends Controller {
 
     }
 
-    public function getNetworkGraph() : JsonResponse {
+    public function getGraph() : JsonResponse {
 
         $networkGraph = [
             'visData' => [
@@ -45,7 +45,7 @@ class DatabasesController extends Controller {
                         'id' => 1,
                         'label' => 'MongoDB server',
                         'shape' => 'image',
-                        'image' => MPG_BASE_URL . '/assets/images/leaf-icon.svg',
+                        'image' => BASE_URL . '/assets/images/leaf-icon.svg',
                         'size' => 32
                     ]
                 ],
@@ -73,7 +73,7 @@ class DatabasesController extends Controller {
                     'id' => $nodeCounter,
                     'label' => 'DB: ' . $databaseName,
                     'shape' => 'image',
-                    'image' => MPG_BASE_URL . '/assets/images/database-icon.svg',
+                    'image' => BASE_URL . '/assets/images/database-icon.svg',
                     'size' => 24
                 ];
 
@@ -87,7 +87,7 @@ class DatabasesController extends Controller {
                         'id' => $nodeCounter,
                         'label' => 'Coll: ' . $collectionInfo['name'],
                         'shape' => 'image',
-                        'image' => MPG_BASE_URL . '/assets/images/document-icon.svg',
+                        'image' => BASE_URL . '/assets/images/document-icon.svg',
                         'size' => 24
                     ];
 

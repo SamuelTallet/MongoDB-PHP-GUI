@@ -34,7 +34,7 @@ $baseUrl = '//' . $_SERVER['HTTP_HOST'] . Request::getPath();
  * @var string
  * Example: //127.0.0.1:5000/mongo
  */
-define('MPG_BASE_URL', $baseUrl);
+define('MPG\BASE_URL', $baseUrl);
 
 $router = require ABS_PATH . '/routes.php';
 

@@ -74,7 +74,7 @@ MPG.drawVisNetwork = function() {
 
     MPG.helpers.doAjaxRequest(
         'GET',
-        MPG_BASE_URL + '/getDatabaseNetworkGraph',
+        MPG_BASE_URL + '/getDatabaseGraph',
         function(response) {
 
             var visNetworkContainer = document.querySelector('#vis-network-container');
