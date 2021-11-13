@@ -7,7 +7,7 @@ use Capsule\Factory\ServerRequestFactory;
 use Limber\Exceptions\NotFoundHttpException;
 
 const APP_NAME = 'MongoDB PHP GUI';
-const VERSION = '1.2.6';
+const VERSION = '1.2.7';
 
 /**
  * Absolute path, without trailing slash.
