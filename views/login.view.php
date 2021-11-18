@@ -4,6 +4,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
 
     <title><?php echo MPG\APP_NAME; ?></title>
 
@@ -22,7 +23,9 @@
 
 <body>
 
-    <div id="mpg-background"></div>
+    <div id="mpg-background">
+        <a class="credit-link" target="_blank"></a>
+    </div>
 
     <div class="container h-100">
 

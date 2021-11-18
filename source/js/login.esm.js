@@ -1,3 +1,38 @@
+/**
+ * @see https://unsplash.com/
+ */
+class UnsplashImage {
+
+  constructor(imageID, authorID, authorName) {
+
+    this.imageID = imageID
+    this.imageURL = `https://source.unsplash.com/${imageID}/1920x1080`
+    this.authorID = authorID
+    this.authorName = authorName
+    this.authorURL = `https://unsplash.com/@${authorID}`
+
+  }
+
+  static getRandom() {
+
+    const images = [
+      new UnsplashImage('pVq6YhmDPtk', 'danranwanghao', 'hao wang'),
+      new UnsplashImage('E8Ufcyxz514', 'fakurian', 'Fakurian Design'),
+      new UnsplashImage('PGdW_bHDbpI', 'fakurian', 'Fakurian Design'),
+      new UnsplashImage('26WixHTutxc', 'gradienta', 'Gradienta'),
+      new UnsplashImage('u8Jn2rzYIps', 'fakurian', 'Fakurian Design'),
+      new UnsplashImage('FBQcPsBL2Zo', 'fakurian', 'Fakurian Design'),
+      new UnsplashImage('Hlkuojv_P6I', 'enginakyurt', 'engin akyurt'),
+      new UnsplashImage('YWIOwHvRBvU', 'pawel_czerwinski', 'Pawel Czerwinski')
+    ]
+    // Select a random image from the list above.
+    const image = images[Math.floor(Math.random() * images.length)]
+
+    return image
+
+  }
+
+}
 
 /**
  * MongoDB PHP GUI login.
@@ -7,6 +42,7 @@ class Login {
   constructor() {
 
     this.background = document.getElementById('mpg-background')
+    this.backgroundCreditLink = this.background.querySelector('.credit-link')
     this.cardsContainer = document.getElementById('mpg-cards')
     this.flipCardButtons = document.querySelectorAll('.mpg-flip-card-button')
     this.requiredInputs = document.querySelectorAll('input[required]')
@@ -15,17 +51,17 @@ class Login {
   }
 
   /**
-   * Defines background. It's a random abstract image from Unsplash.
+   * Defines background.
    */
   setBackground() {
 
-    const sourceURL = 'https://source.unsplash.com/1920x1080/?abstract'
+    const randomImage = UnsplashImage.getRandom()
     const abortController = new AbortController()
 
     // We will abort fetch request if it takes more than one second.
     const timeoutID = setTimeout(() => abortController.abort(), 1000)
 
-    fetch(sourceURL, { signal: abortController.signal })
+    fetch(randomImage.imageURL, { signal: abortController.signal })
       .then(response => {
         clearTimeout(timeoutID)
         return response.blob()
@@ -33,6 +69,8 @@ class Login {
       .then(blob => {
         const blobURL = URL.createObjectURL(blob)
         this.background.style.backgroundImage = `url(${blobURL})`
+        this.backgroundCreditLink.textContent = `Image by ${randomImage.authorName}`
+        this.backgroundCreditLink.href = randomImage.authorURL
         this.cardsContainer.classList.add('reveal')
       })
       .catch(_error => {
