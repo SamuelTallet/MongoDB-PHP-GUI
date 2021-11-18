@@ -75,7 +75,11 @@ SELECT * FROM Cities WHERE state = "CA"
 
 ## Credits
 
-This GUI uses [Limber](https://github.com/nimbly/Limber), [Capsule](https://github.com/nimbly/Capsule), [Font Awesome](https://fontawesome.com/), [Bootstrap](https://getbootstrap.com/), [CodeMirror](https://github.com/codemirror/codemirror), [jsonic](https://github.com/jsonicjs/jsonic), [JsonView](https://github.com/pgrabovets/json-view), [MongoDB PHP library](https://github.com/mongodb/mongo-php-library), [vis.js](https://github.com/visjs) and [SQL to MongoDB Query Converter](https://github.com/vincentrussell/sql-to-mongo-db-query-converter). Leaf icon was made by [Freepik](https://www.freepik.com) from [Flaticon](https://www.flaticon.com). Login backgrounds come from [Unsplash](https://unsplash.com/).
+This GUI uses [Limber](https://github.com/nimbly/Limber), [Capsule](https://github.com/nimbly/Capsule), [Font Awesome](https://fontawesome.com/), [Bootstrap](https://getbootstrap.com/), [CodeMirror](https://github.com/codemirror/codemirror), [jsonic](https://github.com/jsonicjs/jsonic), [JsonView](https://github.com/pgrabovets/json-view), [MongoDB PHP library](https://github.com/mongodb/mongo-php-library), [vis.js](https://github.com/visjs) and [SQL to MongoDB Query Converter](https://github.com/vincentrussell/sql-to-mongo-db-query-converter). Leaf icon was made by [Freepik](https://www.freepik.com) from [Flaticon](https://www.flaticon.com).
+
+## Funding
+
+If you find this GUI useful, [donate](https://www.paypal.me/SamuelTS) at least one dollar to support its development. Thank you to all! ❤️
 
 ## Copyright
 
