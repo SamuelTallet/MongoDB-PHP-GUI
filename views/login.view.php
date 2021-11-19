@@ -6,18 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex">
 
-    <title><?php echo MPG\APP_NAME; ?></title>
+    <title>MongoDB PHP GUI</title>
 
-    <link rel="icon" href="assets/images/mpg-icon.svg">
-    <link rel="mask-icon" href="assets/images/mpg-safari-icon.svg" color="#6eb825">
-    <link rel="apple-touch-icon" href="assets/images/mpg-ios-icon.png">
+    <link rel="icon" href="./assets/images/mpg-icon.svg">
+    <link rel="mask-icon" href="./assets/images/mpg-safari-icon.svg" color="#6eb825">
+    <link rel="apple-touch-icon" href="./assets/images/mpg-ios-icon.png">
 
-    <link rel="stylesheet" href="assets/css/ubuntu-font.css">
-    <link rel="stylesheet" href="assets/css/fontawesome-custom.css">
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="source/css/login.css">
+    <link rel="stylesheet" href="./assets/css/ubuntu-font.css">
+    <link rel="stylesheet" href="./assets/css/fontawesome-custom.css">
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./source/css/login.css">
 
-    <script type="module" src="source/js/login.esm.js"></script>
+    <script type="module" src="./source/js/login.esm.js"></script>
 
 </head>
 
@@ -48,8 +48,8 @@
                 <div class="card mpg-card-front">
 
                     <div class="card-header text-center text-nowrap">
-                        <img src="assets/images/mpg-icon.svg" width="32" height="32" />
-                        <h3 class="mpg-card-header-title d-inline align-middle"><?php echo MPG\APP_NAME; ?></h3>
+                        <img src="./assets/images/mpg-icon.svg" width="32" height="32" />
+                        <h3 class="mpg-card-header-title d-inline align-middle">MongoDB PHP GUI</h3>
                     </div>
                     
                     <div class="card-body">
@@ -75,8 +75,8 @@
                 <div class="card mpg-card-back">
 
                     <div class="card-header text-center text-nowrap">
-                        <img src="assets/images/mpg-icon.svg" width="32" height="32" />
-                        <h3 class="mpg-card-header-title d-inline align-middle"><?php echo MPG\APP_NAME; ?></h3>
+                        <img src="./assets/images/mpg-icon.svg" width="32" height="32" />
+                        <h3 class="mpg-card-header-title d-inline align-middle">MongoDB PHP GUI</h3>
                     </div>
 
                     <div class="card-body">

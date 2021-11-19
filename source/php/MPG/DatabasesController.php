@@ -45,7 +45,7 @@ class DatabasesController extends Controller {
                         'id' => 1,
                         'label' => 'MongoDB server',
                         'shape' => 'image',
-                        'image' => BASE_URL . '/assets/images/leaf-icon.svg',
+                        'image' => './assets/images/leaf-icon.svg',
                         'size' => 32
                     ]
                 ],
@@ -73,7 +73,7 @@ class DatabasesController extends Controller {
                     'id' => $nodeCounter,
                     'label' => 'DB: ' . $databaseName,
                     'shape' => 'image',
-                    'image' => BASE_URL . '/assets/images/database-icon.svg',
+                    'image' => './assets/images/database-icon.svg',
                     'size' => 24
                 ];
 
@@ -87,7 +87,7 @@ class DatabasesController extends Controller {
                         'id' => $nodeCounter,
                         'label' => 'Coll: ' . $collectionInfo['name'],
                         'shape' => 'image',
-                        'image' => BASE_URL . '/assets/images/document-icon.svg',
+                        'image' => './assets/images/document-icon.svg',
                         'size' => 24
                     ];
 

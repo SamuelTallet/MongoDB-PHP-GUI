@@ -1,12 +1,11 @@
 <?php
 
-namespace MPG;
+namespace MPG; // MongoDB PHP GUI
 
 use Limber\Application;
 use Capsule\Factory\ServerRequestFactory;
 use Limber\Exceptions\NotFoundHttpException;
 
-const APP_NAME = 'MongoDB PHP GUI';
 const VERSION = '1.2.7';
 
 /**
@@ -18,23 +17,11 @@ const ABS_PATH = __DIR__;
 session_start();
 
 if ( !file_exists($autoload_file = ABS_PATH . '/vendor/autoload.php') ) {
-    die('Run `composer install` to complete ' . APP_NAME . ' installation.');
+    die('Run `composer install` to complete MongoDB PHP GUI installation.');
 }
 
 $loader = require_once $autoload_file;
 $loader->add('MPG', ABS_PATH . '/source/php');
-
-Request::initialize();
-
-$baseUrl = '//' . $_SERVER['HTTP_HOST'] . Request::getPath();
-
-/**
- * Base URL, without trailing slash.
- * 
- * @var string
- * Example: //127.0.0.1:5000/mongo
- */
-define('MPG\BASE_URL', $baseUrl);
 
 $router = require ABS_PATH . '/routes.php';
 

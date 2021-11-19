@@ -5,23 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title><?php echo MPG\APP_NAME . ' v' . MPG\VERSION; ?></title>
+    <title>MongoDB PHP GUI v<?php echo MPG\VERSION; ?></title>
 
-    <link rel="icon" href="<?php echo MPG\BASE_URL; ?>/assets/images/mpg-icon.svg">
-    <link rel="mask-icon" href="<?php echo MPG\BASE_URL; ?>/assets/images/mpg-safari-icon.svg" color="#6eb825">
-    <link rel="apple-touch-icon" href="<?php echo MPG\BASE_URL; ?>/assets/images/mpg-ios-icon.png">
+    <link rel="icon" href="./assets/images/mpg-icon.svg">
+    <link rel="mask-icon" href="./assets/images/mpg-safari-icon.svg" color="#6eb825">
+    <link rel="apple-touch-icon" href="./assets/images/mpg-ios-icon.png">
 
-    <link rel="stylesheet" href="<?php echo MPG\BASE_URL; ?>/assets/css/ubuntu-font.css">
-    <link rel="stylesheet" href="<?php echo MPG\BASE_URL; ?>/assets/css/fontawesome-custom.css">
-    <link rel="stylesheet" href="<?php echo MPG\BASE_URL; ?>/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<?php echo MPG\BASE_URL; ?>/source/css/inner.css">
+    <link rel="stylesheet" href="./assets/css/ubuntu-font.css">
+    <link rel="stylesheet" href="./assets/css/fontawesome-custom.css">
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./source/css/inner.css">
 
-    <script>
-        var MPG_BASE_URL = '<?php echo MPG\BASE_URL; ?>';
-    </script>
-
-    <script src="<?php echo MPG\BASE_URL; ?>/source/js/_base.js"></script>
-    <script src="<?php echo MPG\BASE_URL; ?>/source/js/manageIndexes.js"></script>
+    <script src="./source/js/_base.js"></script>
+    <script src="./source/js/manageIndexes.js"></script>
 
 </head>
 

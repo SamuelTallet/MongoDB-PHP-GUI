@@ -27,7 +27,7 @@ MPG.reloadCollectionFields = function() {
 
     MPG.helpers.doAjaxRequest(
         'POST',
-        MPG_BASE_URL + '/enumCollectionFields',
+        './enumCollectionFields',
         function(response) {
 
             JSON.parse(response).forEach(function(collectionField) {
@@ -74,7 +74,7 @@ MPG.reloadCollectionIndexes = function() {
 
     MPG.helpers.doAjaxRequest(
         'POST',
-        MPG_BASE_URL + '/listIndexes',
+        './listIndexes',
         function(response) {
 
             MPG.collectionIndexes = JSON.parse(response);
@@ -245,7 +245,7 @@ MPG.eventListeners.addCreateIndex = function() {
 
         MPG.helpers.doAjaxRequest(
             'POST',
-            MPG_BASE_URL + '/createIndex',
+            './createIndex',
             function(response) {
 
                 var indexCreated = document.querySelector('#mpg-index-created');
@@ -286,7 +286,7 @@ MPG.eventListeners.addDropIndex = function() {
 
             MPG.helpers.doAjaxRequest(
                 'POST',
-                MPG_BASE_URL + '/dropIndex',
+                './dropIndex',
                 function(response) {
     
                     if ( JSON.parse(response) === true ) {

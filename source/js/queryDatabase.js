@@ -116,7 +116,7 @@ MPG.helpers.convertSQLToMongoDBQuery = function(sql, successCallback) {
 
     MPG.helpers.doAjaxRequest(
         'POST',
-        MPG_BASE_URL + '/convertSQLToMongoDBQuery',
+        './convertSQLToMongoDBQuery',
         successCallback,
         JSON.stringify({ "sql": sql })
     );
@@ -272,7 +272,7 @@ MPG.eventListeners.addCollections = function() {
 
             MPG.helpers.doAjaxRequest(
                 'POST',
-                MPG_BASE_URL + '/enumCollectionFields',
+                './enumCollectionFields',
                 function(response) {
 
                     JSON.parse(response).forEach(function(collectionField) {
@@ -354,7 +354,7 @@ MPG.eventListeners.addInsertOne = function() {
         
         MPG.helpers.doAjaxRequest(
             'POST',
-            MPG_BASE_URL + '/insertOneDocument',
+            './insertOneDocument',
             function(response) {
 
                 MPG.cachedOutput = '';
@@ -406,7 +406,7 @@ MPG.eventListeners.addCount = function() {
 
         MPG.helpers.doAjaxRequest(
             'POST',
-            MPG_BASE_URL + '/countDocuments',
+            './countDocuments',
             function(response) {
 
                 MPG.cachedOutput = '';
@@ -466,7 +466,7 @@ MPG.eventListeners.addDeleteOne = function() {
         
         MPG.helpers.doAjaxRequest(
             'POST',
-            MPG_BASE_URL + '/deleteOneDocument',
+            './deleteOneDocument',
             function(response) {
 
                 MPG.cachedOutput = '';
@@ -538,7 +538,7 @@ MPG.eventListeners.addUpdate = function() {
 
             MPG.helpers.doAjaxRequest(
                 'POST',
-                MPG_BASE_URL + '/updateOneDocument',
+                './updateOneDocument',
                 function(response) {
 
                     if ( JSON.parse(response) === 1 ) {
@@ -670,7 +670,7 @@ MPG.eventListeners.addFind = function() {
 
         MPG.helpers.doAjaxRequest(
             'POST',
-            MPG_BASE_URL + '/findDocuments',
+            './findDocuments',
             function(response) {
 
                 MPG.cachedOutput = response;

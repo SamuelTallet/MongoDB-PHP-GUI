@@ -4,152 +4,154 @@ namespace MPG;
 
 use Limber\Router\Router;
 
+Routes::setPrefix();
+
 $router = new Router();
 
-$router->get(Request::getPath() . '/', function() {
+$router->get(Routes::getPrefix() . '/', function() {
 
     AuthController::ensureUserIsLogged();
-    Request::redirectTo('/queryDatabase');
+    Routes::redirectTo('/queryDatabase');
 
 });
 
 $router->get(
-    Request::getPath() . '/login',
+    Routes::getPrefix() . '/login',
     AuthController::class . '@login'
 );
 
 $router->post(
-    Request::getPath() . '/login',
+    Routes::getPrefix() . '/login',
     AuthController::class . '@login'
 );
 
 $router->get(
-    Request::getPath() . '/manageCollections',
+    Routes::getPrefix() . '/manageCollections',
     CollectionsController::class . '@manage'
 );
 
 $router->post(
-    Request::getPath() . '/listCollections',
+    Routes::getPrefix() . '/listCollections',
     CollectionsController::class . '@list'
 );
 
 $router->post(
-    Request::getPath() . '/createCollection',
+    Routes::getPrefix() . '/createCollection',
     CollectionsController::class . '@create'
 );
 
 $router->post(
-    Request::getPath() . '/renameCollection',
+    Routes::getPrefix() . '/renameCollection',
     CollectionsController::class . '@rename'
 );
 
 $router->post(
-    Request::getPath() . '/dropCollection',
+    Routes::getPrefix() . '/dropCollection',
     CollectionsController::class . '@drop'
 );
 
 $router->get(
-    Request::getPath() . '/importDocuments',
+    Routes::getPrefix() . '/importDocuments',
     DocumentsController::class . '@import'
 );
 
 $router->post(
-    Request::getPath() . '/importDocuments',
+    Routes::getPrefix() . '/importDocuments',
     DocumentsController::class . '@import'
 );
 
 $router->get(
-    Request::getPath() . '/visualizeDatabase',
+    Routes::getPrefix() . '/visualizeDatabase',
     DatabasesController::class . '@visualize'
 );
 
 $router->get(
-    Request::getPath() . '/getDatabaseGraph',
+    Routes::getPrefix() . '/getDatabaseGraph',
     DatabasesController::class . '@getGraph'
 );
 
 $router->get(
-    Request::getPath() . '/queryDatabase',
+    Routes::getPrefix() . '/queryDatabase',
     DatabasesController::class . '@query'
 );
 
 $router->post(
-    Request::getPath() . '/insertOneDocument',
+    Routes::getPrefix() . '/insertOneDocument',
     DocumentsController::class . '@insertOne'
 );
 
 $router->post(
-    Request::getPath() . '/countDocuments',
+    Routes::getPrefix() . '/countDocuments',
     DocumentsController::class . '@count'
 );
 
 $router->post(
-    Request::getPath() . '/deleteOneDocument',
+    Routes::getPrefix() . '/deleteOneDocument',
     DocumentsController::class . '@deleteOne'
 );
 
 $router->post(
-    Request::getPath() . '/convertSQLToMongoDBQuery',
+    Routes::getPrefix() . '/convertSQLToMongoDBQuery',
     SQLController::class . '@convertToMongoDBQuery'
 );
 
 $router->post(
-    Request::getPath() . '/findDocuments',
+    Routes::getPrefix() . '/findDocuments',
     DocumentsController::class . '@find'
 );
 
 $router->post(
-    Request::getPath() . '/updateOneDocument',
+    Routes::getPrefix() . '/updateOneDocument',
     DocumentsController::class . '@updateOne'
 );
 
 $router->post(
-    Request::getPath() . '/enumCollectionFields',
+    Routes::getPrefix() . '/enumCollectionFields',
     CollectionsController::class . '@enumFields'
 );
 
 $router->get(
-    Request::getPath() . '/manageIndexes',
+    Routes::getPrefix() . '/manageIndexes',
     IndexesController::class . '@manage'
 );
 
 $router->post(
-    Request::getPath() . '/createIndex',
+    Routes::getPrefix() . '/createIndex',
     IndexesController::class . '@create'
 );
 
 $router->post(
-    Request::getPath() . '/listIndexes',
+    Routes::getPrefix() . '/listIndexes',
     IndexesController::class . '@list'
 );
 
 $router->post(
-    Request::getPath() . '/dropIndex',
+    Routes::getPrefix() . '/dropIndex',
     IndexesController::class . '@drop'
 );
 
 $router->get(
-    Request::getPath() . '/manageUsers',
+    Routes::getPrefix() . '/manageUsers',
     UsersController::class . '@manage'
 );
 
 $router->post(
-    Request::getPath() . '/createUser',
+    Routes::getPrefix() . '/createUser',
     UsersController::class . '@create'
 );
 
 $router->post(
-    Request::getPath() . '/listUsers',
+    Routes::getPrefix() . '/listUsers',
     UsersController::class . '@list'
 );
 
 $router->post(
-    Request::getPath() . '/dropUser',
+    Routes::getPrefix() . '/dropUser',
     UsersController::class . '@drop'
 );
 
 $router->get(
-    Request::getPath() . '/logout',
+    Routes::getPrefix() . '/logout',
     AuthController::class . '@logout'
 );
 

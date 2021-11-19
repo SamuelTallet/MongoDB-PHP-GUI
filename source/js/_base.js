@@ -179,7 +179,7 @@ MPG.reloadCollections = function(databaseName) {
     var requestBody = { 'databaseName': databaseName };
 
     MPG.helpers.doAjaxRequest(
-        'POST', MPG_BASE_URL + '/listCollections', function(response) {
+        'POST', './listCollections', function(response) {
 
             var collectionsList = document.querySelector('#mpg-collections-list');
 

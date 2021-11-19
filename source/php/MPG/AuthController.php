@@ -8,7 +8,7 @@ class AuthController extends Controller {
 
         if ( !isset($_SESSION['mpg']['user_is_logged']) ) {
 
-            Request::redirectTo('/login#');
+            Routes::redirectTo('/login#');
 
         }
 
@@ -29,7 +29,7 @@ class AuthController extends Controller {
             } else {
 
                 $_SESSION['mpg']['user_is_logged'] = true;
-                Request::redirectTo('/');
+                Routes::redirectTo('/');
 
             }
 
@@ -88,7 +88,7 @@ class AuthController extends Controller {
 
         $_SESSION['mpg'] = [];
 
-        Request::redirectTo('/login');
+        Routes::redirectTo('/login');
 
     }
 
