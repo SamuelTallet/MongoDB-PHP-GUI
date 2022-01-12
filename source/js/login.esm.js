@@ -124,7 +124,7 @@ class Login {
         /**
          * TODO: Submit form if credentials are good.
          *
-         * @see https://github.com/SamuelTS/MongoDB-PHP-GUI/issues/21
+         * @see https://github.com/SamuelTallet/MongoDB-PHP-GUI/issues/21
          */
         form.submit()
       })

@@ -7,9 +7,9 @@ Export documents to JSON. Import documents from JSON. Manage indexes. Manage use
 
 ## Screenshots
 
-![MongoDB PHP GUI - Visualize Database](https://raw.githubusercontent.com/SamuelTS/MongoDB-PHP-GUI/master/docs/screenshots/visualize-database.png)
+![MongoDB PHP GUI - Visualize Database](https://raw.githubusercontent.com/SamuelTallet/MongoDB-PHP-GUI/master/docs/screenshots/visualize-database.png)
 
-![MongoDB PHP GUI - Query Database](https://raw.githubusercontent.com/SamuelTS/MongoDB-PHP-GUI/master/docs/screenshots/query-database.png)
+![MongoDB PHP GUI - Query Database](https://raw.githubusercontent.com/SamuelTallet/MongoDB-PHP-GUI/master/docs/screenshots/query-database.png)
 
 ## Installation
 
