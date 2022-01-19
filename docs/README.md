@@ -79,7 +79,7 @@ This GUI uses [Limber](https://github.com/nimbly/Limber), [Capsule](https://gith
 
 ## Funding
 
-If you find this GUI useful, [donate](https://www.paypal.me/SamuelTS) at least one dollar to support its development. Thank you to all! ❤️
+If you find this GUI useful, [donate](https://www.paypal.me/SamuelTallet) at least one dollar to support its development. Thank you to all! ❤️
 
 ## Copyright
 
