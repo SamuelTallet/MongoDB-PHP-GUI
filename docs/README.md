@@ -83,4 +83,4 @@ If you find this GUI useful, [donate](https://www.paypal.me/SamuelTallet) at lea
 
 ## Copyright
 
-© 2021 Samuel Tallet
+© 2022 Samuel Tallet
