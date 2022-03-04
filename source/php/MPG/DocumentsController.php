@@ -287,10 +287,14 @@ class DocumentsController extends Controller {
             return new JsonResponse(400, ErrorNormalizer::normalize($th, __METHOD__));
         }
 
-        if ( isset($decodedRequestBody['filter']['_id'])
-            && preg_match(MongoDBHelper::OBJECT_ID_REGEX, $decodedRequestBody['filter']['_id']) ) {
-                $decodedRequestBody['filter']['_id'] =
-                    new \MongoDB\BSON\ObjectId($decodedRequestBody['filter']['_id']);
+        if ( isset($decodedRequestBody['filter']['_id']) ) {
+
+            if ( preg_match(MongoDBHelper::OBJECT_ID_REGEX, $decodedRequestBody['filter']['_id']) ) {
+                $decodedRequestBody['filter']['_id'] = new \MongoDB\BSON\ObjectId($decodedRequestBody['filter']['_id']);
+            } elseif ( preg_match(MongoDBHelper::UINT_REGEX, $decodedRequestBody['filter']['_id']) ) {
+                $decodedRequestBody['filter']['_id'] = intval($decodedRequestBody['filter']['_id']);
+            }
+
         }
 
         foreach ($decodedRequestBody['update']['$set'] as &$updateValue) {

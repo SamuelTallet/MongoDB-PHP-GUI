@@ -191,9 +191,8 @@ var JsonView = (function (exports) {
     } else {
 
       // XXX Modification made for MongoDB PHP GUI.
-      if ( node.key === '_id' ) {
+      if ( node.key === '_id' && node.depth === 2 ) {
         MPG.documentId = node.value;
-        MPG.documentIdType = _typeof(node.value);
       }
       if ( node.depth >= 2 && node.depth <= 5 && node.key !== '_id' ) {
         var documentFieldIsUpdatable = true;

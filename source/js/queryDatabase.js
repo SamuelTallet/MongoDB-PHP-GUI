@@ -44,14 +44,6 @@ MPG.collectionFields = [];
 MPG.documentId = '';
 
 /**
- * Type of document ID.
- * XXX Used by JsonView parser.
- * 
- * @type {string}
- */
-MPG.documentIdType = '';
-
-/**
  * Cached output.
  * 
  * @type {string}
@@ -517,11 +509,7 @@ MPG.eventListeners.addUpdate = function() {
                 documentFieldNewValue, documentField.dataset.documentFieldType
             );
 
-            if ( MPG.documentIdType === 'number' ) {
-                var documentId = parseInt(documentField.dataset.documentId);
-            } else {
-                var documentId = documentField.dataset.documentId;
-            }
+            var documentId = documentField.dataset.documentId;
 
             var requestBody = {
                 'databaseName': MPG.databaseName,

@@ -26,6 +26,13 @@ class MongoDBHelper {
     public const OBJECT_ID_REGEX = '/^[a-f\d]{24}$/i';
 
     /**
+     * Regular expression for an unsigned integer.
+     * 
+     * @var string
+     */
+    public const UINT_REGEX = '/^(0|[1-9][0-9]*)$/';
+
+    /**
      * Regular expression for an ISO date-time.
      * 
      * @var string
