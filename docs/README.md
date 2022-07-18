@@ -15,9 +15,8 @@ Export documents to JSON. Import documents from JSON. Manage indexes. Manage use
 
 ### Docker (PHP built-in server)
 1. In a case of an upgrade, run `docker pull samueltallet/mongodb-php-gui`<br>
-2. Always run `docker run --rm -p 5000:5000 samueltallet/mongodb-php-gui`<br>
+2. Always run `docker run --add-host localhost:172.17.0.1 --publish 5000:5000 --rm samueltallet/mongodb-php-gui`<br>
 3. Open your browser at this address: http://127.0.0.1:5000/ to access GUI.<br>
-4. If your MongoDB is running on localhost, use 172.17.0.1 as host to login.
 
 ### Apache HTTP server
 1. Clone current repository in a folder served by Apache.
