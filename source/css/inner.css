@@ -8,9 +8,9 @@
     --mpg-danger-color: hsl(354, 70%, 54%);
     --mpg-info-color: hsl(188, 78%, 41%);
     --mpg-json-boolean-color: hsl(351, 94%, 83%);
-    --mpg-json-key-color: hsl(174, 68%, 56%);
-    --mpg-json-number-color: hsl(120, 67%, 75%);
-    --mpg-json-string-color: hsl(39, 84%, 50%);
+    --mpg-json-key-color: hsl(192, 79%, 65%);
+    --mpg-json-number-color: hsl(47, 75%, 60%);
+    --mpg-json-string-color: hsl(120, 67%, 75%);
     --mpg-primary-color-darker: hsl(252, 53%, 52%);
     --mpg-primary-color: hsl(252, 53%, 55%);
     --mpg-secondary-color-darker: hsl(45, 100%, 45%);
