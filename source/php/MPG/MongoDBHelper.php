@@ -7,6 +7,7 @@ use \MongoDB\BSON\Regex;
 
 /**
  * @deprecated
+ * TODO: Split this helper into many helpers.
  */
 class MongoDBHelper {
 
