@@ -9,18 +9,18 @@ Export documents to JSON. Import documents from JSON. Manage indexes. Manage use
 
 ![MongoDB PHP GUI - Visualize Database](https://raw.githubusercontent.com/SamuelTallet/MongoDB-PHP-GUI/master/docs/screenshots/visualize-database.png)
 
-![MongoDB PHP GUI - Query Database](https://raw.githubusercontent.com/SamuelTallet/MongoDB-PHP-GUI/master/docs/screenshots/query-database.png)
+![MongoDB PHP GUI - Query Documents](https://raw.githubusercontent.com/SamuelTallet/MongoDB-PHP-GUI/master/docs/screenshots/query-documents.png)
 
 ## Installation
 
 ### Docker (PHP built-in server)
 1. In a case of an upgrade, run `docker pull samueltallet/mongodb-php-gui`<br>
 2. Always run `docker run --add-host localhost:172.17.0.1 --publish 5000:5000 --rm samueltallet/mongodb-php-gui`<br>
-3. Open your browser at this address: http://127.0.0.1:5000/ to access GUI.<br>
+3. Open your browser at this address: http://127.0.0.1:5000/ to access GUI.
 
 ### Apache HTTP server
 1. Clone current repository in a folder served by Apache.
-2. Be sure to have PHP >= 7.3 with [MongoDB ext.](https://www.php.net/manual/en/mongodb.installation.php) enabled.
+2. Be sure to have PHP >= 7.3 with [MongoDB extension](https://www.php.net/manual/en/mongodb.installation.php) enabled.
 3. Check that `rewrite_module` module is enabled in your Apache configuration.
 4. Be sure to have `AllowOverride All` in your Apache (virtual host) configuration.
 5. Run `composer install` at project's root directory to install all PHP dependencies.
