@@ -92,7 +92,7 @@ MPG.drawVisNetwork = function() {
 
                 var selectedNodeId = nodeProperties.nodes[0];
                 var selectedNodeMapping = networkGraph.mapping[selectedNodeId];
-                var targetUrl = './queryDatabase#';
+                var targetUrl = './queryDocuments#';
 
                 if ( selectedNodeMapping.databaseName !== null ) {
 
