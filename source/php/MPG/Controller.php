@@ -2,9 +2,6 @@
 
 namespace MPG;
 
-/**
- * @deprecated
- */
 class Controller {
 
     /**
@@ -22,6 +19,7 @@ class Controller {
 
     /**
      * Returns request body, decoded.
+     * @deprecated
      * 
      * @throws \Exception
      * 
