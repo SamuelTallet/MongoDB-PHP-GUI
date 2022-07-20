@@ -15,7 +15,7 @@ class CollectionsController extends Controller {
     }
 
     /**
-     * @see https://docs.mongodb.com/php-library/v1.6/reference/method/MongoDBDatabase-listCollections/index.html
+     * @see https://docs.mongodb.com/php-library/v1.12/reference/method/MongoDBDatabase-listCollections/index.html
      */
     public function list() : JsonResponse {
 
@@ -48,7 +48,7 @@ class CollectionsController extends Controller {
     }
 
     /**
-     * @see https://docs.mongodb.com/php-library/v1.6/reference/method/MongoDBDatabase-createCollection/index.html
+     * @see https://docs.mongodb.com/php-library/v1.12/reference/method/MongoDBDatabase-createCollection/index.html
      */
     public function create() : JsonResponse {
 
@@ -107,7 +107,7 @@ class CollectionsController extends Controller {
     }
 
     /**
-     * @see https://docs.mongodb.com/php-library/v1.6/reference/method/MongoDBCollection-drop/index.html
+     * @see https://docs.mongodb.com/php-library/v1.12/reference/method/MongoDBCollection-drop/index.html
      */
     public function drop() : JsonResponse {
 

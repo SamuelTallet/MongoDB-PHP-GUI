@@ -40,7 +40,7 @@ class Routes {
      * Redirects to a route.
      * 
      * @param string $route Route with leading slash.
-     * Example: /queryDatabase
+     * Example: /queryDocuments
      */
     public static function redirectTo(string $route) {
 

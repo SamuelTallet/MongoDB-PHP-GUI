@@ -127,14 +127,4 @@ class DatabasesController extends Controller {
 
     }
 
-    public function query() : ViewResponse {
-
-        AuthController::ensureUserIsLogged();
-        
-        return new ViewResponse(200, 'queryDatabase', [
-            'databaseNames' => self::getDatabaseNames()
-        ]);
-
-    }
-
 }

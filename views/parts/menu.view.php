@@ -9,7 +9,7 @@
         <a class="nav-item nav-link<?php echo ('manageCollections' === $viewName) ? ' active' : ''; ?>" data-canonical-url="./manageCollections" href="./manageCollections">Manage collections</a>
         <a class="nav-item nav-link<?php echo ('importDocuments' === $viewName) ? ' active' : ''; ?>" data-canonical-url="./importDocuments" href="./importDocuments">Import documents</a>
         <a class="nav-item nav-link<?php echo ('visualizeDatabase' === $viewName) ? ' active' : ''; ?>" data-canonical-url="./visualizeDatabase" href="./visualizeDatabase">Visualize database</a>
-        <a class="nav-item nav-link<?php echo ('queryDatabase' === $viewName) ? ' active' : ''; ?>" data-canonical-url="./queryDatabase" href="./queryDatabase">Query database</a>
+        <a class="nav-item nav-link<?php echo ('queryDocuments' === $viewName) ? ' active' : ''; ?>" data-canonical-url="./queryDocuments" href="./queryDocuments">Query documents</a>
         <a class="nav-item nav-link<?php echo ('manageIndexes' === $viewName) ? ' active' : ''; ?>" data-canonical-url="./manageIndexes" href="./manageIndexes">Manage indexes</a>
         <a class="nav-item nav-link<?php echo ('manageUsers' === $viewName) ? ' active' : ''; ?>" data-canonical-url="./manageUsers" href="./manageUsers">Manage users</a>
         <a class="nav-item nav-link" href="./logout">Logout</a>

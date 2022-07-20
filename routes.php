@@ -11,7 +11,7 @@ $router = new Router();
 $router->get(Routes::getPrefix() . '/', function() {
 
     AuthController::ensureUserIsLogged();
-    Routes::redirectTo('/queryDatabase');
+    Routes::redirectTo('/queryDocuments');
 
 });
 
@@ -71,8 +71,8 @@ $router->get(
 );
 
 $router->get(
-    Routes::getPrefix() . '/queryDatabase',
-    DatabasesController::class . '@query'
+    Routes::getPrefix() . '/queryDocuments',
+    DocumentsController::class . '@query'
 );
 
 $router->post(
