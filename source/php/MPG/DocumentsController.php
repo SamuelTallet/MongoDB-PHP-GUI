@@ -59,7 +59,7 @@ class DocumentsController extends Controller {
     }
 
     /**
-     * @see https://docs.mongodb.com/php-library/v1.6/reference/method/MongoDBCollection-insertMany/
+     * @see https://docs.mongodb.com/php-library/v1.12/reference/method/MongoDBCollection-insertMany/
      */
     private static function importFromFile($documentsFilename, $databaseName, $collectionName) : int {
 
@@ -104,8 +104,18 @@ class DocumentsController extends Controller {
 
     }
 
+    public function query() : ViewResponse {
+
+        AuthController::ensureUserIsLogged();
+        
+        return new ViewResponse(200, 'queryDocuments', [
+            'databaseNames' => DatabasesController::getDatabaseNames()
+        ]);
+
+    }
+
     /**
-     * @see https://docs.mongodb.com/php-library/v1.6/reference/method/MongoDBCollection-insertOne/index.html
+     * @see https://docs.mongodb.com/php-library/v1.12/reference/method/MongoDBCollection-insertOne/index.html
      */
     public function insertOne() : JsonResponse {
 
@@ -146,7 +156,7 @@ class DocumentsController extends Controller {
     }
 
     /**
-     * @see https://docs.mongodb.com/php-library/v1.6/reference/method/MongoDBCollection-countDocuments/
+     * @see https://docs.mongodb.com/php-library/v1.12/reference/method/MongoDBCollection-countDocuments/
      */
     public function count() : JsonResponse {
 
@@ -185,7 +195,7 @@ class DocumentsController extends Controller {
     }
 
     /**
-     * @see https://docs.mongodb.com/php-library/v1.6/reference/method/MongoDBCollection-deleteOne/index.html
+     * @see https://docs.mongodb.com/php-library/v1.12/reference/method/MongoDBCollection-deleteOne/index.html
      */
     public function deleteOne() : JsonResponse {
 
@@ -224,7 +234,7 @@ class DocumentsController extends Controller {
     }
 
     /**
-     * @see https://docs.mongodb.com/php-library/v1.6/reference/method/MongoDBCollection-find/index.html
+     * @see https://docs.mongodb.com/php-library/v1.12/reference/method/MongoDBCollection-find/index.html
      */
     public function find() : JsonResponse {
 
@@ -277,7 +287,7 @@ class DocumentsController extends Controller {
     }
 
     /**
-     * @see https://docs.mongodb.com/php-library/v1.6/reference/method/MongoDBCollection-updateOne/index.html
+     * @see https://docs.mongodb.com/php-library/v1.12/reference/method/MongoDBCollection-updateOne/index.html
      */
     public function updateOne() : JsonResponse {
 
