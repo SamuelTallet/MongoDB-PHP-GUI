@@ -15,7 +15,7 @@ class IndexesController extends Controller {
     }
 
     /**
-     * @see https://docs.mongodb.com/php-library/v1.6/reference/method/MongoDBCollection-createIndex/index.html
+     * @see https://docs.mongodb.com/php-library/v1.12/reference/method/MongoDBCollection-createIndex/index.html
      */
     public function create() : JsonResponse {
 
@@ -44,7 +44,7 @@ class IndexesController extends Controller {
     }
 
     /**
-     * @see https://docs.mongodb.com/php-library/v1.6/reference/method/MongoDBCollection-listIndexes/index.html
+     * @see https://docs.mongodb.com/php-library/v1.12/reference/method/MongoDBCollection-listIndexes/index.html
      */
     public function list() : JsonResponse {
 
@@ -79,7 +79,7 @@ class IndexesController extends Controller {
     }
 
     /**
-     * @see https://docs.mongodb.com/php-library/v1.6/reference/method/MongoDBCollection-dropIndex/index.html
+     * @see https://docs.mongodb.com/php-library/v1.12/reference/method/MongoDBCollection-dropIndex/index.html
      */
     public function drop() : JsonResponse {
 
