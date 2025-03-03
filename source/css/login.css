@@ -52,21 +52,14 @@
 
 #mpg-background {
 
-    background-image: url("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"); /* Transition hack */
+    background-image: url("../../assets/images/login-background.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     height: 100%;
     left: 0;
     position: absolute;
     top: 0;
-    transition: background-image 1s;
     width: 100%;
-
-}
-
-#mpg-background.fallback {
-
-    background-image: url("../../assets/images/login-background.jpg");
 
 }
 
@@ -101,17 +94,9 @@ body {
 #mpg-cards {
 
     min-height: 191px;
-    opacity: 0;
     perspective: 1000px;
     transform-style: preserve-3d;
-    transition: opacity 1s;
     width: 322px;
-
-}
-
-#mpg-cards.reveal {
-
-    opacity: 1;
 
 }
 
