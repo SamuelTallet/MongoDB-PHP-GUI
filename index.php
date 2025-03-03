@@ -6,7 +6,7 @@ use Limber\Application;
 use Capsule\Factory\ServerRequestFactory;
 use Limber\Exceptions\NotFoundHttpException;
 
-const VERSION = '1.3.1';
+const VERSION = '1.3.2';
 
 /**
  * Absolute path, without trailing slash.
