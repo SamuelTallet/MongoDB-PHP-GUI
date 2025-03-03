@@ -1,0 +1,29 @@
+services:
+  app:
+    build: .
+    develop:
+      watch:
+        - action: sync
+          path: ./assets
+          target: /app/assets
+        - action: sync
+          path: ./extras
+          target: /app/extras
+          ignore:
+            - dataset/
+        - action: sync
+          path: ./source
+          target: /app/source
+        - action: sync
+          path: ./views
+          target: /app/views
+        - action: rebuild
+          path: .dockerignore
+        - action: rebuild
+          path: composer.json
+        - action: rebuild
+          path: Dockerfile
+    ports:
+      - 5000:5000
+    extra_hosts:
+      - "localhost:172.17.0.1"

@@ -10,7 +10,7 @@ const VERSION = '1.3.1';
 
 /**
  * Absolute path, without trailing slash.
- * Example: /opt/mongodb-php-gui
+ * Example: /app
  */
 const ABS_PATH = __DIR__;
 

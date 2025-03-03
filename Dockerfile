@@ -1,7 +1,7 @@
 FROM php:8.1-cli-alpine
 
-WORKDIR /opt/mongodb-php-gui
-COPY . /opt/mongodb-php-gui
+WORKDIR /app
+COPY . /app
 
 RUN echo "; PHP settings added by MongoDB PHP GUI (MPG)" > /usr/local/etc/php/conf.d/mpg-docker-php.ini \
   && echo "upload_max_filesize = 25M" >> /usr/local/etc/php/conf.d/mpg-docker-php.ini \
