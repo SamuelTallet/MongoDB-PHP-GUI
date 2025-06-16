@@ -2,7 +2,7 @@
 
 namespace MPG;
 
-use Limber\Router\Router;
+use Nimbly\Limber\Router\Router;
 
 Routes::setPrefix();
 

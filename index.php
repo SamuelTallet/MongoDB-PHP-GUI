@@ -2,9 +2,9 @@
 
 namespace MPG; // MongoDB PHP GUI
 
-use Limber\Application;
-use Capsule\Factory\ServerRequestFactory;
-use Limber\Exceptions\NotFoundHttpException;
+use Nimbly\Limber\Application;
+use Nimbly\Capsule\Factory\ServerRequestFactory;
+use Nimbly\Limber\Exceptions\NotFoundHttpException;
 
 const VERSION = '1.3.2';
 

@@ -1,7 +1,7 @@
 {
     "require": {
-        "nimbly/limber": "^1.4",
-        "nimbly/capsule": "^1.1.2",
-        "mongodb/mongodb": "^1.12.0"
+        "nimbly/limber": "^3.0.1",
+        "nimbly/capsule": "^3.0.1",
+        "mongodb/mongodb": "^2.1.0"
     }
 }

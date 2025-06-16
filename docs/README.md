@@ -20,7 +20,7 @@ Export documents to JSON. Import documents from JSON. Manage indexes. Manage use
 
 ### Apache HTTP server
 1. Clone current repository in a folder served by Apache.
-2. Be sure to have PHP >= 7.3 with [MongoDB extension](https://www.php.net/manual/en/mongodb.installation.php) enabled.
+2. Be sure to have PHP >= 8.4 with [MongoDB extension](https://www.php.net/manual/en/mongodb.installation.php) enabled.
 3. Check that `rewrite_module` module is enabled in your Apache configuration.
 4. Be sure to have `AllowOverride All` in your Apache (virtual host) configuration.
 5. Run `composer install` at project's root directory to install all PHP dependencies.
@@ -82,4 +82,4 @@ If you find this GUI useful, [donate](https://www.paypal.me/SamuelTallet) at lea
 
 ## Copyright
 
-© 2022 Samuel Tallet
+© 2025 Samuel Tallet

@@ -2,7 +2,7 @@
 
 namespace MPG;
 
-use Capsule\Response;
+use Nimbly\Capsule\Response;
 
 class ViewResponse extends Response {
 

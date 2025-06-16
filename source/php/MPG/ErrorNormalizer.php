@@ -12,7 +12,7 @@ class ErrorNormalizer {
      * 
      * @return array
      */
-    public static function normalize(\Throwable $error, string $function = null) : array {
+    public static function normalize(\Throwable $error, ?string $function = null) : array {
 
         $normalizedError = ['error' => null];
 
